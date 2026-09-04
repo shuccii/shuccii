@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 120" width="900" height="120" role="img" aria-label="J.A.R.V.I.S. standby footer">
+  <defs>
+    <linearGradient id="fbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#02070e"/>
+      <stop offset="100%" stop-color="#041220"/>
+    </linearGradient>
+    <linearGradient id="fsweep" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#67e8f9" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="fglow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="fgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0H0V30" fill="none" stroke="#0e3a4d" stroke-width="0.6" opacity="0.5"/>
+    </pattern>
+    <clipPath id="fclip"><rect width="900" height="120" rx="6"/></clipPath>
+    <style>
+      .fm { font-family: "SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace; }
+      .fb { animation: fb 1.8s steps(1,end) infinite; }
+      @keyframes fb { 0%,55%{opacity:1} 56%,100%{opacity:0.1} }
+    </style>
+  </defs>
+
+  <g clip-path="url(#fclip)">
+    <rect width="900" height="120" fill="url(#fbg)"/>
+    <rect width="900" height="120" fill="url(#fgrid)" opacity="0.45"/>
+
+    <!-- equalizer / telemetry bars -->
+    <g fill="#0e7490" opacity="0.85">
+      <rect x="60"  y="70" width="4" height="20"><animate attributeName="height" values="8;30;8"  dur="2.1s" repeatCount="indefinite"/><animate attributeName="y" values="82;60;82" dur="2.1s" repeatCount="indefinite"/></rect>
+      <rect x="72"  y="70" width="4" height="20"><animate attributeName="height" values="24;6;24" dur="2.7s" repeatCount="indefinite"/><animate attributeName="y" values="66;84;66" dur="2.7s" repeatCount="indefinite"/></rect>
+      <rect x="84"  y="70" width="4" height="20"><animate attributeName="height" values="12;34;12" dur="1.7s" repeatCount="indefinite"/><animate attributeName="y" values="78;56;78" dur="1.7s" repeatCount="indefinite"/></rect>
+      <rect x="96"  y="70" width="4" height="20"><animate attributeName="height" values="30;10;30" dur="2.4s" repeatCount="indefinite"/><animate attributeName="y" values="60;80;60" dur="2.4s" repeatCount="indefinite"/></rect>
+      <rect x="108" y="70" width="4" height="20"><animate attributeName="height" values="9;26;9"  dur="3.1s" repeatCount="indefinite"/><animate attributeName="y" values="81;64;81" dur="3.1s" repeatCount="indefinite"/></rect>
+    </g>
+    <g fill="#0e7490" opacity="0.85" transform="translate(730,0)">
+      <rect x="60"  y="70" width="4" height="20"><animate attributeName="height" values="26;8;26" dur="2.5s" repeatCount="indefinite"/><animate attributeName="y" values="64;82;64" dur="2.5s" repeatCount="indefinite"/></rect>
+      <rect x="72"  y="70" width="4" height="20"><animate attributeName="height" values="10;32;10" dur="1.9s" repeatCount="indefinite"/><animate attributeName="y" values="80;58;80" dur="1.9s" repeatCount="indefinite"/></rect>
+      <rect x="84"  y="70" width="4" height="20"><animate attributeName="height" values="28;12;28" dur="2.9s" repeatCount="indefinite"/><animate attributeName="y" values="62;78;62" dur="2.9s" repeatCount="indefinite"/></rect>
+      <rect x="96"  y="70" width="4" height="20"><animate attributeName="height" values="14;30;14" dur="2.2s" repeatCount="indefinite"/><animate attributeName="y" values="76;60;76" dur="2.2s" repeatCount="indefinite"/></rect>
+      <rect x="108" y="70" width="4" height="20"><animate attributeName="height" values="32;9;32" dur="3.3s" repeatCount="indefinite"/><animate attributeName="y" values="58;81;58" dur="3.3s" repeatCount="indefinite"/></rect>
+    </g>
+
+    <!-- mini reactor -->
+    <g transform="translate(450,52)">
+      <g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="14s" repeatCount="indefinite"/>
+        <circle r="26" fill="none" stroke="#22d3ee" stroke-width="1.3" stroke-dasharray="14 8" opacity="0.7"/>
+      </g>
+      <g><animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="20s" repeatCount="indefinite"/>
+        <circle r="18" fill="none" stroke="#f5b841" stroke-width="1.6" stroke-dasharray="4 10" opacity="0.75"/>
+      </g>
+      <circle r="9" fill="#67e8f9" filter="url(#fglow)" opacity="0.9">
+        <animate attributeName="r" values="7;11;7" dur="3s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <g class="fm" text-anchor="middle">
+      <text x="450" y="98" fill="#5aa7bf" font-size="11.5" letter-spacing="3.4">SYSTEM STANDBY &#183; AWAITING NEXT DIRECTIVE</text>
+      <text x="596" y="98" fill="#f5b841" font-size="11.5" class="fb" text-anchor="start">_</text>
+    </g>
+
+    <g stroke="#22d3ee" stroke-width="1.6" fill="none" opacity="0.8">
+      <path d="M12 34 V108 H60"/><path d="M888 34 V108 H840"/>
+    </g>
+    <path d="M0 6 H900" stroke="#0e7490" stroke-width="1.2" opacity="0.8"/>
+    <rect x="-200" y="4.4" width="200" height="3.2" fill="url(#fsweep)">
+      <animate attributeName="x" values="-200;900" dur="5.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg>
