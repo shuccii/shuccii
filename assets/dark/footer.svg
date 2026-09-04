@@ -5,22 +5,18 @@
     <stop offset="100%" stop-color="#01050a"/>
   </radialGradient>
   <radialGradient id="fVig" cx="50%" cy="50%" r="74%">
-    <stop offset="58%" stop-color="#000" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
+    <stop offset="58%" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.6"/>
   </radialGradient>
-  <radialGradient id="fCore" cx="50%" cy="42%" r="58%">
-    <stop offset="0%" stop-color="#fff"/><stop offset="26%" stop-color="#dff8ff"/>
-    <stop offset="60%" stop-color="#54c8e8" stop-opacity="0.62"/>
-    <stop offset="100%" stop-color="#0a4b61" stop-opacity="0"/>
-  </radialGradient>
+  <radialGradient id="fCore" cx="50%" cy="42%" r="58%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="26%" stop-color="#dff8ff" stop-opacity="1"/><stop offset="60%" stop-color="#54c8e8" stop-opacity="0.62"/><stop offset="100%" stop-color="#0a4b61" stop-opacity="0"/></radialGradient>
   <linearGradient id="fSweep" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%" stop-color="#5fd8f2" stop-opacity="0"/>
-    <stop offset="52%" stop-color="#bdeeff" stop-opacity="0.45"/>
+    <stop offset="52%" stop-color="#5fd8f2" stop-opacity="0.45"/>
     <stop offset="100%" stop-color="#5fd8f2" stop-opacity="0"/>
   </linearGradient>
   <filter id="fBevel" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="h"/>
-    <feSpecularLighting in="h" surfaceScale="3.6" specularConstant="0.85"
+    <feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="hh"/>
+    <feSpecularLighting in="hh" surfaceScale="3.6" specularConstant="0.85"
                         specularExponent="26" lighting-color="#dff6ff" result="s">
       <fePointLight x="-70" y="-70" z="60">
         <animate attributeName="x" values="-70;70;-70" dur="9s" repeatCount="indefinite"/>
@@ -28,11 +24,11 @@
       </fePointLight>
     </feSpecularLighting>
     <feComposite in="s" in2="SourceAlpha" operator="in" result="sc"/>
-    <feComposite in="SourceGraphic" in2="sc" operator="arithmetic" k1="0" k2="1" k3="0.9" k4="0"/>
+    <feComposite in="SourceGraphic" in2="sc" operator="arithmetic" k1="0" k2="1" k3="0.90" k4="0"/>
   </filter>
   <filter id="fGlow" x="-200%" y="-200%" width="500%" height="500%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="0.9" result="a"/>
-    <feGaussianBlur in="SourceGraphic" stdDeviation="3.6" result="b"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="0.90" result="a"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3.60" result="b"/>
     <feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
   <filter id="fGrain" x="0%" y="0%" width="100%" height="100%">
@@ -94,7 +90,7 @@
     <text x="754.7" y="74" fill="#cfeefb" font-size="17" letter-spacing="0.4">2</text>
     <line x1="66" y1="98" x2="834" y2="98" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
     <text x="66" y="115" fill="#3f7f96" font-size="9" letter-spacing="1.7">shuccii/shuccii &#183; regenerated daily by github actions</text>
-    <text x="834" y="115" fill="#3f7f96" font-size="9" letter-spacing="1.7" text-anchor="end">SYNC 2026-09-04 11:10Z</text>
+    <text x="834" y="115" fill="#3f7f96" font-size="9" letter-spacing="1.7" text-anchor="end">SYNC 2026-09-04 11:20Z</text>
   </g>
 
   <rect x="-300" y="0" width="300" height="128" fill="url(#fSweep)" opacity="0.09">

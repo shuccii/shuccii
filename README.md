@@ -1,14 +1,26 @@
 <div align="center">
 
-<img width="100%" alt="Repository telemetry" src="assets/jarvis-header.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/header.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/header.svg" />
+  <img width="100%" alt="Repository telemetry" src="assets/dark/header.svg" />
+</picture>
 
 <!-- ─── navigation ─────────────────────────────────────────────── -->
 
-[![Research](https://img.shields.io/badge/01-RESEARCH-5FD8F2?style=flat-square&labelColor=040F18)](#-01--research) [![Method](https://img.shields.io/badge/02-METHOD-5FD8F2?style=flat-square&labelColor=040F18)](#-02--method) [![Stack](https://img.shields.io/badge/03-STACK-5FD8F2?style=flat-square&labelColor=040F18)](#-03--stack) [![Activity](https://img.shields.io/badge/04-ACTIVITY-5FD8F2?style=flat-square&labelColor=040F18)](#-04--activity) [![Repositories](https://img.shields.io/badge/05-REPOSITORIES-E8B455?style=flat-square&labelColor=040F18)](#-05--repositories) [![Site](https://img.shields.io/badge/↗-shuccii.github.io-E8B455?style=flat-square&labelColor=040F18)](https://shuccii.github.io)
+<a href="#-01--research"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/01-RESEARCH-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/01-RESEARCH-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="RESEARCH" src="https://img.shields.io/badge/01-RESEARCH-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-02--method"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/02-METHOD-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/02-METHOD-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="METHOD" src="https://img.shields.io/badge/02-METHOD-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-03--stack"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/03-STACK-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/03-STACK-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="STACK" src="https://img.shields.io/badge/03-STACK-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-04--activity"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/04-ACTIVITY-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/04-ACTIVITY-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="ACTIVITY" src="https://img.shields.io/badge/04-ACTIVITY-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-05--repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/05-REPOSITORIES-e8b455?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/05-REPOSITORIES-9a6a10?style=flat-square&labelColor=dbe7ee" /><img alt="REPOSITORIES" src="https://img.shields.io/badge/05-REPOSITORIES-e8b455?style=flat-square&labelColor=0b2733" /></picture></a> <a href="https://shuccii.github.io"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/↗-shuccii.github.io-e8b455?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/↗-shuccii.github.io-9a6a10?style=flat-square&labelColor=dbe7ee" /><img alt="shuccii.github.io" src="https://img.shields.io/badge/↗-shuccii.github.io-e8b455?style=flat-square&labelColor=0b2733" /></picture></a>
 
-<img width="100%" alt="git readout" src="assets/command-strip.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/command-strip.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/command-strip.svg" />
+  <img width="100%" alt="git readout" src="assets/dark/command-strip.svg" />
+</picture>
 
-<img width="100%" alt="" src="assets/divider.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
+  <img width="100%" alt="" src="assets/dark/divider.svg" />
+</picture>
 
 </div>
 
@@ -20,12 +32,16 @@ The constraint that shapes everything: irradiation experiments are slow and expe
 
 Currently extending into privacy-preserving and federated learning, for materials data that cannot leave the institution that measured it.
 
-<div align="center"><img width="100%" alt="" src="assets/divider.svg" /></div>
+<div align="center"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
+  <img width="100%" alt="" src="assets/dark/divider.svg" />
+</picture></div>
 
 ## ◤ 02 · METHOD
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables':{'background':'#040f18','primaryColor':'#0a2735','primaryTextColor':'#cfeefb','primaryBorderColor':'#5fd8f2','lineColor':'#3f7f96','fontFamily':'monospace','fontSize':'14px'}}}%%
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#0e4a5f','primaryTextColor':'#eaf7fd','primaryBorderColor':'#4aa3bf','lineColor':'#6f9aad','fontFamily':'monospace','fontSize':'14px'}}}%%
 flowchart LR
     A["EXPERIMENT<br/><small>few · expensive</small>"]:::src --> D
     B["FIRST-PRINCIPLES<br/><small>DFT</small>"]:::src --> D
@@ -34,48 +50,84 @@ flowchart LR
     E["PREDICTION<br/><small>property + uncertainty</small>"]:::out --> F
     F["BAYESIAN OPT<br/><small>next experiment</small>"]:::gold --> A
 
-    classDef src  fill:#08202c,stroke:#3f7f96,stroke-width:1px,color:#cfeefb
-    classDef core fill:#0c3346,stroke:#5fd8f2,stroke-width:1.5px,color:#f2fdff
-    classDef out  fill:#08202c,stroke:#5fd8f2,stroke-width:1px,color:#cfeefb
-    classDef gold fill:#241a06,stroke:#e8b455,stroke-width:1.5px,color:#f0d9a8
+    classDef src  fill:#0e4a5f,stroke:#4aa3bf,stroke-width:1px,color:#eaf7fd
+    classDef core fill:#0b6b86,stroke:#7fd4ea,stroke-width:1.5px,color:#ffffff
+    classDef out  fill:#0e4a5f,stroke:#4aa3bf,stroke-width:1px,color:#eaf7fd
+    classDef gold fill:#6b4a10,stroke:#d8a94a,stroke-width:1.5px,color:#fff4dd
 ```
 
 > Sparse experiments cannot cover a high-dimensional composition space on their own.
 > Linked to abundant computation through a shared covariance structure, they can tell you which single experiment to run next.
 
-<div align="center"><img width="100%" alt="" src="assets/divider.svg" /></div>
+<div align="center"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
+  <img width="100%" alt="" src="assets/dark/divider.svg" />
+</picture></div>
 
 ## ◤ 03 · STACK
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-5FD8F2?style=flat-square&logo=python&logoColor=5FD8F2&labelColor=040F18) ![PyTorch](https://img.shields.io/badge/PyTorch-5FD8F2?style=flat-square&logo=pytorch&logoColor=5FD8F2&labelColor=040F18) ![scikit-learn](https://img.shields.io/badge/scikit--learn-5FD8F2?style=flat-square&logo=scikitlearn&logoColor=5FD8F2&labelColor=040F18) ![NumPy](https://img.shields.io/badge/NumPy-5FD8F2?style=flat-square&logo=numpy&logoColor=5FD8F2&labelColor=040F18) ![pandas](https://img.shields.io/badge/pandas-5FD8F2?style=flat-square&logo=pandas&logoColor=5FD8F2&labelColor=040F18) ![SciPy](https://img.shields.io/badge/SciPy-5FD8F2?style=flat-square&logo=scipy&logoColor=5FD8F2&labelColor=040F18)
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Python-040f18?style=flat-square&logo=python&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Python-eef4f8?style=flat-square&logo=python&logoColor=0e7490&labelColor=eef4f8" /><img alt="Python" src="https://img.shields.io/badge/Python-040f18?style=flat-square&logo=python&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/PyTorch-040f18?style=flat-square&logo=pytorch&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/PyTorch-eef4f8?style=flat-square&logo=pytorch&logoColor=0e7490&labelColor=eef4f8" /><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-040f18?style=flat-square&logo=pytorch&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/scikit--learn-040f18?style=flat-square&logo=scikitlearn&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/scikit--learn-eef4f8?style=flat-square&logo=scikitlearn&logoColor=0e7490&labelColor=eef4f8" /><img alt="scikit-learn" src="https://img.shields.io/badge/scikit--learn-040f18?style=flat-square&logo=scikitlearn&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/NumPy-040f18?style=flat-square&logo=numpy&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/NumPy-eef4f8?style=flat-square&logo=numpy&logoColor=0e7490&labelColor=eef4f8" /><img alt="NumPy" src="https://img.shields.io/badge/NumPy-040f18?style=flat-square&logo=numpy&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/pandas-040f18?style=flat-square&logo=pandas&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/pandas-eef4f8?style=flat-square&logo=pandas&logoColor=0e7490&labelColor=eef4f8" /><img alt="pandas" src="https://img.shields.io/badge/pandas-040f18?style=flat-square&logo=pandas&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/SciPy-040f18?style=flat-square&logo=scipy&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/SciPy-eef4f8?style=flat-square&logo=scipy&logoColor=0e7490&labelColor=eef4f8" /><img alt="SciPy" src="https://img.shields.io/badge/SciPy-040f18?style=flat-square&logo=scipy&logoColor=5fd8f2&labelColor=040f18" /></picture>
 
-![Jupyter](https://img.shields.io/badge/Jupyter-3F7F96?style=flat-square&logo=jupyter&logoColor=3F7F96&labelColor=040F18) ![Matplotlib](https://img.shields.io/badge/Matplotlib-3F7F96?style=flat-square&logo=plotly&logoColor=3F7F96&labelColor=040F18) ![LaTeX](https://img.shields.io/badge/LaTeX-3F7F96?style=flat-square&logo=latex&logoColor=3F7F96&labelColor=040F18) ![Astro](https://img.shields.io/badge/Astro-3F7F96?style=flat-square&logo=astro&logoColor=3F7F96&labelColor=040F18) ![Git](https://img.shields.io/badge/Git-E8B455?style=flat-square&logo=git&logoColor=E8B455&labelColor=040F18) ![Linux](https://img.shields.io/badge/Linux-3F7F96?style=flat-square&logo=linux&logoColor=3F7F96&labelColor=040F18)
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Jupyter-040f18?style=flat-square&logo=jupyter&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Jupyter-eef4f8?style=flat-square&logo=jupyter&logoColor=0e7490&labelColor=eef4f8" /><img alt="Jupyter" src="https://img.shields.io/badge/Jupyter-040f18?style=flat-square&logo=jupyter&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Matplotlib-040f18?style=flat-square&logo=plotly&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Matplotlib-eef4f8?style=flat-square&logo=plotly&logoColor=0e7490&labelColor=eef4f8" /><img alt="Matplotlib" src="https://img.shields.io/badge/Matplotlib-040f18?style=flat-square&logo=plotly&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/LaTeX-040f18?style=flat-square&logo=latex&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/LaTeX-eef4f8?style=flat-square&logo=latex&logoColor=0e7490&labelColor=eef4f8" /><img alt="LaTeX" src="https://img.shields.io/badge/LaTeX-040f18?style=flat-square&logo=latex&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Astro-040f18?style=flat-square&logo=astro&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Astro-eef4f8?style=flat-square&logo=astro&logoColor=0e7490&labelColor=eef4f8" /><img alt="Astro" src="https://img.shields.io/badge/Astro-040f18?style=flat-square&logo=astro&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Git-040f18?style=flat-square&logo=git&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Git-eef4f8?style=flat-square&logo=git&logoColor=0e7490&labelColor=eef4f8" /><img alt="Git" src="https://img.shields.io/badge/Git-040f18?style=flat-square&logo=git&logoColor=5fd8f2&labelColor=040f18" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Linux-040f18?style=flat-square&logo=linux&logoColor=5fd8f2&labelColor=040f18" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Linux-eef4f8?style=flat-square&logo=linux&logoColor=0e7490&labelColor=eef4f8" /><img alt="Linux" src="https://img.shields.io/badge/Linux-040f18?style=flat-square&logo=linux&logoColor=5fd8f2&labelColor=040f18" /></picture>
 
 </div>
 
-<div align="center"><img width="100%" alt="" src="assets/divider.svg" /></div>
+<div align="center"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
+  <img width="100%" alt="" src="assets/dark/divider.svg" />
+</picture></div>
 
 ## ◤ 04 · ACTIVITY
 
 <div align="center">
 
-<img width="98%" alt="account summary" src="assets/cards/profile-details.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/profile-details.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/profile-details.svg" />
+  <img width="98%" alt="account summary" src="assets/cards/dark/profile-details.svg" />
+</picture>
 
-<img width="45%" alt="languages by repository" src="assets/cards/repos-per-language.svg" />
-<img width="45%" alt="languages by commit" src="assets/cards/most-commit-language.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/repos-per-language.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/repos-per-language.svg" />
+  <img width="45%" alt="languages by repository" src="assets/cards/dark/repos-per-language.svg" />
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/most-commit-language.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/most-commit-language.svg" />
+  <img width="45%" alt="languages by commit" src="assets/cards/dark/most-commit-language.svg" />
+</picture>
 
-<img width="45%" alt="totals" src="assets/cards/stats.svg" />
-<img width="45%" alt="commits by hour" src="assets/cards/productive-time.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/stats.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/stats.svg" />
+  <img width="45%" alt="totals" src="assets/cards/dark/stats.svg" />
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/productive-time.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/productive-time.svg" />
+  <img width="45%" alt="commits by hour" src="assets/cards/dark/productive-time.svg" />
+</picture>
 
 <br/>
 
-<img width="100%" alt="contribution grid" src="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake.svg" />
+  <img width="100%" alt="contribution grid" src="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake-dark.svg" />
+</picture>
 
 </div>
 
-<div align="center"><img width="100%" alt="" src="assets/divider.svg" /></div>
+<div align="center"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
+  <img width="100%" alt="" src="assets/dark/divider.svg" />
+</picture></div>
 
 ## ◤ 05 · REPOSITORIES
 
@@ -87,6 +139,10 @@ flowchart LR
 
 <div align="center">
 
-<img width="100%" alt="" src="assets/jarvis-footer.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/footer.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/footer.svg" />
+  <img width="100%" alt="Recent activity and account totals" src="assets/dark/footer.svg" />
+</picture>
 
 </div>

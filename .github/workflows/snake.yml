@@ -19,9 +19,11 @@ jobs:
         uses: Platane/snk/svg-only@v3.5.0
         with:
           github_user_name: ${{ github.repository_owner }}
-          # level-0 dots stay slightly lighter than the page so the grid reads as a grid
+          # level-0 dots stay a step off the page colour so the grid the scan
+          # travels over still reads as a grid in either theme
           outputs: |
-            dist/github-snake.svg?color_snake=#f5b841&color_dots=#0d2430,#155e75,#0e97b8,#22d3ee,#7defff
+            dist/github-snake-dark.svg?color_snake=#e8b455&color_dots=#12384a,#12617a,#1e9bbd,#4fd0ee,#a8f0ff
+            dist/github-snake.svg?color_snake=#9a6a10&color_dots=#d3e3ea,#a3cddd,#5aa8c5,#26809f,#0b5570
 
       - name: Push scan to the output branch
         uses: crazy-max/ghaction-github-pages@v4
