@@ -203,8 +203,8 @@
 
     <line x1="312" y1="248" x2="872" y2="248" stroke="#5d8ba0" stroke-width="0.6" opacity="0.45"/>
     <g font-size="9" letter-spacing="1.7" fill="#5d8ba0">
-      <text x="312" y="272">SYNC 2026-09-04 11:20Z</text>
-      <text x="502" y="272">HEAD ee6aac5</text>
+      <text x="312" y="272">SYNC 2026-09-04 20:53Z</text>
+      <text x="502" y="272">HEAD 8788147</text>
       <text x="622" y="272">PEAK 79/WK</text>
       <text x="732" y="272">ACTIVE 11/53</text>
     </g>
