@@ -6,20 +6,39 @@
       <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
     </linearGradient>
     <clipPath id="bsClip"><rect width="900" height="58" rx="5"/></clipPath>
+    <linearGradient id="bsDeep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06131d"/>
+      <stop offset="100%" stop-color="#030b13"/>
+    </linearGradient>
+    <filter id="bsBloom" x="-40%" y="-160%" width="180%" height="420%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.1" result="a"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"   result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bsHolo" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="11" result="n">
+        <animate attributeName="seed" values="11;4;18;11" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feColorMatrix in="n" type="matrix"
+        values="0 0 0 0 0.13   0 0 0 0 0.72   0 0 0 0 0.85   0 0 0 0.26 0"/>
+    </filter>
+    <pattern id="bsScan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1.2" fill="#0a3d4d" opacity="0.3"/>
+    </pattern>
     <style>
       .bsm { font-family: "SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace; font-size: 16px; }
     </style>
   </defs>
 
   <g clip-path="url(#bsClip)">
-    <rect width="900" height="58" fill="#05090f"/>
+    <rect width="900" height="58" fill="url(#bsDeep)"/>
     <rect x="0.75" y="0.75" width="898.5" height="56.5" rx="5" fill="none" stroke="#0e7490" stroke-width="1.5" opacity="0.7"/>
 
     <!-- prompt -->
-    <text class="bsm" x="26" y="35" fill="#f5b841">jarvis&gt;</text>
+    <text class="bsm" x="26" y="35" fill="#f5b841" filter="url(#bsBloom)">jarvis&gt;</text>
 
     <!-- cycling readout: line 0 is fully drawn on the first frame -->
-    <g class="bsm" fill="#22d3ee">
+    <g class="bsm" fill="#3ee0ff" filter="url(#bsBloom)">
       <text x="106" y="35" opacity="1">J.A.R.V.I.S. online. Welcome back, sir.
         <animate attributeName="opacity" dur="14s" calcMode="discrete" keyTimes="0;0.25;0.5;0.75" values="1;0;0;0" repeatCount="indefinite"/>
       </text>
@@ -49,5 +68,7 @@
     <rect x="-220" y="0" width="220" height="58" fill="url(#bsSweep)" opacity="0.14">
       <animate attributeName="x" values="-220;900" dur="7s" repeatCount="indefinite"/>
     </rect>
+    <rect width="900" height="58" fill="url(#bsScan)" opacity="0.42"/>
+    <rect width="900" height="58" filter="url(#bsHolo)" opacity="0.4"/>
   </g>
 </svg>

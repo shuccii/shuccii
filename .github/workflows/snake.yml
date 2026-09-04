@@ -19,8 +19,9 @@ jobs:
         uses: Platane/snk/svg-only@v3.5.0
         with:
           github_user_name: ${{ github.repository_owner }}
+          # level-0 dots stay slightly lighter than the page so the grid reads as a grid
           outputs: |
-            dist/github-snake.svg?color_snake=#f5b841&color_dots=#05090f,#0e3a4d,#0e7490,#22d3ee,#67e8f9
+            dist/github-snake.svg?color_snake=#f5b841&color_dots=#0d2430,#155e75,#0e97b8,#22d3ee,#7defff
 
       - name: Push scan to the output branch
         uses: crazy-max/ghaction-github-pages@v4

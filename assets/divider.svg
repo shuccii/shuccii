@@ -1,27 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 26" width="900" height="26" role="img" aria-label="divider">
-  <defs>
-    <linearGradient id="d" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0"/>
-      <stop offset="18%"  stop-color="#22d3ee" stop-opacity="0.85"/>
-      <stop offset="82%"  stop-color="#22d3ee" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="p" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#f5b841" stop-opacity="0"/>
-      <stop offset="50%"  stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#f5b841" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-  <path d="M0 13 H900" stroke="url(#d)" stroke-width="2.6"/>
-  <path d="M120 13 H380" stroke="#0e7490" stroke-width="6" stroke-dasharray="2 7" opacity="0.75"/>
-  <path d="M520 13 H780" stroke="#0e7490" stroke-width="6" stroke-dasharray="2 7" opacity="0.75"/>
-  <g fill="none" stroke="#f5b841" stroke-width="2.2" opacity="1">
-    <path d="M430 13 L442 4 L458 4 L470 13 L458 22 L442 22 Z"/>
-  </g>
-  <circle cx="450" cy="13" r="3" fill="#67e8f9">
-    <animate attributeName="r" values="2.2;4.2;2.2" dur="2.6s" repeatCount="indefinite"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 30" width="900" height="30" role="img" aria-label="divider">
+<defs>
+  <linearGradient id="dvLine" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0"/>
+    <stop offset="14%"  stop-color="#22d3ee" stop-opacity="0.9"/>
+    <stop offset="86%"  stop-color="#22d3ee" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="dvGold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%"   stop-color="#6d4510"/>
+    <stop offset="30%"  stop-color="#ffe9a8"/>
+    <stop offset="55%"  stop-color="#c8892a"/>
+    <stop offset="100%" stop-color="#ffd889"/>
+  </linearGradient>
+  <linearGradient id="dvPulse" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#7defff" stop-opacity="0"/>
+    <stop offset="50%"  stop-color="#ffffff" stop-opacity="1"/>
+    <stop offset="100%" stop-color="#7defff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="dvBloom" x="-200%" y="-400%" width="500%" height="900%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="a"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="5"   result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="dvBevel" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="1.1" result="h"/>
+    <feSpecularLighting in="h" surfaceScale="3.4" specularConstant="1" specularExponent="20"
+                        lighting-color="#fff6d8" result="s">
+      <fePointLight x="440" y="4" z="26">
+        <animate attributeName="x" values="420;480;420" dur="5s" repeatCount="indefinite"/>
+      </fePointLight>
+    </feSpecularLighting>
+    <feComposite in="s" in2="SourceAlpha" operator="in" result="sc"/>
+    <feComposite in="SourceGraphic" in2="sc" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+  </filter>
+</defs>
+
+  <path d="M0 15 H900" stroke="url(#dvLine)" stroke-width="1.5" opacity="0.55"/>
+  <path d="M118 15 H384" stroke="#0e7490" stroke-width="7" stroke-dasharray="1.6 8" opacity="0.85"/>
+  <path d="M516 15 H782" stroke="#0e7490" stroke-width="7" stroke-dasharray="1.6 8" opacity="0.85"/>
+
+  <path d="M404 15 L420 5 L480 5 L496 15 L480 25 L420 25 Z"
+        fill="#04121d" stroke="url(#dvGold)" stroke-width="1.8" filter="url(#dvBevel)"/>
+
+  <circle cx="450" cy="15" r="3.2" fill="#9ff0ff" filter="url(#dvBloom)">
+    <animate attributeName="r" values="2.2;4.4;2.2" dur="2.6s" repeatCount="indefinite"/>
   </circle>
-  <rect x="-140" y="11.6" width="140" height="2.8" fill="url(#p)" opacity="0.9">
-    <animate attributeName="x" values="-140;900" dur="5s" repeatCount="indefinite"/>
+
+  <g fill="#7defff" opacity="0.9" filter="url(#dvBloom)">
+    <circle cy="15" r="1.8"><animate attributeName="cx" values="120;404" dur="3.4s" repeatCount="indefinite"/></circle>
+    <circle cy="15" r="1.8"><animate attributeName="cx" values="780;496" dur="3.4s" begin="1.7s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <rect x="-160" y="13.4" width="160" height="3.2" fill="url(#dvPulse)" opacity="0.85" filter="url(#dvBloom)">
+    <animate attributeName="x" values="-160;900" dur="5.5s" repeatCount="indefinite"/>
   </rect>
 </svg>
