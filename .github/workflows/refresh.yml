@@ -1,4 +1,4 @@
-name: Refresh JARVIS Diagnostics Cards
+name: Refresh Telemetry
 
 on:
   schedule:
@@ -8,25 +8,35 @@ on:
     branches:
       - main
 
+# Panels are committed to the repo rather than hot-linked, so the profile never
+# depends on a third-party service being up at the moment someone looks at it.
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
 
-      # The cards are fetched with the arc-reactor palette and committed to the repo,
-      # so the README never depends on the upstream API being up at view time.
-      # No `animation=` here on purpose: those presets start at opacity 0, so any
-      # renderer that freezes SVGs on frame 0 would show an empty card.
-      - name: Fetch cards with arc-reactor palette
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Redraw the HUD from live repository telemetry
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUD_LOGIN: ${{ github.repository_owner }}
+        run: python3 scripts/render_hud.py
+
+      - name: Fetch summary cards
         run: |
           set -euo pipefail
           mkdir -p assets/cards
           BASE="https://github-profile-summary-cards.vercel.app/api/cards"
-          PAL="username=${{ github.repository_owner }}&theme=github_dark&bg_color=05090f&title_color=67e8f9&text_color=bfe9f5&border_color=0e7490&icon_color=f5b841&chart_color=22d3ee"
+          # No `animation=` on purpose: those presets start at opacity 0, so any
+          # renderer that freezes SVGs on frame 0 would show an empty card.
+          PAL="username=${{ github.repository_owner }}&theme=github_dark&bg_color=040f18&title_color=5fd8f2&text_color=cfeefb&border_color=3f7f96&icon_color=e8b455&chart_color=5fd8f2"
           fetch () {
             name="$1"; extra="${2:-}"
             if curl -sS --fail --retry 3 --retry-delay 5 --max-time 60 \
@@ -44,15 +54,15 @@ jobs:
           fetch stats
           fetch productive-time "&utcOffset=9"
 
-      - name: Commit refreshed cards
+      - name: Commit
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/cards
+          git add assets
           if git diff --cached --quiet; then
             echo "no changes"
           else
-            git commit -m "chore: refresh JARVIS diagnostics cards"
+            git commit -m "chore: refresh telemetry panels"
             git push
           fi

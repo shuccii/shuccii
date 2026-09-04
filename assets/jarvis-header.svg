@@ -1,295 +1,255 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="J.A.R.V.I.S. holographic interface for Shuichi Tani">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="shuccii — 160 contributions in the last year">
 <defs>
-  <radialGradient id="deep" cx="16%" cy="48%" r="86%">
-    <stop offset="0%"   stop-color="#0a2734"/>
-    <stop offset="42%"  stop-color="#04121d"/>
+  <radialGradient id="hDeep" cx="16%" cy="50%" r="88%">
+    <stop offset="0%" stop-color="#07202b"/><stop offset="46%" stop-color="#040f18"/>
     <stop offset="100%" stop-color="#01050a"/>
   </radialGradient>
-  <radialGradient id="vig" cx="50%" cy="50%" r="72%">
-    <stop offset="55%"  stop-color="#000000" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#000000" stop-opacity="0.72"/>
+  <radialGradient id="hVig" cx="50%" cy="50%" r="74%">
+    <stop offset="58%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
   </radialGradient>
-
-  <!-- glass core -->
-  <radialGradient id="core" cx="50%" cy="42%" r="58%">
-    <stop offset="0%"   stop-color="#ffffff"/>
-    <stop offset="14%"  stop-color="#e2fbff"/>
-    <stop offset="34%"  stop-color="#6fdcff" stop-opacity="0.88"/>
-    <stop offset="62%"  stop-color="#1490b4" stop-opacity="0.5"/>
-    <stop offset="86%"  stop-color="#0a4f66" stop-opacity="0.22"/>
-    <stop offset="100%" stop-color="#062f3f" stop-opacity="0"/>
+  <radialGradient id="hCore" cx="50%" cy="42%" r="58%">
+    <stop offset="0%" stop-color="#fff"/><stop offset="26%" stop-color="#dff8ff"/>
+    <stop offset="60%" stop-color="#54c8e8" stop-opacity="0.62"/>
+    <stop offset="100%" stop-color="#0a4b61" stop-opacity="0"/>
   </radialGradient>
-  <radialGradient id="dome" cx="34%" cy="24%" r="40%">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.42"/>
-    <stop offset="48%"  stop-color="#ffffff" stop-opacity="0.07"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-  </radialGradient>
-
-  <!-- brushed-metal housing, lit by a travelling point light -->
-  <linearGradient id="ringMetal" x1="0" y1="0" x2="0.7" y2="1">
-    <stop offset="0%"   stop-color="#0d3f52"/>
-    <stop offset="35%"  stop-color="#2a7f9b"/>
-    <stop offset="55%"  stop-color="#0a2f3e"/>
-    <stop offset="100%" stop-color="#154b60"/>
+  <linearGradient id="hSweep" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#5fd8f2" stop-opacity="0"/>
+    <stop offset="52%" stop-color="#bdeeff" stop-opacity="0.45"/>
+    <stop offset="100%" stop-color="#5fd8f2" stop-opacity="0"/>
   </linearGradient>
-  <linearGradient id="goldMetal" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%"   stop-color="#7a4f12"/>
-    <stop offset="28%"  stop-color="#ffe9a8"/>
-    <stop offset="52%"  stop-color="#c8892a"/>
-    <stop offset="76%"  stop-color="#ffd889"/>
-    <stop offset="100%" stop-color="#6d4510"/>
-  </linearGradient>
-
-  <filter id="spec" x="-45%" y="-45%" width="190%" height="190%">
-    <feGaussianBlur in="SourceAlpha" stdDeviation="3.4" result="height"/>
-    <feSpecularLighting in="height" surfaceScale="5.5" specularConstant="1.15"
-                        specularExponent="24" lighting-color="#e4faff" result="sp">
-      <fePointLight x="-70" y="-70" z="70">
-        <animate attributeName="x" values="-80;80;-80" dur="8s" repeatCount="indefinite"/>
-        <animate attributeName="y" values="-70;70;-70" dur="11s" repeatCount="indefinite"/>
+  <filter id="hBevel" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="h"/>
+    <feSpecularLighting in="h" surfaceScale="3.6" specularConstant="0.85"
+                        specularExponent="26" lighting-color="#dff6ff" result="s">
+      <fePointLight x="-70" y="-70" z="60">
+        <animate attributeName="x" values="-70;70;-70" dur="9s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-70;70;-70" dur="13s" repeatCount="indefinite"/>
       </fePointLight>
     </feSpecularLighting>
-    <feComposite in="sp" in2="SourceAlpha" operator="in" result="spc"/>
-    <feComposite in="SourceGraphic" in2="spc" operator="arithmetic" k1="0" k2="1" k3="0.95" k4="0"/>
+    <feComposite in="s" in2="SourceAlpha" operator="in" result="sc"/>
+    <feComposite in="SourceGraphic" in2="sc" operator="arithmetic" k1="0" k2="1" k3="0.9" k4="0"/>
   </filter>
-
-  <!-- volumetric bloom: three blur radii merged -->
-  <filter id="bloom" x="-90%" y="-90%" width="280%" height="280%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="2"  result="b1"/>
-    <feGaussianBlur in="SourceGraphic" stdDeviation="7"  result="b2"/>
-    <feGaussianBlur in="SourceGraphic" stdDeviation="13" result="b3"/>
-    <feMerge>
-      <feMergeNode in="b3"/><feMergeNode in="b2"/>
-      <feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/>
-    </feMerge>
+  <filter id="hGlow" x="-200%" y="-200%" width="500%" height="500%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="0.9" result="a"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3.6" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
-  <filter id="bloomS" x="-70%" y="-70%" width="240%" height="240%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="b1"/>
-    <feGaussianBlur in="SourceGraphic" stdDeviation="5"   result="b2"/>
-    <feMerge><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-  <filter id="depth" x="-20%" y="-20%" width="140%" height="140%">
-    <feGaussianBlur stdDeviation="1.5"/>
-  </filter>
-  <filter id="haze" x="-40%" y="-40%" width="180%" height="180%">
-    <feGaussianBlur stdDeviation="11"/>
-  </filter>
-
-  <!-- holographic interference grain -->
-  <filter id="holo" x="0%" y="0%" width="100%" height="100%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" seed="3" result="n">
-      <animate attributeName="seed" values="3;9;17;3" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/>
+  <filter id="hGrain" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="5" result="n">
+      <animate attributeName="seed" values="5;13;21;5" dur="1.3s" calcMode="discrete" repeatCount="indefinite"/>
     </feTurbulence>
     <feColorMatrix in="n" type="matrix"
-      values="0 0 0 0 0.13   0 0 0 0 0.72   0 0 0 0 0.85   0 0 0 0.32 0"/>
+      values="0 0 0 0 0.12  0 0 0 0 0.66  0 0 0 0 0.8  0 0 0 0.18 0"/>
   </filter>
-
-  <linearGradient id="shaft" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%"   stop-color="#67e8f9" stop-opacity="0.30"/>
-    <stop offset="100%" stop-color="#67e8f9" stop-opacity="0"/>
-  </linearGradient>
-  <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%"   stop-color="#22d3ee" stop-opacity="0"/>
-    <stop offset="46%"  stop-color="#67e8f9" stop-opacity="0.5"/>
-    <stop offset="54%"  stop-color="#ffffff" stop-opacity="0.75"/>
-    <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
-  </linearGradient>
-  <linearGradient id="floorFade" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%"   stop-color="#000000" stop-opacity="1"/>
-    <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-  </linearGradient>
-  <mask id="floorMask"><rect x="0" y="196" width="900" height="104" fill="url(#floorFade)" transform="translate(0,300) scale(1,-1) translate(0,-300)"/></mask>
-
-  <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
-    <rect width="4" height="1.2" fill="#0a3d4d" opacity="0.34"/>
+  <pattern id="hScan" width="3" height="3" patternUnits="userSpaceOnUse">
+    <rect width="3" height="0.8" fill="#0a3242" opacity="0.28"/>
   </pattern>
-  <clipPath id="fr"><rect width="900" height="300" rx="7"/></clipPath>
+  <clipPath id="hClip"><rect width="900" height="300" rx="3"/></clipPath>
+  <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style></defs>
+<g clip-path="url(#hClip)">
+  <rect width="900" height="300" fill="url(#hDeep)"/>
 
-  <style>
-    .m { font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace; }
-  </style>
-</defs>
-
-<g clip-path="url(#fr)">
-  <rect width="900" height="300" fill="url(#deep)"/>
-
-  <!-- ===== perspective floor, receding to a vanishing point ===== -->
-  <g mask="url(#floorMask)" opacity="0.8">
-    <g stroke="#17738f" stroke-width="1.1">
-      <path d="M450 196 L-560 300"/><path d="M450 196 L-300 300"/><path d="M450 196 L-90 300"/>
-      <path d="M450 196 L80 300"/>  <path d="M450 196 L220 300"/> <path d="M450 196 L330 300"/>
-      <path d="M450 196 L570 300"/> <path d="M450 196 L680 300"/> <path d="M450 196 L820 300"/>
-      <path d="M450 196 L1010 300"/><path d="M450 196 L1200 300"/><path d="M450 196 L1460 300"/>
-    </g>
-    <g stroke="#0e7490" stroke-width="1.1" fill="none">
-      <path d="M0 214 H900"><animate attributeName="d" values="M0 206 H900;M0 214 H900;M0 206 H900" dur="6s" repeatCount="indefinite"/></path>
-      <path d="M0 232 H900"><animate attributeName="d" values="M0 222 H900;M0 236 H900;M0 222 H900" dur="6s" repeatCount="indefinite"/></path>
-      <path d="M0 258 H900"><animate attributeName="d" values="M0 244 H900;M0 266 H900;M0 244 H900" dur="6s" repeatCount="indefinite"/></path>
-      <path d="M0 292 H900"><animate attributeName="d" values="M0 274 H900;M0 300 H900;M0 274 H900" dur="6s" repeatCount="indefinite"/></path>
-    </g>
-  </g>
-
-  <!-- ===== volumetric light shafts from the reactor ===== -->
-  <g opacity="0.34" filter="url(#haze)">
-    <path d="M150 150 L900 62 L900 238 Z" fill="url(#shaft)"/>
-    <path d="M150 150 L520 -30 L640 -30 Z" fill="url(#shaft)" opacity="0.4"/>
-  </g>
-
-  <!-- ================= ARC REACTOR ================= -->
-  <g transform="translate(150,150)">
-    <circle r="104" fill="#22d3ee" opacity="0.09" filter="url(#bloom)"/>
-
-    <!-- gyroscope: three tilted orbital rings -->
-    <g opacity="0.92">
-      <g transform="rotate(0)">
-        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="17s" repeatCount="indefinite"/>
-        <ellipse rx="92" ry="30" fill="none" stroke="#1d7f9c" stroke-width="1.6" opacity="0.85"/>
-        <ellipse rx="92" ry="30" fill="none" stroke="#7defff" stroke-width="2.4" stroke-dasharray="10 570" filter="url(#bloomS)"/>
-      </g>
-      <g transform="rotate(62)">
-        <animateTransform attributeName="transform" type="rotate" from="62" to="422" dur="23s" repeatCount="indefinite"/>
-        <ellipse rx="88" ry="26" fill="none" stroke="#155e75" stroke-width="1.5" opacity="0.8"/>
-        <ellipse rx="88" ry="26" fill="none" stroke="#f5b841" stroke-width="2" stroke-dasharray="7 540" filter="url(#bloomS)"/>
-      </g>
-      <g transform="rotate(-58)">
-        <animateTransform attributeName="transform" type="rotate" from="-58" to="302" dur="29s" repeatCount="indefinite"/>
-        <ellipse rx="84" ry="21" fill="none" stroke="#12617a" stroke-width="1.4" opacity="0.75"/>
-      </g>
-    </g>
-
-    <!-- data ring : dashes + measurement ticks -->
+  <!-- ============ CONTRIBUTION INSTRUMENT : one spoke per week ============ -->
+  <g class="t">
+    <circle cx="158" cy="150" r="119" fill="none" stroke="#12384a" stroke-width="0.6" opacity="0.8"/>
+    <circle cx="158" cy="150" r="50" fill="none" stroke="#12384a" stroke-width="0.6" opacity="0.8"/>
     <g>
-      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="21s" repeatCount="indefinite"/>
-      <circle r="74" fill="none" stroke="#0e7490" stroke-width="8" stroke-dasharray="1.6 9" opacity="0.85"/>
-      <circle r="74" fill="none" stroke="#22d3ee" stroke-width="1" opacity="0.5"/>
+      <line x1="158.0" y1="96.0" x2="158.0" y2="90.0" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="164.4" y1="96.4" x2="165.1" y2="90.4" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="170.7" y1="97.5" x2="172.1" y2="91.7" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="176.8" y1="99.4" x2="178.9" y2="93.8" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="182.7" y1="102.0" x2="185.4" y2="96.6" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="188.2" y1="105.2" x2="191.5" y2="100.2" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="193.3" y1="109.1" x2="197.2" y2="104.5" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="197.8" y1="113.6" x2="202.3" y2="109.5" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="201.9" y1="118.5" x2="206.7" y2="115.0" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="205.3" y1="123.9" x2="210.5" y2="121.0" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="208.0" y1="129.7" x2="213.6" y2="127.5" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="210.1" y1="135.8" x2="215.9" y2="134.2" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="211.4" y1="142.0" x2="217.3" y2="141.1" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="212.0" y1="148.4" x2="218.0" y2="148.2" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="211.8" y1="154.8" x2="217.8" y2="155.3" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="210.8" y1="161.1" x2="216.7" y2="162.4" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="209.2" y1="167.3" x2="214.8" y2="169.2" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="206.8" y1="173.2" x2="212.2" y2="175.8" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="203.7" y1="178.8" x2="208.7" y2="182.0" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="199.9" y1="184.0" x2="204.6" y2="187.8" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="195.6" y1="188.7" x2="199.8" y2="193.1" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="190.8" y1="192.9" x2="194.4" y2="197.7" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="185.5" y1="196.5" x2="188.5" y2="201.7" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="179.8" y1="199.4" x2="182.2" y2="204.9" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="173.8" y1="201.6" x2="175.5" y2="207.4" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="167.6" y1="203.1" x2="168.6" y2="209.1" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="161.2" y1="203.9" x2="161.6" y2="209.9" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="154.8" y1="203.9" x2="154.4" y2="209.9" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="148.4" y1="203.1" x2="147.4" y2="209.1" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="142.2" y1="201.6" x2="140.5" y2="207.4" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="136.2" y1="199.4" x2="133.8" y2="204.9" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="130.5" y1="196.5" x2="127.5" y2="201.7" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="125.2" y1="192.9" x2="121.6" y2="197.7" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="120.4" y1="188.7" x2="116.2" y2="193.1" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="116.1" y1="184.0" x2="111.4" y2="187.8" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="112.3" y1="178.8" x2="107.3" y2="182.0" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="109.2" y1="173.2" x2="103.8" y2="175.8" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="106.8" y1="167.3" x2="101.2" y2="169.2" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="105.2" y1="161.1" x2="99.3" y2="162.4" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="104.2" y1="154.8" x2="98.2" y2="155.3" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="104.0" y1="148.4" x2="98.0" y2="148.2" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="104.6" y1="142.0" x2="98.7" y2="141.1" stroke="#1b4055" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+      <line x1="105.9" y1="135.8" x2="83.0" y2="129.5" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="108.0" y1="129.7" x2="79.4" y2="118.1" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="110.7" y1="123.9" x2="97.7" y2="116.8" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="114.1" y1="118.5" x2="63.8" y2="82.4" stroke="#a8f0ff" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="118.2" y1="113.6" x2="82.7" y2="81.1" stroke="#1e9bbd" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="122.7" y1="109.1" x2="94.7" y2="76.6" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="127.8" y1="105.2" x2="107.4" y2="74.8" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="133.3" y1="102.0" x2="121.2" y2="78.3" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="139.2" y1="99.4" x2="129.9" y2="74.5" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="145.3" y1="97.5" x2="138.1" y2="67.5" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+      <line x1="151.6" y1="96.4" x2="148.5" y2="70.0" stroke="#12617a" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
     </g>
     <g>
-      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="12s" repeatCount="indefinite"/>
-      <circle r="62" fill="none" stroke="#67e8f9" stroke-width="3" stroke-dasharray="52 26" opacity="0.9" filter="url(#bloomS)"/>
-      <circle r="62" fill="none" stroke="#f5b841" stroke-width="3" stroke-dasharray="9 381" opacity="0.95" filter="url(#bloomS)"/>
+      <line x1="172.4" y1="28.9" x2="173.0" y2="23.9" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="226.2" y1="48.8" x2="228.9" y2="44.7" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="264.8" y1="91.1" x2="269.2" y2="88.7" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="279.5" y1="160.8" x2="284.5" y2="161.3" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="261.2" y1="215.1" x2="265.4" y2="217.8" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="220.0" y1="255.0" x2="222.6" y2="259.4" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="165.2" y1="271.8" x2="165.5" y2="276.8" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="96.0" y1="255.0" x2="93.4" y2="259.4" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="54.8" y1="215.1" x2="50.6" y2="217.8" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="36.1" y1="146.4" x2="31.1" y2="146.2" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="51.2" y1="91.1" x2="46.8" y2="88.7" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="89.8" y1="48.8" x2="87.1" y2="44.7" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+    </g>
+    <g>
+      <text x="174.0" y="18.3" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">SEP</text>
+      <text x="233.4" y="40.4" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">OCT</text>
+      <text x="276.2" y="87.2" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">NOV</text>
+      <text x="292.5" y="164.4" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">DEC</text>
+      <text x="272.2" y="224.5" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">JAN</text>
+      <text x="226.7" y="268.6" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">FEB</text>
+      <text x="166.0" y="287.2" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">MAR</text>
+      <text x="89.3" y="268.6" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">APR</text>
+      <text x="43.8" y="224.5" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">MAY</text>
+      <text x="23.1" y="148.4" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">JUN</text>
+      <text x="39.8" y="87.2" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">JUL</text>
+      <text x="82.6" y="40.4" fill="#3f7f96" font-size="6.6" letter-spacing="1.1" text-anchor="middle" opacity="0.9">AUG</text>
     </g>
 
-    <!-- machined housing : metal gradient + specular lighting -->
-    <circle r="48" fill="none" stroke="url(#ringMetal)" stroke-width="13" filter="url(#spec)"/>
-    <circle r="54.5" fill="none" stroke="#0a2a38" stroke-width="1.6" opacity="0.95"/>
-    <circle r="41.5" fill="none" stroke="#03161f" stroke-width="1.6" opacity="0.95"/>
-    <circle r="48" fill="none" stroke="url(#goldMetal)" stroke-width="1.6" opacity="0.5"/>
+    <!-- busiest week of the year -->
+    <line x1="60.5" y1="80.0" x2="54.0" y2="75.4" stroke="#e8b455" stroke-width="0.9"/><circle cx="54.0" cy="75.4" r="1.7" fill="#e8b455"/><text x="42.6" y="69.6" fill="#e8b455" font-size="6.6" letter-spacing="1" text-anchor="middle">PEAK 79</text>
 
-    <!-- stator coils -->
-    <g fill="none" stroke="#2fa8c8" stroke-width="3.2" opacity="0.9" filter="url(#depth)">
-      <path d="M0 -37 L32 18 L-32 18 Z"/>
-      <path d="M0 37 L-32 -18 L32 -18 Z" opacity="0.45" stroke="#1a7d9c"/>
-    </g>
-    <g fill="#7defff" filter="url(#bloomS)">
-      <circle cx="0" cy="-37" r="3.6"><animate attributeName="r" values="2.8;4.4;2.8" dur="2.2s" repeatCount="indefinite"/></circle>
-      <circle cx="32" cy="18"  r="3.6"><animate attributeName="r" values="4.4;2.8;4.4" dur="2.2s" repeatCount="indefinite"/></circle>
-      <circle cx="-32" cy="18" r="3.6"><animate attributeName="r" values="3.4;4.4;3.4" dur="2.6s" repeatCount="indefinite"/></circle>
+    <!-- read head sweeping the year -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 158 150" to="360 158 150" dur="24s" repeatCount="indefinite"/>
+      <line x1="158" y1="102" x2="158" y2="30" stroke="#5fd8f2" stroke-width="0.9" opacity="0.9" filter="url(#hGlow)"/>
+      <circle cx="158" cy="26" r="1.8" fill="#e8b455" filter="url(#hGlow)"/>
     </g>
 
-    <!-- plasma core + glass dome -->
-    <circle r="33" fill="url(#core)" filter="url(#bloom)">
-      <animate attributeName="r" values="30;35;30" dur="3.6s" repeatCount="indefinite"/>
-    </circle>
-    <circle r="14" fill="#f2ffff" filter="url(#bloom)">
-      <animate attributeName="r" values="12;16;12" dur="2.2s" repeatCount="indefinite"/>
-    </circle>
-    <circle r="34" fill="url(#dome)"/>
-    <circle r="34" fill="none" stroke="#0a3f52" stroke-width="1.8" opacity="0.85"/>
-    <circle r="34" fill="none" stroke="#9ff0ff" stroke-width="1" opacity="0.35"/>
-    <path d="M-24 -14 A28 28 0 0 1 6 -30" fill="none" stroke="#ffffff" stroke-width="2.6"
-          stroke-linecap="round" opacity="0.6" filter="url(#bloomS)"/>
-
-    <!-- energy shockwaves -->
-    <circle fill="none" stroke="#7defff" stroke-width="1.8" opacity="0">
-      <animate attributeName="r" values="36;108" dur="4s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.7;0" dur="4s" repeatCount="indefinite"/>
-    </circle>
-    <circle fill="none" stroke="#f5b841" stroke-width="1.2" opacity="0">
-      <animate attributeName="r" values="36;108" dur="4s" begin="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.45;0" dur="4s" begin="2s" repeatCount="indefinite"/>
-    </circle>
-
-    <!-- orbiting particles -->
-    <g fill="#a8f3ff" filter="url(#bloomS)">
-      <circle r="2.2"><animateMotion dur="8s"  repeatCount="indefinite" path="M0,-70 A70,70 0 1,1 -0.1,-70"/></circle>
-      <circle r="1.7"><animateMotion dur="11s" repeatCount="indefinite" path="M0,86 A86,86 0 1,0 0.1,86"/></circle>
-      <circle r="1.5" fill="#ffd889"><animateMotion dur="6.5s" repeatCount="indefinite" path="M0,-56 A56,56 0 1,1 -0.1,-56"/></circle>
+    <!-- orbital planes -->
+    <g opacity="0.55">
+      <g><animateTransform attributeName="transform" type="rotate" from="0 158 150" to="360 158 150" dur="38s" repeatCount="indefinite"/>
+        <ellipse cx="158" cy="150" rx="132" ry="34" fill="none" stroke="#3f7f96" stroke-width="0.6"/></g>
+      <g><animateTransform attributeName="transform" type="rotate" from="64 158 150" to="424 158 150" dur="52s" repeatCount="indefinite"/>
+        <ellipse cx="158" cy="150" rx="126" ry="26" fill="none" stroke="#3f7f96" stroke-width="0.6" opacity="0.75"/></g>
     </g>
+
+    <!-- core well -->
+    <circle cx="158" cy="150" r="46" fill="#03121b"/>
+    <circle cx="158" cy="150" r="46" fill="none" stroke="#17536b" stroke-width="2.6" filter="url(#hBevel)"/>
+    <circle cx="158" cy="150" r="42" fill="url(#hCore)" opacity="0.34">
+      <animate attributeName="opacity" values="0.24;0.42;0.24" dur="4.6s" repeatCount="indefinite"/>
+    </circle>
+    <g fill="none" stroke="#3f7f96" stroke-width="0.6" opacity="0.85">
+      <path d="M167.4 112.2 A39.0 39.0 0 0 1 195.5 160.7"/>
+      <path d="M186.1 177.1 A39.0 39.0 0 0 1 129.9 177.1"/>
+      <path d="M120.5 160.7 A39.0 39.0 0 0 1 148.6 112.2"/>
+    </g>
+
+    <text x="158" y="154" text-anchor="middle" fill="#f2fdff" font-size="27" letter-spacing="0.5">160</text>
+    <text x="158" y="169" text-anchor="middle" fill="#3f7f96" font-size="6.8" letter-spacing="2.6">CONTRIBUTIONS</text>
+    <text x="158" y="126" text-anchor="middle" fill="#3f7f96" font-size="6.4" letter-spacing="2.4">LAST 12 MONTHS</text>
+
   </g>
 
-  <!-- ================= HUD TEXT ================= -->
-  <g class="m">
-    <text x="286" y="80" fill="#f5b841" font-size="12.5" letter-spacing="4.6" opacity="0.95">STARK-STYLE INTERFACE // v5.1</text>
+  <!-- ============ READOUT ============ -->
+  <g class="t">
+    <text x="312" y="60" fill="#e8b455" font-size="10.5" letter-spacing="4.2">GITHUB.COM / SHUCCII</text>
+    <text x="872" y="60" fill="#3f7f96" font-size="10.5" letter-spacing="2.2" text-anchor="end">BRANCH main</text>
+    <line x1="312" y1="70" x2="872" y2="70" stroke="#3f7f96" stroke-width="0.6" opacity="0.5"/>
 
-    <!-- chromatic aberration: red / cyan fringes behind the white face -->
-    <g font-size="47" font-weight="700" letter-spacing="7">
-      <text x="284.4" y="136" fill="#ff3b3b" opacity="0.5">SHUICHI TANI</text>
-      <text x="287.6" y="136" fill="#25f2ff" opacity="0.5">SHUICHI TANI</text>
-      <text x="286"   y="136" fill="#f4feff" filter="url(#bloomS)">SHUICHI TANI</text>
+    <g font-size="38" letter-spacing="8.5">
+      <text x="311.3" y="122" fill="#ff4d4d" opacity="0.26">SHUICHI TANI</text>
+      <text x="312.7" y="122" fill="#3ee6ff" opacity="0.26">SHUICHI TANI</text>
+      <text x="312"     y="122" fill="#f2fdff">SHUICHI TANI</text>
     </g>
 
-    <path d="M286 154 H842" stroke="#0e7490" stroke-width="1.2" opacity="0.85"/>
-    <path d="M286 154 H486" stroke="url(#goldMetal)" stroke-width="2.4" opacity="1"/>
+    <line x1="312" y1="138" x2="872" y2="138" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+    <line x1="312" y1="138" x2="404" y2="138" stroke="#e8b455" stroke-width="1.2"/>
 
-    <text x="286" y="184" fill="#8fd9f0" font-size="14.5" letter-spacing="2.6">MATERIALS INFORMATICS &#183; MACHINE LEARNING &#183; FUSION</text>
+    <text x="312" y="164" fill="#8ecfe6" font-size="11.5" letter-spacing="3">MATERIALS INFORMATICS &#183; MACHINE LEARNING &#183; FUSION</text>
 
-    <g font-size="12.5" letter-spacing="1.6">
-      <text x="286" y="216" fill="#4b8ba3">SYS:</text>
-      <text x="326" y="216" fill="#34d399" filter="url(#bloomS)">ONLINE</text>
-      <text x="402" y="216" fill="#4b8ba3">REACTOR:</text>
-      <text x="478" y="216" fill="#22d3ee" filter="url(#bloomS)">STABLE</text>
-      <text x="558" y="216" fill="#4b8ba3">MODE:</text>
-      <text x="606" y="216" fill="#f5b841" filter="url(#bloomS)">RESEARCH</text>
-      <text x="702" y="216" fill="#34d399">&#9679; LIVE
-        <animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.55;0.6;1" dur="1.8s" repeatCount="indefinite"/>
-      </text>
+    <text x="312.0" y="200" fill="#3f7f96" font-size="8.5" letter-spacing="2.2">COMMITS</text>
+    <text x="312.0" y="226" fill="#cfeefb" font-size="19" letter-spacing="0.4">157</text>
+    <line x1="410.0" y1="189" x2="410.0" y2="231" stroke="#3f7f96" stroke-width="0.6" opacity="0.55"/>
+    <text x="424.0" y="200" fill="#3f7f96" font-size="8.5" letter-spacing="2.2">PULL REQ</text>
+    <text x="424.0" y="226" fill="#cfeefb" font-size="19" letter-spacing="0.4">0</text>
+    <line x1="522.0" y1="189" x2="522.0" y2="231" stroke="#3f7f96" stroke-width="0.6" opacity="0.55"/>
+    <text x="536.0" y="200" fill="#3f7f96" font-size="8.5" letter-spacing="2.2">ISSUES</text>
+    <text x="536.0" y="226" fill="#cfeefb" font-size="19" letter-spacing="0.4">0</text>
+    <line x1="634.0" y1="189" x2="634.0" y2="231" stroke="#3f7f96" stroke-width="0.6" opacity="0.55"/>
+    <text x="648.0" y="200" fill="#3f7f96" font-size="8.5" letter-spacing="2.2">REPOS</text>
+    <text x="648.0" y="226" fill="#cfeefb" font-size="19" letter-spacing="0.4">3</text>
+    <line x1="746.0" y1="189" x2="746.0" y2="231" stroke="#3f7f96" stroke-width="0.6" opacity="0.55"/>
+    <text x="760.0" y="200" fill="#3f7f96" font-size="8.5" letter-spacing="2.2">STARS</text>
+    <text x="760.0" y="226" fill="#cfeefb" font-size="19" letter-spacing="0.4">0</text>
+
+    <line x1="312" y1="248" x2="872" y2="248" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+    <g font-size="9" letter-spacing="1.7" fill="#3f7f96">
+      <text x="312" y="272">SYNC 2026-09-04 11:06Z</text>
+      <text x="502" y="272">HEAD 32adf73</text>
+      <text x="622" y="272">PEAK 79/WK</text>
+      <text x="732" y="272">ACTIVE 11/53</text>
     </g>
-
-    <text x="286" y="248" fill="#8ed8ef" font-size="13" letter-spacing="1.3">&gt; J.A.R.V.I.S. &#8212; all systems nominal, sir.</text>
-    <rect x="646" y="238" width="8" height="13" fill="#f5b841">
-      <animate attributeName="opacity" values="1;1;0.1;0.1" keyTimes="0;0.5;0.55;1" dur="1.6s" repeatCount="indefinite"/>
-    </rect>
+    <text x="872" y="272" text-anchor="end" fill="#5fd8f2" font-size="9" letter-spacing="1.8">LIVE<animate attributeName="opacity" values="1;1;0.2;1" keyTimes="0;0.6;0.66;1" dur="2.4s" repeatCount="indefinite"/></text>
   </g>
 
-  <!-- right-hand telemetry -->
-  <g class="m" opacity="0.85">
-    <g stroke="#0e7490" stroke-width="1.4">
-      <path d="M858 104 H884"><animate attributeName="d" values="M858 104 H884;M858 104 H870;M858 104 H884" dur="3.4s" repeatCount="indefinite"/></path>
-      <path d="M858 118 H872"><animate attributeName="d" values="M858 118 H872;M858 118 H886;M858 118 H872" dur="4.1s" repeatCount="indefinite"/></path>
-      <path d="M858 132 H880"/>
-      <path d="M858 146 H866"><animate attributeName="d" values="M858 146 H866;M858 146 H884;M858 146 H866" dur="2.9s" repeatCount="indefinite"/></path>
-      <path d="M858 160 H876"/>
-      <path d="M858 174 H882"><animate attributeName="d" values="M858 174 H882;M858 174 H864;M858 174 H882" dur="3.7s" repeatCount="indefinite"/></path>
-      <path d="M858 188 H868"/>
-      <path d="M858 202 H878"/>
-    </g>
-    <g transform="translate(872,70)">
-      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="11s" repeatCount="indefinite" additive="sum"/>
-      <circle r="10" fill="none" stroke="#22d3ee" stroke-width="1.3" stroke-dasharray="10 5"/>
-    </g>
-    <circle cx="872" cy="70" r="2.8" fill="#22d3ee" filter="url(#bloomS)"/>
-    <path d="M872 56 V62 M872 78 V84 M858 70 H864 M880 70 H886" stroke="#22d3ee" stroke-width="1.2"/>
+  <g><line x1="878" y1="74" x2="892" y2="74" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="878" y1="83" x2="885" y2="83" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="92" x2="885" y2="92" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="101" x2="885" y2="101" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="110" x2="892" y2="110" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="878" y1="119" x2="885" y2="119" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="128" x2="885" y2="128" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="137" x2="885" y2="137" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="146" x2="892" y2="146" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="878" y1="155" x2="885" y2="155" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="164" x2="885" y2="164" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="173" x2="885" y2="173" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="182" x2="892" y2="182" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+      <line x1="878" y1="191" x2="885" y2="191" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="200" x2="885" y2="200" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="209" x2="885" y2="209" stroke="#3f7f96" stroke-width="0.6" opacity="0.45"/>
+      <line x1="878" y1="218" x2="892" y2="218" stroke="#3f7f96" stroke-width="0.6" opacity="0.85"/>
+    <line x1="876" y1="74" x2="876" y2="226" stroke="#3f7f96" stroke-width="0.6" opacity="0.6"/>
   </g>
 
-  <!-- ===== atmosphere: sweep, scanlines, grain, vignette ===== -->
-  <rect x="-340" y="0" width="340" height="300" fill="url(#sweep)" opacity="0.13">
-    <animate attributeName="x" values="-340;900" dur="7.5s" repeatCount="indefinite"/>
+  <rect x="-300" y="0" width="300" height="300" fill="url(#hSweep)" opacity="0.09">
+    <animate attributeName="x" values="-300;900" dur="9s" repeatCount="indefinite"/>
   </rect>
-  <rect width="900" height="300" fill="url(#scan)" opacity="0.42"/>
-  <rect width="900" height="300" filter="url(#holo)" opacity="0.5"/>
-  <rect width="900" height="300" fill="url(#vig)"/>
-  <rect width="900" height="2" fill="#9ff0ff" opacity="0.16">
-    <animate attributeName="y" values="0;300;0" dur="13s" repeatCount="indefinite"/>
-  </rect>
+  <rect width="900" height="300" fill="url(#hScan)" opacity="0.34"/>
+  <rect width="900" height="300" filter="url(#hGrain)" opacity="0.32"/>
+  <rect width="900" height="300" fill="url(#hVig)"/>
 
-  <!-- frame -->
-  <g stroke="#22d3ee" stroke-width="1.8" fill="none" opacity="0.9">
-    <path d="M13 48 V13 H72"/><path d="M887 48 V13 H828"/>
-    <path d="M13 252 V287 H72"/><path d="M887 252 V287 H828"/>
+  <g stroke="#5fd8f2" stroke-width="0.9" fill="none" opacity="0.8">
+    <path d="M10 34 V10 H52"/>
+    <path d="M890 34 V10 H848"/>
+    <path d="M10 266 V290 H52"/>
+    <path d="M890 266 V290 H848"/>
   </g>
-  <g stroke="#f5b841" stroke-width="1.6" fill="none" opacity="0.8">
-    <path d="M82 13 H126"/><path d="M774 287 H818"/>
-  </g>
-  <rect x="0.9" y="0.9" width="898.2" height="298.2" rx="7" fill="none" stroke="#0e7490" stroke-width="1.6" opacity="0.75"/>
+  <rect x="0.5" y="0.5" width="899" height="299" rx="3" fill="none"
+        stroke="#3f7f96" stroke-width="0.8" opacity="0.6"/>
 </g>
 </svg>
