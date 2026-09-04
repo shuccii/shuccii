@@ -2,7 +2,7 @@
 
 <img width="100%" alt="J.A.R.V.I.S. interface" src="assets/jarvis-header.svg" />
 
-<img alt="boot sequence" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=19&duration=3400&pause=700&color=22D3EE&center=true&vCenter=true&width=820&height=52&lines=%3E+J.A.R.V.I.S.+online.+Welcome+back%2C+sir.;%3E+Scanning+structural+materials+for+fusion+reactors...;%3E+Assimilating+experiment+%2B+first-principles+data;%3E+Bayesian+optimization+%7C+next+candidate+located" />
+<img width="100%" alt="boot sequence" src="assets/boot-sequence.svg" />
 
 <p>
   <a href="https://shuccii.github.io"><img alt="Website" src="https://img.shields.io/badge/UPLINK-shuccii.github.io-22D3EE?style=for-the-badge&logo=astro&logoColor=22D3EE&labelColor=05090F" /></a>
