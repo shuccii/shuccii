@@ -85,9 +85,9 @@
   </g>
 <g clip-path="url(#syInner)">
 
-  <defs><clipPath id="syBar0"><rect x="19" y="45.0" width="254.0" height="3" rx="1.5"/></clipPath><clipPath id="syBar1"><rect x="19" y="65.5" width="238.1" height="3" rx="1.5"/></clipPath><clipPath id="syBar2"><rect x="19" y="86.0" width="206.4" height="3" rx="1.5"/></clipPath><clipPath id="syBar3"><rect x="19" y="106.5" width="158.8" height="3" rx="1.5"/></clipPath><clipPath id="syBar4"><rect x="19" y="127.0" width="30.5" height="3" rx="1.5"/></clipPath><clipPath id="syBar5"><rect x="19" y="147.5" width="30.5" height="3" rx="1.5"/></clipPath></defs>
+  <defs><clipPath id="syBar0"><rect x="19" y="45.0" width="254.0" height="3" rx="1.5"/></clipPath><clipPath id="syBar1"><rect x="19" y="65.5" width="224.1" height="3" rx="1.5"/></clipPath><clipPath id="syBar2"><rect x="19" y="86.0" width="30.5" height="3" rx="1.5"/></clipPath></defs>
   <g class="t">
-    <text x="19" y="41.0" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">conductivity-claude</text>
+    <text x="19" y="41.0" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">shuccii</text>
     <text x="273" y="41.0" fill="#5d8ba0" font-size="6.1" text-anchor="end">09-05</text>
     <rect x="19" y="45.0" width="254" height="3" rx="1.5" fill="#c2d6e0" opacity="0.75"/>
     <rect x="19" y="45.0" width="254.0" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
@@ -98,59 +98,26 @@
                  begin="0.00s" repeatCount="indefinite"/>
       </rect>
     </g>
-    <text x="19" y="61.5" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">shuccii</text>
-    <text x="273" y="61.5" fill="#5d8ba0" font-size="6.1" text-anchor="end">09-04</text>
+    <text x="19" y="61.5" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">shuccii.github.io</text>
+    <text x="273" y="61.5" fill="#5d8ba0" font-size="6.1" text-anchor="end">08-30</text>
     <rect x="19" y="65.5" width="254" height="3" rx="1.5" fill="#c2d6e0" opacity="0.75"/>
-    <rect x="19" y="65.5" width="238.1" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
-    <rect x="19" y="65.5" width="238.1" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
+    <rect x="19" y="65.5" width="224.1" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
+    <rect x="19" y="65.5" width="224.1" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
     <g clip-path="url(#syBar1)">
       <rect y="65.5" width="26" height="3" rx="1.5" fill="#0b5570" opacity="0.5">
-        <animate attributeName="x" values="-7;257.1" dur="2.6s"
+        <animate attributeName="x" values="-7;243.1" dur="2.6s"
                  begin="0.42s" repeatCount="indefinite"/>
       </rect>
     </g>
-    <text x="19" y="82.0" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">WADACHI</text>
-    <text x="273" y="82.0" fill="#5d8ba0" font-size="6.1" text-anchor="end">09-02</text>
+    <text x="19" y="82.0" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">Python-seminar</text>
+    <text x="273" y="82.0" fill="#5d8ba0" font-size="6.1" text-anchor="end">07-16</text>
     <rect x="19" y="86.0" width="254" height="3" rx="1.5" fill="#c2d6e0" opacity="0.75"/>
-    <rect x="19" y="86.0" width="206.4" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
-    <rect x="19" y="86.0" width="206.4" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
+    <rect x="19" y="86.0" width="30.5" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
+    <rect x="19" y="86.0" width="30.5" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
     <g clip-path="url(#syBar2)">
       <rect y="86.0" width="26" height="3" rx="1.5" fill="#0b5570" opacity="0.5">
-        <animate attributeName="x" values="-7;225.4" dur="2.6s"
+        <animate attributeName="x" values="-7;49.5" dur="2.6s"
                  begin="0.84s" repeatCount="indefinite"/>
-      </rect>
-    </g>
-    <text x="19" y="102.5" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">shuccii.github.io</text>
-    <text x="273" y="102.5" fill="#5d8ba0" font-size="6.1" text-anchor="end">08-30</text>
-    <rect x="19" y="106.5" width="254" height="3" rx="1.5" fill="#c2d6e0" opacity="0.75"/>
-    <rect x="19" y="106.5" width="158.8" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
-    <rect x="19" y="106.5" width="158.8" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
-    <g clip-path="url(#syBar3)">
-      <rect y="106.5" width="26" height="3" rx="1.5" fill="#0b5570" opacity="0.5">
-        <animate attributeName="x" values="-7;177.8" dur="2.6s"
-                 begin="1.26s" repeatCount="indefinite"/>
-      </rect>
-    </g>
-    <text x="19" y="123.0" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">Data_SciencePBL</text>
-    <text x="273" y="123.0" fill="#5d8ba0" font-size="6.1" text-anchor="end">08-20</text>
-    <rect x="19" y="127.0" width="254" height="3" rx="1.5" fill="#c2d6e0" opacity="0.75"/>
-    <rect x="19" y="127.0" width="30.5" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
-    <rect x="19" y="127.0" width="30.5" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
-    <g clip-path="url(#syBar4)">
-      <rect y="127.0" width="26" height="3" rx="1.5" fill="#0b5570" opacity="0.5">
-        <animate attributeName="x" values="-7;49.5" dur="2.6s"
-                 begin="1.68s" repeatCount="indefinite"/>
-      </rect>
-    </g>
-    <text x="19" y="143.5" fill="#1d4d61" font-size="6.8" letter-spacing="0.6">JARVIS</text>
-    <text x="273" y="143.5" fill="#5d8ba0" font-size="6.1" text-anchor="end">08-20</text>
-    <rect x="19" y="147.5" width="254" height="3" rx="1.5" fill="#c2d6e0" opacity="0.75"/>
-    <rect x="19" y="147.5" width="30.5" height="3" rx="1.5" fill="#0e7490" opacity="0.85"/>
-    <rect x="19" y="147.5" width="30.5" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
-    <g clip-path="url(#syBar5)">
-      <rect y="147.5" width="26" height="3" rx="1.5" fill="#0b5570" opacity="0.5">
-        <animate attributeName="x" values="-7;49.5" dur="2.6s"
-                 begin="2.10s" repeatCount="indefinite"/>
       </rect>
     </g>
     <text x="19" y="179" fill="#5d8ba0" font-size="5.8" letter-spacing="1.6">BAR LENGTH = RECENCY OF LAST PUSH</text>
