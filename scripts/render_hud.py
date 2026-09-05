@@ -48,6 +48,10 @@ def main() -> int:
             "pulse.svg": widgets.pulse(t, pal),
             "languages.svg": widgets.languages(t, pal),
             "log.svg": widgets.log(t, pal),
+            "summary.svg": widgets.summary(t, pal),
+            "ledger.svg": widgets.ledger(t, pal),
+            "hours.svg": widgets.hours(t, pal),
+            "grid.svg": widgets.grid(t, pal),
         }.items():
             (d / name).write_text(svg)
             print(f"rendered {pal.key}/{name} ({len(svg)} bytes)")

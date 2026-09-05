@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 178" width="444" height="178" role="img" aria-label="commits by hour">
+<defs>
+  <radialGradient id="hrDeep" cx="16%" cy="50%" r="88%">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58"/>
+    <stop offset="46%" stop-color="#eef4f8" stop-opacity="0.42"/>
+    <stop offset="100%" stop-color="#dde8ef" stop-opacity="0.26"/>
+  </radialGradient>
+  <radialGradient id="hrVig" cx="50%" cy="50%" r="74%">
+    <stop offset="58%" stop-color="#3d6b80" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#3d6b80" stop-opacity="0.16"/>
+  </radialGradient>
+  <radialGradient id="hrCore" cx="50%" cy="42%" r="58%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="26%" stop-color="#dff2fa" stop-opacity="1"/><stop offset="60%" stop-color="#7cc6dd" stop-opacity="0.5"/><stop offset="100%" stop-color="#bcd9e5" stop-opacity="0"/></radialGradient>
+  <linearGradient id="hrSweep" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#0e7490" stop-opacity="0"/>
+    <stop offset="52%" stop-color="#0e7490" stop-opacity="0.45"/>
+    <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="hrBevel" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="hh"/>
+    <feSpecularLighting in="hh" surfaceScale="3.6" specularConstant="0.85"
+                        specularExponent="26" lighting-color="#dff6ff" result="s">
+      <fePointLight x="-70" y="-70" z="60">
+        <animate attributeName="x" values="-70;70;-70" dur="9s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-70;70;-70" dur="13s" repeatCount="indefinite"/>
+      </fePointLight>
+    </feSpecularLighting>
+    <feComposite in="s" in2="SourceAlpha" operator="in" result="sc"/>
+    <feComposite in="SourceGraphic" in2="sc" operator="arithmetic" k1="0" k2="1" k3="0.41" k4="0"/>
+  </filter>
+  <filter id="hrGlow" x="-200%" y="-200%" width="500%" height="500%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="0.41" result="a"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="1.62" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="hrGrain" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="5" result="n">
+      <animate attributeName="seed" values="5;13;21;5" dur="1.3s" calcMode="discrete" repeatCount="indefinite"/>
+    </feTurbulence>
+    <feColorMatrix in="n" type="matrix"
+      values="0 0 0 0 0.12  0 0 0 0 0.66  0 0 0 0 0.8  0 0 0 0.06 0"/>
+  </filter>
+  <pattern id="hrScan" width="3" height="3" patternUnits="userSpaceOnUse">
+    <rect width="3" height="0.8" fill="#9dbccb" opacity="0.16"/>
+  </pattern>
+  <clipPath id="hrClip"><rect width="444" height="178" rx="3"/></clipPath>
+  <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
+  <linearGradient id="hrBody" x1="0" y1="0" x2="0.3" y2="1">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58"/>
+    <stop offset="52%" stop-color="#eef4f8" stop-opacity="0.42"/>
+    <stop offset="100%" stop-color="#dde8ef" stop-opacity="0.26"/>
+  </linearGradient>
+  <linearGradient id="hrBar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0e7490" stop-opacity="0.13"/>
+    <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="hrLip" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="18%" stop-color="#ffffff" stop-opacity="0.9"/>
+    <stop offset="82%" stop-color="#ffffff" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="hrDrop" x="-12%" y="-12%" width="124%" height="130%">
+    <feDropShadow dx="0" dy="2.4" stdDeviation="3.4"
+                  flood-color="#33586b"
+                  flood-opacity="0.22"/>
+  </filter>
+  <clipPath id="hrInner"><rect x="7" y="28" width="430" height="143"/></clipPath>
+</defs>
+
+  <g filter="url(#hrDrop)">
+    <rect x="7" y="7" width="430" height="164" rx="4" fill="url(#hrBody)"/>
+  </g>
+  <rect x="7" y="7" width="430" height="21" rx="4" fill="url(#hrBar)"/>
+  <rect x="7" y="28" width="430" height="0.6" fill="#5d8ba0" opacity="0.5"/>
+  <rect x="13" y="7.5" width="418" height="0.9" fill="url(#hrLip)"/>
+  <rect x="7.3" y="7.3" width="429.4" height="163.4" rx="4" fill="none"
+        stroke="#0e7490" stroke-width="0.5" opacity="0.55"/>
+  <path d="M10 16 V10 H16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M428 10 H434 V16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M10 162 V168 H16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M428 168 H434 V162" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/>
+  <g class="t">
+    <circle cx="20" cy="17.6" r="2.6" fill="none" stroke="#0e7490" stroke-width="0.45"/>
+    <circle cx="20" cy="17.6" r="0.9" fill="#0e7490"/>
+    <text x="29" y="20.6" fill="#0e7490" font-size="7.4" letter-spacing="2.8">COMMIT HOURS</text>
+    <text x="429" y="20.6" fill="#5d8ba0" font-size="6.8" letter-spacing="1.8"
+          text-anchor="end">JST &#183; PEAK 12:00</text>
+  </g>
+<g clip-path="url(#hrInner)">
+
+  <defs>
+    <linearGradient id="hrShimmer" gradientUnits="userSpaceOnUse"
+                    x1="33" y1="0" x2="163" y2="0">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.35"/>
+      <stop offset="42%" stop-color="#0b5570" stop-opacity="0.95"/>
+      <stop offset="58%" stop-color="#0b5570" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0e7490" stop-opacity="0.35"/>
+      <animateTransform attributeName="gradientTransform" type="translate"
+                        values="-120;444" dur="6.5s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+  <g class="t">
+    <rect x="36.9" y="91.1" width="8.4" height="4.7" rx="1" fill="#0e7490" opacity="0.12"/><rect x="52.9" y="74.7" width="8.4" height="37.6" rx="1" fill="#0e7490" opacity="0.12"/><rect x="69.0" y="67.6" width="8.4" height="51.8" rx="1" fill="#0e7490" opacity="0.12"/><rect x="85.1" y="88.8" width="8.4" height="9.4" rx="1" fill="#0e7490" opacity="0.12"/><rect x="101.2" y="91.1" width="8.4" height="4.7" rx="1" fill="#0e7490" opacity="0.12"/><rect x="117.3" y="91.1" width="8.4" height="4.7" rx="1" fill="#0e7490" opacity="0.12"/><rect x="133.4" y="93.5" width="8.4" height="0.0" rx="1" fill="#0e7490" opacity="0.05"/><rect x="149.4" y="93.5" width="8.4" height="0.0" rx="1" fill="#0e7490" opacity="0.05"/><rect x="165.5" y="88.8" width="8.4" height="9.4" rx="1" fill="#0e7490" opacity="0.12"/><rect x="181.6" y="93.5" width="8.4" height="0.0" rx="1" fill="#0e7490" opacity="0.05"/><rect x="197.7" y="93.5" width="8.4" height="0.0" rx="1" fill="#0e7490" opacity="0.05"/><rect x="213.8" y="86.4" width="8.4" height="14.1" rx="1" fill="#0e7490" opacity="0.12"/><rect x="229.9" y="53.5" width="8.4" height="80.0" rx="1" fill="#0e7490" opacity="0.12"/><rect x="245.9" y="74.7" width="8.4" height="37.6" rx="1" fill="#0e7490" opacity="0.12"/><rect x="262.0" y="79.4" width="8.4" height="28.2" rx="1" fill="#0e7490" opacity="0.12"/><rect x="278.1" y="86.4" width="8.4" height="14.1" rx="1" fill="#0e7490" opacity="0.12"/><rect x="294.2" y="65.3" width="8.4" height="56.5" rx="1" fill="#0e7490" opacity="0.12"/><rect x="310.3" y="74.7" width="8.4" height="37.6" rx="1" fill="#0e7490" opacity="0.12"/><rect x="326.4" y="79.4" width="8.4" height="28.2" rx="1" fill="#0e7490" opacity="0.12"/><rect x="342.4" y="81.7" width="8.4" height="23.5" rx="1" fill="#0e7490" opacity="0.12"/><rect x="358.5" y="55.9" width="8.4" height="75.3" rx="1" fill="#0e7490" opacity="0.12"/><rect x="374.6" y="74.7" width="8.4" height="37.6" rx="1" fill="#0e7490" opacity="0.12"/><rect x="390.7" y="81.7" width="8.4" height="23.5" rx="1" fill="#0e7490" opacity="0.12"/><rect x="406.8" y="70.0" width="8.4" height="47.1" rx="1" fill="#0e7490" opacity="0.12"/>
+    <line x1="33" y1="93.5" x2="419" y2="93.5" stroke="#5d8ba0" stroke-width="0.45" opacity="0.6"/>
+    <path d="M33 93.5 L41.0 91.1 L57.1 74.7 L73.2 67.6 L89.3 88.8 L105.4 91.1 L121.5 91.1 L137.5 93.5 L153.6 93.5 L169.7 88.8 L185.8 93.5 L201.9 93.5 L218.0 86.4 L234.0 53.5 L250.1 74.7 L266.2 79.4 L282.3 86.4 L298.4 65.3 L314.5 74.7 L330.5 79.4 L346.6 81.7 L362.7 55.9 L378.8 74.7 L394.9 81.7 L411.0 70.0 L419 93.5 L411.0 117.0 L394.9 105.3 L378.8 112.3 L362.7 131.1 L346.6 105.3 L330.5 107.6 L314.5 112.3 L298.4 121.7 L282.3 100.6 L266.2 107.6 L250.1 112.3 L234.0 133.5 L218.0 100.6 L201.9 93.5 L185.8 93.5 L169.7 98.2 L153.6 93.5 L137.5 93.5 L121.5 95.9 L105.4 95.9 L89.3 98.2 L73.2 119.4 L57.1 112.3 L41.0 95.9 Z" fill="url(#hrShimmer)" stroke="#0e7490" stroke-width="0.45" opacity="0.95"/>
+    <line x1="234.0" y1="45.5" x2="234.0" y2="137.5"
+          stroke="#9a6a10" stroke-width="0.45" opacity="0.85"/>
+    <text x="234.0" y="42.5" fill="#9a6a10" font-size="5.8"
+          text-anchor="middle" letter-spacing="0.8">PEAK</text>
+    <line x1="41.0" y1="139.5" x2="41.0" y2="143.5" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="41.0" y="152.5" fill="#5d8ba0" font-size="5.8" text-anchor="middle">00</text><line x1="137.5" y1="139.5" x2="137.5" y2="143.5" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="137.5" y="152.5" fill="#5d8ba0" font-size="5.8" text-anchor="middle">06</text><line x1="234.0" y1="139.5" x2="234.0" y2="143.5" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="234.0" y="152.5" fill="#5d8ba0" font-size="5.8" text-anchor="middle">12</text><line x1="330.5" y1="139.5" x2="330.5" y2="143.5" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="330.5" y="152.5" fill="#5d8ba0" font-size="5.8" text-anchor="middle">18</text><line x1="411.0" y1="139.5" x2="411.0" y2="143.5" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="411.0" y="152.5" fill="#5d8ba0" font-size="5.8" text-anchor="middle">23</text>
+    <text x="25" y="162" fill="#5d8ba0" font-size="5.8" letter-spacing="1.6">133 COMMITS BY HOUR OF DAY</text>
+  </g>
+  <rect x="7" y="28" width="430" height="143" fill="url(#hrScan)" opacity="0.3"/>
+  <rect x="7" y="28" width="430" height="143" filter="url(#hrGrain)" opacity="0.14"/>
+</g>
+</svg>

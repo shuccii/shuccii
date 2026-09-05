@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 178" width="900" height="178" role="img" aria-label="account summary">
+<defs>
+  <radialGradient id="smDeep" cx="16%" cy="50%" r="88%">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58"/>
+    <stop offset="46%" stop-color="#eef4f8" stop-opacity="0.42"/>
+    <stop offset="100%" stop-color="#dde8ef" stop-opacity="0.26"/>
+  </radialGradient>
+  <radialGradient id="smVig" cx="50%" cy="50%" r="74%">
+    <stop offset="58%" stop-color="#3d6b80" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#3d6b80" stop-opacity="0.16"/>
+  </radialGradient>
+  <radialGradient id="smCore" cx="50%" cy="42%" r="58%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="26%" stop-color="#dff2fa" stop-opacity="1"/><stop offset="60%" stop-color="#7cc6dd" stop-opacity="0.5"/><stop offset="100%" stop-color="#bcd9e5" stop-opacity="0"/></radialGradient>
+  <linearGradient id="smSweep" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#0e7490" stop-opacity="0"/>
+    <stop offset="52%" stop-color="#0e7490" stop-opacity="0.45"/>
+    <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="smBevel" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="hh"/>
+    <feSpecularLighting in="hh" surfaceScale="3.6" specularConstant="0.85"
+                        specularExponent="26" lighting-color="#dff6ff" result="s">
+      <fePointLight x="-70" y="-70" z="60">
+        <animate attributeName="x" values="-70;70;-70" dur="9s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-70;70;-70" dur="13s" repeatCount="indefinite"/>
+      </fePointLight>
+    </feSpecularLighting>
+    <feComposite in="s" in2="SourceAlpha" operator="in" result="sc"/>
+    <feComposite in="SourceGraphic" in2="sc" operator="arithmetic" k1="0" k2="1" k3="0.41" k4="0"/>
+  </filter>
+  <filter id="smGlow" x="-200%" y="-200%" width="500%" height="500%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="0.41" result="a"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="1.62" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="smGrain" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="5" result="n">
+      <animate attributeName="seed" values="5;13;21;5" dur="1.3s" calcMode="discrete" repeatCount="indefinite"/>
+    </feTurbulence>
+    <feColorMatrix in="n" type="matrix"
+      values="0 0 0 0 0.12  0 0 0 0 0.66  0 0 0 0 0.8  0 0 0 0.06 0"/>
+  </filter>
+  <pattern id="smScan" width="3" height="3" patternUnits="userSpaceOnUse">
+    <rect width="3" height="0.8" fill="#9dbccb" opacity="0.16"/>
+  </pattern>
+  <clipPath id="smClip"><rect width="900" height="178" rx="3"/></clipPath>
+  <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
+  <linearGradient id="smBody" x1="0" y1="0" x2="0.3" y2="1">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58"/>
+    <stop offset="52%" stop-color="#eef4f8" stop-opacity="0.42"/>
+    <stop offset="100%" stop-color="#dde8ef" stop-opacity="0.26"/>
+  </linearGradient>
+  <linearGradient id="smBar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0e7490" stop-opacity="0.13"/>
+    <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="smLip" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="18%" stop-color="#ffffff" stop-opacity="0.9"/>
+    <stop offset="82%" stop-color="#ffffff" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="smDrop" x="-12%" y="-12%" width="124%" height="130%">
+    <feDropShadow dx="0" dy="2.4" stdDeviation="3.4"
+                  flood-color="#33586b"
+                  flood-opacity="0.22"/>
+  </filter>
+  <clipPath id="smInner"><rect x="7" y="28" width="886" height="143"/></clipPath>
+</defs>
+
+  <g filter="url(#smDrop)">
+    <rect x="7" y="7" width="886" height="164" rx="4" fill="url(#smBody)"/>
+  </g>
+  <rect x="7" y="7" width="886" height="21" rx="4" fill="url(#smBar)"/>
+  <rect x="7" y="28" width="886" height="0.6" fill="#5d8ba0" opacity="0.5"/>
+  <rect x="13" y="7.5" width="874" height="0.9" fill="url(#smLip)"/>
+  <rect x="7.3" y="7.3" width="885.4" height="163.4" rx="4" fill="none"
+        stroke="#0e7490" stroke-width="0.5" opacity="0.55"/>
+  <path d="M10 16 V10 H16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M884 10 H890 V16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M10 162 V168 H16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M884 168 H890 V162" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/>
+  <g class="t">
+    <circle cx="20" cy="17.6" r="2.6" fill="none" stroke="#0e7490" stroke-width="0.45"/>
+    <circle cx="20" cy="17.6" r="0.9" fill="#0e7490"/>
+    <text x="29" y="20.6" fill="#0e7490" font-size="7.4" letter-spacing="2.8">ACCOUNT SUMMARY</text>
+    <text x="885" y="20.6" fill="#5d8ba0" font-size="6.8" letter-spacing="1.8"
+          text-anchor="end">SHUCCII &#183; SINCE 2023</text>
+  </g>
+<g clip-path="url(#smInner)">
+
+  <defs>
+    <linearGradient id="smFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g class="t">
+    <text x="29" y="54" fill="#5d8ba0" font-size="6.4" letter-spacing="2">CONTRIBUTIONS</text><text x="29" y="68" fill="#1d4d61" font-size="14">160</text><line x1="23" y1="46" x2="23" y2="70" stroke="#0e7490" stroke-width="0.7" opacity="0.9"/><text x="29" y="80" fill="#5d8ba0" font-size="6.4" letter-spacing="2">PUBLIC REPOS</text><text x="29" y="94" fill="#1d4d61" font-size="14">3</text><line x1="23" y1="72" x2="23" y2="96" stroke="#5d8ba0" stroke-width="0.7" opacity="0.4"/><text x="29" y="106" fill="#5d8ba0" font-size="6.4" letter-spacing="2">ON GITHUB</text><text x="29" y="120" fill="#1d4d61" font-size="14">3 YR</text><line x1="23" y1="98" x2="23" y2="122" stroke="#5d8ba0" stroke-width="0.7" opacity="0.4"/><text x="29" y="132" fill="#5d8ba0" font-size="6.4" letter-spacing="2">FOLLOWERS</text><text x="29" y="146" fill="#1d4d61" font-size="14">2</text><line x1="23" y1="124" x2="23" y2="148" stroke="#5d8ba0" stroke-width="0.7" opacity="0.4"/>
+    <line x1="187" y1="40" x2="187" y2="157" stroke="#5d8ba0" stroke-width="0.45" opacity="0.45"/>
+    <text x="207" y="54" fill="#5d8ba0" font-size="6.4" letter-spacing="2">IDENTITY</text>
+    <text x="207" y="72" fill="#062430" font-size="15" letter-spacing="1.4">SHUICHI TANI</text>
+    <text x="207" y="88" fill="#5d8ba0" font-size="7.4" letter-spacing="1.4">github.com/shuccii</text>
+    <text x="207" y="112" fill="#5d8ba0" font-size="6.4" letter-spacing="2">PRIMARY LANGUAGE</text>
+    <text x="207" y="128" fill="#1d4d61" font-size="10">Python</text>
+
+    <line x1="359" y1="40" x2="359" y2="157" stroke="#5d8ba0" stroke-width="0.45" opacity="0.45"/>
+    <text x="859" y="42" fill="#5d8ba0" font-size="6.4" letter-spacing="2" text-anchor="end">CONTRIBUTIONS PER WEEK</text>
+    <path d="M372.0 137.0 L381.4 137.0 L390.7 137.0 L400.1 137.0 L409.5 137.0 L418.8 137.0 L428.2 137.0 L437.6 137.0 L446.9 137.0 L456.3 137.0 L465.7 137.0 L475.0 137.0 L484.4 137.0 L493.8 137.0 L503.1 137.0 L512.5 137.0 L521.8 137.0 L531.2 137.0 L540.6 137.0 L549.9 137.0 L559.3 137.0 L568.7 137.0 L578.0 137.0 L587.4 137.0 L596.8 137.0 L606.1 137.0 L615.5 137.0 L624.9 137.0 L634.2 137.0 L643.6 137.0 L653.0 137.0 L662.3 137.0 L671.7 137.0 L681.1 137.0 L690.4 137.0 L699.8 137.0 L709.2 137.0 L718.5 137.0 L727.9 137.0 L737.2 137.0 L746.6 137.0 L756.0 137.0 L765.3 133.7 L774.7 130.4 L784.1 135.9 L793.4 50.0 L802.8 108.4 L812.2 118.3 L821.5 126.0 L830.9 132.6 L840.3 132.6 L849.6 130.4 L859.0 132.6 L859.0 137 L372.0 137 Z" fill="url(#smFill)"/>
+    <path id="smCurve" d="M372.0 137.0 L381.4 137.0 L390.7 137.0 L400.1 137.0 L409.5 137.0 L418.8 137.0 L428.2 137.0 L437.6 137.0 L446.9 137.0 L456.3 137.0 L465.7 137.0 L475.0 137.0 L484.4 137.0 L493.8 137.0 L503.1 137.0 L512.5 137.0 L521.8 137.0 L531.2 137.0 L540.6 137.0 L549.9 137.0 L559.3 137.0 L568.7 137.0 L578.0 137.0 L587.4 137.0 L596.8 137.0 L606.1 137.0 L615.5 137.0 L624.9 137.0 L634.2 137.0 L643.6 137.0 L653.0 137.0 L662.3 137.0 L671.7 137.0 L681.1 137.0 L690.4 137.0 L699.8 137.0 L709.2 137.0 L718.5 137.0 L727.9 137.0 L737.2 137.0 L746.6 137.0 L756.0 137.0 L765.3 133.7 L774.7 130.4 L784.1 135.9 L793.4 50.0 L802.8 108.4 L812.2 118.3 L821.5 126.0 L830.9 132.6 L840.3 132.6 L849.6 130.4 L859.0 132.6" fill="none" stroke="#0e7490" stroke-width="0.7" opacity="0.95"/>
+    <line x1="372" y1="137" x2="859" y2="137" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/>
+    <text x="366" y="53" fill="#5d8ba0" font-size="5.8" text-anchor="end">79</text>
+    <text x="366" y="139" fill="#5d8ba0" font-size="5.8" text-anchor="end">0</text>
+    <line x1="372.0" y1="137" x2="372.0" y2="141" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="372.0" y="150" fill="#5d8ba0" font-size="5.8" letter-spacing="0.8" text-anchor="middle">25/08</text><line x1="418.8" y1="137" x2="418.8" y2="141" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="418.8" y="150" fill="#5d8ba0" font-size="5.8" letter-spacing="0.8" text-anchor="middle">25/10</text><line x1="503.1" y1="137" x2="503.1" y2="141" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="503.1" y="150" fill="#5d8ba0" font-size="5.8" letter-spacing="0.8" text-anchor="middle">25/12</text><line x1="578.0" y1="137" x2="578.0" y2="141" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="578.0" y="150" fill="#5d8ba0" font-size="5.8" letter-spacing="0.8" text-anchor="middle">26/02</text><line x1="662.3" y1="137" x2="662.3" y2="141" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="662.3" y="150" fill="#5d8ba0" font-size="5.8" letter-spacing="0.8" text-anchor="middle">26/04</text><line x1="746.6" y1="137" x2="746.6" y2="141" stroke="#5d8ba0" stroke-width="0.45" opacity="0.7"/><text x="746.6" y="150" fill="#5d8ba0" font-size="5.8" letter-spacing="0.8" text-anchor="middle">26/06</text>
+    <circle r="2.6" fill="#9a6a10" filter="url(#smGlow)">
+      <animateMotion dur="13s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+        <mpath href="#smCurve"/>
+      </animateMotion>
+    </circle>
+  </g>
+  <rect x="7" y="28" width="886" height="143" fill="url(#smScan)" opacity="0.3"/>
+  <rect x="7" y="28" width="886" height="143" filter="url(#smGrain)" opacity="0.14"/>
+</g>
+</svg>

@@ -8,8 +8,9 @@ on:
     branches:
       - main
 
-# Panels are committed to the repo rather than hot-linked, so the profile never
-# depends on a third-party service being up at the moment someone looks at it.
+# Every panel is drawn here and committed, so the profile depends on no
+# third-party image service at view time — and nothing can go stale or dark
+# on someone else's outage.
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -31,34 +32,6 @@ jobs:
 
       - name: Audit the panels for frozen-frame blanks
         run: python3 scripts/check_frame0.py
-
-      - name: Fetch summary cards in both themes
-        run: |
-          set -euo pipefail
-          BASE="https://github-profile-summary-cards.vercel.app/api/cards"
-          OWNER="${{ github.repository_owner }}"
-          # No `animation=` on purpose: those presets start at opacity 0, so any
-          # renderer that freezes SVGs on frame 0 would show an empty card.
-          DARK="theme=github_dark&bg_color=040f18&title_color=5fd8f2&text_color=cfeefb&border_color=3f7f96&icon_color=e8b455&chart_color=5fd8f2"
-          LIGHT="theme=default&bg_color=eef4f8&title_color=0e7490&text_color=1d4d61&border_color=5d8ba0&icon_color=9a6a10&chart_color=0e7490"
-          fetch () {
-            mode="$1"; pal="$2"; name="$3"; extra="${4:-}"
-            mkdir -p "assets/cards/$mode"
-            if curl -sS --fail --retry 3 --retry-delay 5 --max-time 60 \
-                 "$BASE/$name?username=$OWNER&$pal$extra" -o "assets/cards/$mode/$name.svg.tmp"; then
-              mv "assets/cards/$mode/$name.svg.tmp" "assets/cards/$mode/$name.svg"
-              echo "updated $mode/$name"
-            else
-              rm -f "assets/cards/$mode/$name.svg.tmp"
-              echo "::warning::could not refresh $mode/$name — keeping the committed version"
-            fi
-          }
-          for card in profile-details repos-per-language most-commit-language stats; do
-            fetch dark  "$DARK"  "$card"
-            fetch light "$LIGHT" "$card"
-          done
-          fetch dark  "$DARK"  productive-time "&utcOffset=9"
-          fetch light "$LIGHT" productive-time "&utcOffset=9"
 
       - name: Commit
         run: |

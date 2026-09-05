@@ -28,7 +28,7 @@ query($login: String!) {
         primaryLanguage { name }
         defaultBranchRef {
           name
-          target { ... on Commit { history(first: 6) { nodes { messageHeadline committedDate oid } } } }
+          target { ... on Commit { history(first: 100) { nodes { messageHeadline committedDate oid } } } }
         }
         languages(first: 8, orderBy: {field: SIZE, direction: DESC}) {
           totalSize
@@ -69,6 +69,9 @@ class Telemetry:
     week_starts: list[str] = field(default_factory=list)
     days: list[int] = field(default_factory=list)       # daily totals, most recent last
     weekday: list[int] = field(default_factory=list)    # Sun..Sat totals over the year
+    hours: list[int] = field(default_factory=list)      # commits per hour, JST
+    day_dates: list[str] = field(default_factory=list)
+    created: str = ""
     repos_detail: list[dict] = field(default_factory=list)
     commits_log: list[tuple[str, str, str]] = field(default_factory=list)  # (time, repo, headline)
     lang_bytes: list[tuple[str, int, str]] = field(default_factory=list)   # (name, bytes, colour)
@@ -84,6 +87,17 @@ class Telemetry:
     @property
     def active_weeks(self) -> int:
         return sum(1 for w in self.weeks if w)
+
+    @property
+    def years_on_github(self) -> int:
+        if not self.created:
+            return 0
+        delta = datetime.now(timezone.utc) - datetime.fromisoformat(self.created.replace("Z", "+00:00"))
+        return max(0, int(delta.days / 365.25))
+
+    @property
+    def peak_hour(self) -> int:
+        return self.hours.index(max(self.hours)) if self.hours else 0
 
 
 def _git(*args: str) -> str:
@@ -150,6 +164,8 @@ def collect(login: str, token: str | None) -> Telemetry:
     t.weeks = [sum(d["contributionCount"] for d in w["contributionDays"]) for w in cal["weeks"]]
     t.week_starts = [w["firstDay"] for w in cal["weeks"]]
     t.days = [d["contributionCount"] for w in cal["weeks"] for d in w["contributionDays"]]
+    t.day_dates = [d["date"] for w in cal["weeks"] for d in w["contributionDays"]]
+    t.created = user["createdAt"]
 
     by_weekday = [0] * 7
     for w in cal["weeks"]:
@@ -176,6 +192,12 @@ def collect(login: str, token: str | None) -> Telemetry:
             log.append((c["committedDate"], node["name"], c["messageHeadline"]))
     log.sort(reverse=True)
     t.commits_log = [(d[11:16], r, m) for d, r, m in log[:9]]
+
+    # committedDate is UTC; the profile reads in JST
+    by_hour = [0] * 24
+    for iso, _, _ in log:
+        by_hour[(int(iso[11:13]) + 9) % 24] += 1
+    t.hours = by_hour
 
     t.repos_detail = [
         {"name": n["name"], "stars": n["stargazerCount"],

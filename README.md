@@ -77,15 +77,11 @@ flowchart LR
 
 <div align="center">
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/profile-details.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/cards/light/profile-details.svg" /><img width="98%" alt="account summary" src="assets/cards/dark/profile-details.svg" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/summary.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/summary.svg" /><img width="100%" alt="Account summary" src="assets/dark/summary.svg" /></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/stats.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/cards/light/stats.svg" /><img width="45%" alt="totals" src="assets/cards/dark/stats.svg" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/productive-time.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/cards/light/productive-time.svg" /><img width="45%" alt="commits by hour" src="assets/cards/dark/productive-time.svg" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/ledger.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/ledger.svg" /><img width="49%" alt="Activity ledger" src="assets/dark/ledger.svg" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/hours.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/hours.svg" /><img width="49%" alt="Commits by hour" src="assets/dark/hours.svg" /></picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake.svg" />
-  <img width="100%" alt="contribution grid" src="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake-dark.svg" />
-</picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/grid.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/grid.svg" /><img width="100%" alt="Contribution calendar" src="assets/dark/grid.svg" /></picture>
 
 </div>
 

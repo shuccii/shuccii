@@ -142,6 +142,8 @@ def system(t: Telemetry, p: Palette) -> str:
 
 # ---------------------------------------------------------------- rhythm
 DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+DAYS_SHORT = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+              "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
 
 def radar(t: Telemetry, p: Palette) -> str:
@@ -367,3 +369,219 @@ def languages(t: Telemetry, p: Palette) -> str:
     <text x="{cx}" y="{cy+13}" fill="{p.dim}" font-size="5.8" letter-spacing="1.8" text-anchor="middle">LANGUAGES</text>
     {''.join(legend)}
   </g>''', "language mix by bytes")
+
+
+# ---------------------------------------------------------------- summary
+def summary(t: Telemetry, p: Palette) -> str:
+    """Motion: a tracer running along the year curve (animateMotion)."""
+    W, H, P = 900, 178, "sm"
+    weeks = t.weeks or [0] * 53
+    peak = max(weeks) or 1
+    x0, x1 = 372, W - PAD - 34
+    base, top = H - PAD - 34, PAD + BAR + 22
+    step = (x1 - x0) / max(1, len(weeks) - 1)
+
+    pts = [(x0 + i * step, base - (base - top) * (v / peak)) for i, v in enumerate(weeks)]
+    line = "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts)
+    area = line + f" L{pts[-1][0]:.1f} {base} L{pts[0][0]:.1f} {base} Z"
+
+    months, seen = [], set()
+    for i, d in enumerate(t.day_dates[::7][:len(weeks)] or []):
+        m = int(d[5:7])
+        if m not in seen:
+            seen.add(m)
+            if len(seen) % 2 == 0:      # label every other month
+                continue
+            mx = x0 + i * step
+            months.append(f'<line x1="{mx:.1f}" y1="{base}" x2="{mx:.1f}" y2="{base+4}" '
+                          f'stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.7"/>'
+                          f'<text x="{mx:.1f}" y="{base+13}" fill="{p.dim}" font-size="5.8" '
+                          f'letter-spacing="0.8" text-anchor="middle">{d[:7].replace("-", "/")[2:]}</text>')
+
+    facts = [("CONTRIBUTIONS", f"{t.contributions}"), ("PUBLIC REPOS", f"{t.repos}"),
+             ("ON GITHUB", f"{t.years_on_github} YR"), ("FOLLOWERS", f"{t.followers}")]
+    rows = "".join(
+        f'<text x="{PAD+22}" y="{PAD+BAR+26+i*26}" fill="{p.dim}" font-size="6.4" letter-spacing="2">{lbl}</text>'
+        f'<text x="{PAD+22}" y="{PAD+BAR+40+i*26}" fill="{p.pale}" font-size="14">{val}</text>'
+        f'<line x1="{PAD+16}" y1="{PAD+BAR+18+i*26}" x2="{PAD+16}" y2="{PAD+BAR+42+i*26}" '
+        f'stroke="{p.cyan if i == 0 else p.dim}" stroke-width="{LINE}" opacity="{0.9 if i == 0 else 0.4}"/>'
+        for i, (lbl, val) in enumerate(facts))
+
+    return _shell(P, W, H, p, "ACCOUNT SUMMARY", f"{t.login.upper()} &#183; SINCE {t.since}", f'''
+  <defs>
+    <linearGradient id="{P}Fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="{p.cyan}" stop-opacity="{0.3 if p.key=='dark' else 0.22}"/>
+      <stop offset="100%" stop-color="{p.cyan}" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g class="t">
+    {rows}
+    <line x1="{PAD+180}" y1="{PAD+BAR+12}" x2="{PAD+180}" y2="{H-PAD-14}" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.45"/>
+    <text x="{PAD+200}" y="{PAD+BAR+26}" fill="{p.dim}" font-size="6.4" letter-spacing="2">IDENTITY</text>
+    <text x="{PAD+200}" y="{PAD+BAR+44}" fill="{p.ink}" font-size="15" letter-spacing="1.4">{_esc(t.name)}</text>
+    <text x="{PAD+200}" y="{PAD+BAR+60}" fill="{p.dim}" font-size="7.4" letter-spacing="1.4">github.com/{t.login}</text>
+    <text x="{PAD+200}" y="{PAD+BAR+84}" fill="{p.dim}" font-size="6.4" letter-spacing="2">PRIMARY LANGUAGE</text>
+    <text x="{PAD+200}" y="{PAD+BAR+100}" fill="{p.pale}" font-size="10">{_esc(t.top_language)}</text>
+
+    <line x1="{PAD+352}" y1="{PAD+BAR+12}" x2="{PAD+352}" y2="{H-PAD-14}" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.45"/>
+    <text x="{x1}" y="{top-8}" fill="{p.dim}" font-size="6.4" letter-spacing="2" text-anchor="end">CONTRIBUTIONS PER WEEK</text>
+    <path d="{area}" fill="url(#{P}Fill)"/>
+    <path id="{P}Curve" d="{line}" fill="none" stroke="{p.cyan}" stroke-width="{LINE}" opacity="0.95"/>
+    <line x1="{x0}" y1="{base}" x2="{x1}" y2="{base}" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.7"/>
+    <text x="{x0-6}" y="{top+3}" fill="{p.dim}" font-size="5.8" text-anchor="end">{peak}</text>
+    <text x="{x0-6}" y="{base+2}" fill="{p.dim}" font-size="5.8" text-anchor="end">0</text>
+    {"".join(months)}
+    <circle r="2.6" fill="{p.gold}" filter="url(#{P}Glow)">
+      <animateMotion dur="13s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+        <mpath href="#{P}Curve"/>
+      </animateMotion>
+    </circle>
+  </g>''', "account summary")
+
+
+# ---------------------------------------------------------------- ledger
+def ledger(t: Telemetry, p: Palette) -> str:
+    """Motion: a caliper stepping down the rows, one at a time."""
+    W, H, P = 444, 178, "ld"
+    rows = [("TOTAL COMMITS", t.commits), ("PULL REQUESTS", t.prs), ("ISSUES", t.issues),
+            ("STARS EARNED", t.stars), ("REPOS TOUCHED", t.repos)]
+    top = PAD + BAR + 22
+    gap = 24
+    peak = max((v for _, v in rows), default=1) or 1
+    gx, gw = PAD + 190, W - PAD - 200 - 46
+
+    body = []
+    for i, (label, value) in enumerate(rows):
+        y = top + i * gap
+        w = gw * (value / peak)
+        body.append(
+            f'<text x="{PAD+18}" y="{y}" fill="{p.dim}" font-size="7.4" letter-spacing="1.6">{label}</text>'
+            f'<line x1="{gx}" y1="{y-3}" x2="{gx+gw}" y2="{y-3}" stroke="{p.faint}" stroke-width="2" opacity="0.7"/>'
+            f'<line x1="{gx}" y1="{y-3}" x2="{gx+max(w, 1.5):.1f}" y2="{y-3}" stroke="{p.cyan}" stroke-width="2" opacity="0.9"/>'
+            f'<text x="{W-PAD-18}" y="{y}" fill="{p.pale}" font-size="10.5" text-anchor="end">{value}</text>')
+
+    stops = ";".join(f"0 {i*gap}" for i in range(len(rows)))
+    keytimes = ";".join(f"{i/len(rows):.4f}" for i in range(len(rows)))
+
+    return _shell(P, W, H, p, "LEDGER", "LAST 12 MONTHS", f'''
+  <g class="t">
+    {"".join(body)}
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="{stops}"
+                        keyTimes="{keytimes}" dur="{len(rows)*1.6:.1f}s" calcMode="discrete" repeatCount="indefinite"/>
+      <path d="M{PAD+11} {top-9} L{PAD+15} {top-6} L{PAD+11} {top-3} Z" fill="{p.gold}"/>
+      <line x1="{PAD+11}" y1="{top-12}" x2="{PAD+11}" y2="{top}" stroke="{p.gold}" stroke-width="{HAIR}" opacity="0.8"/>
+      <line x1="{W-PAD-10}" y1="{top-12}" x2="{W-PAD-10}" y2="{top}" stroke="{p.gold}" stroke-width="{HAIR}" opacity="0.8"/>
+    </g>
+    <text x="{PAD+18}" y="{H-PAD-9}" fill="{p.dim}" font-size="5.8" letter-spacing="1.6">BARS SCALED TO THE LARGEST FIGURE</text>
+  </g>''', "activity ledger")
+
+
+# ---------------------------------------------------------------- hours
+def hours(t: Telemetry, p: Palette) -> str:
+    """Motion: a shimmer travelling through the fill — the gradient moves, not the shape."""
+    W, H, P = 444, 178, "hr"
+    counts = t.hours or [0] * 24
+    peak = max(counts) or 1
+    x0, x1 = PAD + 26, W - PAD - 18
+    mid = PAD + BAR + (H - PAD * 2 - BAR) / 2 - 6
+    amp = 40
+    step = (x1 - x0) / 24
+
+    top_pts, bot_pts = [], []
+    for i, v in enumerate(counts):
+        x = x0 + (i + 0.5) * step
+        a = amp * (v / peak)
+        top_pts.append(f"{x:.1f} {mid-a:.1f}")
+        bot_pts.append(f"{x:.1f} {mid+a:.1f}")
+    silhouette = (f"M{x0} {mid} L" + " L".join(top_pts) + f" L{x1} {mid} L" +
+                  " L".join(reversed(bot_pts)) + " Z")
+
+    bars = "".join(
+        f'<rect x="{x0+i*step+step*0.24:.1f}" y="{mid-amp*(v/peak):.1f}" '
+        f'width="{step*0.52:.1f}" height="{2*amp*(v/peak):.1f}" rx="1" '
+        f'fill="{p.cyan}" opacity="{0.12 if v else 0.05}"/>' for i, v in enumerate(counts))
+
+    ticks = "".join(
+        f'<line x1="{x0+(h+0.5)*step:.1f}" y1="{mid+amp+6}" x2="{x0+(h+0.5)*step:.1f}" y2="{mid+amp+10}" '
+        f'stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.7"/>'
+        f'<text x="{x0+(h+0.5)*step:.1f}" y="{mid+amp+19}" fill="{p.dim}" font-size="5.8" '
+        f'text-anchor="middle">{h:02d}</text>' for h in (0, 6, 12, 18, 23))
+
+    ph = t.peak_hour
+    return _shell(P, W, H, p, "COMMIT HOURS", f"JST &#183; PEAK {ph:02d}:00", f'''
+  <defs>
+    <linearGradient id="{P}Shimmer" gradientUnits="userSpaceOnUse"
+                    x1="{x0}" y1="0" x2="{x0+130}" y2="0">
+      <stop offset="0%" stop-color="{p.cyan}" stop-opacity="0.35"/>
+      <stop offset="42%" stop-color="{p.pulse}" stop-opacity="0.95"/>
+      <stop offset="58%" stop-color="{p.pulse}" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="{p.cyan}" stop-opacity="0.35"/>
+      <animateTransform attributeName="gradientTransform" type="translate"
+                        values="{-120};{W}" dur="6.5s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+  <g class="t">
+    {bars}
+    <line x1="{x0}" y1="{mid}" x2="{x1}" y2="{mid}" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.6"/>
+    <path d="{silhouette}" fill="url(#{P}Shimmer)" stroke="{p.cyan}" stroke-width="{HAIR}" opacity="0.95"/>
+    <line x1="{x0+(ph+0.5)*step:.1f}" y1="{mid-amp-8}" x2="{x0+(ph+0.5)*step:.1f}" y2="{mid+amp+4}"
+          stroke="{p.gold}" stroke-width="{HAIR}" opacity="0.85"/>
+    <text x="{x0+(ph+0.5)*step:.1f}" y="{mid-amp-11}" fill="{p.gold}" font-size="5.8"
+          text-anchor="middle" letter-spacing="0.8">PEAK</text>
+    {ticks}
+    <text x="{PAD+18}" y="{H-PAD-9}" fill="{p.dim}" font-size="5.8" letter-spacing="1.6">{sum(counts)} COMMITS BY HOUR OF DAY</text>
+  </g>''', "commits by hour")
+
+
+# ---------------------------------------------------------------- grid
+def grid(t: Telemetry, p: Palette) -> str:
+    """Motion: a diagonal wave of brightness propagating across the calendar."""
+    W, H, P = 900, 190, "gr"
+    days = t.days or [0] * 371
+    dates = t.day_dates or [""] * len(days)
+    peak = max(days) or 1
+    cols = math.ceil(len(days) / 7)
+    gx, right = PAD + 26, PAD + 16
+    pitch = (W - gx - right) / cols
+    gapc = 2.6
+    cell = pitch - gapc
+    gy = PAD + BAR + 24
+
+    cells, months, seen = [], [], set()
+    for i, v in enumerate(days):
+        c, r = divmod(i, 7)
+        x = gx + c * pitch
+        y = gy + r * pitch
+        lvl = 0 if not v else min(4, 1 + int(v / peak * 3.999))
+        phase = (c * 0.055 + r * 0.09) % 3.2
+        cells.append(
+            f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell:.1f}" height="{cell:.1f}" rx="2.4" '
+            f'fill="{p.ramp[lvl]}" opacity="{0.55 if not lvl else 0.95}">'
+            f'<animate attributeName="opacity" '
+            f'values="{0.55 if not lvl else 0.95};{0.8 if not lvl else 1};{0.55 if not lvl else 0.95}" '
+            f'dur="3.2s" begin="-{phase:.2f}s" repeatCount="indefinite"/></rect>')
+        if r == 0 and dates[i]:
+            m = int(dates[i][5:7])
+            if m not in seen:
+                seen.add(m)
+                months.append(f'<text x="{x:.1f}" y="{gy-6}" fill="{p.dim}" font-size="5.8" '
+                              f'letter-spacing="0.8">{DAYS_SHORT[m-1]}</text>')
+
+    wd = "".join(f'<text x="{gx-6}" y="{gy+r*pitch+cell*0.78:.1f}" fill="{p.dim}" '
+                 f'font-size="5.4" text-anchor="end">{d}</text>'
+                 for r, d in ((1, "M"), (3, "W"), (5, "F")))
+
+    legend = "".join(
+        f'<rect x="{W-PAD-118+i*14:.1f}" y="{H-PAD-20}" width="9" height="9" rx="1.8" fill="{c}" opacity="0.95"/>'
+        for i, c in enumerate(p.ramp))
+
+    return _shell(P, W, H, p, "CONTRIBUTION CALENDAR",
+                  f"{t.contributions} IN {len(days)} DAYS", f'''
+  <g class="t">
+    {"".join(months)}{wd}
+    {"".join(cells)}
+    <text x="{W-PAD-132}" y="{H-PAD-12}" fill="{p.dim}" font-size="5.8" letter-spacing="1.4" text-anchor="end">LESS</text>
+    {legend}
+    <text x="{W-PAD-14}" y="{H-PAD-12}" fill="{p.dim}" font-size="5.8" letter-spacing="1.4" text-anchor="end">MORE</text>
+  </g>''', "contribution calendar")
