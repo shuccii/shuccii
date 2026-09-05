@@ -4,9 +4,11 @@ on:
   schedule:
     - cron: "30 18 * * *"   # 03:30 JST daily
   workflow_dispatch:
-  push:
-    branches:
-      - main
+
+# Deliberately not triggered by push. The panels embed a sync time, so a
+# push-triggered run always produces a diff and commits back — which lands a
+# bot commit on top of every push and turns the next one into a conflict on
+# generated files. The data this draws changes daily, so daily is the cadence.
 
 # Every panel is drawn here and committed, so the profile depends on no
 # third-party image service at view time — and nothing can go stale or dark
