@@ -174,7 +174,7 @@
   <!-- ============ READOUT ============ -->
   <g class="t">
     <text x="312" y="60" fill="#9a6a10" font-size="9.7" letter-spacing="4.2">GITHUB.COM / SHUCCII</text>
-    <text x="872" y="60" fill="#5d8ba0" font-size="9.7" letter-spacing="2.2" text-anchor="end">BRANCH HEAD</text>
+    <text x="872" y="60" fill="#5d8ba0" font-size="9.7" letter-spacing="2.2" text-anchor="end">BRANCH main</text>
     <line x1="312" y1="70" x2="872" y2="70" stroke="#5d8ba0" stroke-width="0.45" opacity="0.5"/>
 
     <g font-size="38" letter-spacing="8.5">
@@ -204,8 +204,8 @@
 
     <line x1="312" y1="248" x2="872" y2="248" stroke="#5d8ba0" stroke-width="0.45" opacity="0.45"/>
     <g font-size="8.3" letter-spacing="1.7" fill="#5d8ba0">
-      <text x="312" y="272">SYNC 2026-09-05 09:28Z</text>
-      <text x="502" y="272">HEAD 4b212df</text>
+      <text x="312" y="272">SYNC 2026-09-05 09:29Z</text>
+      <text x="502" y="272">HEAD 6a04c5c</text>
       <text x="622" y="272">PEAK 79/WK</text>
       <text x="732" y="272">ACTIVE 11/53</text>
     </g>

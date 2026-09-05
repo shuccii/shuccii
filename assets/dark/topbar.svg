@@ -86,7 +86,7 @@
     <g clip-path="url(#tbTick)">
       <text y="24.6" fill="#3f7f96" font-size="6.8" letter-spacing="2.4" xml:space="preserve">
         <animate attributeName="x" values="246;-899" dur="42s" repeatCount="indefinite"/>
-        REPO shuccii/shuccii   •   BRANCH HEAD   •   HEAD 4b212df   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-05 09:28Z   •   REPO shuccii/shuccii   •   BRANCH HEAD   •   HEAD 4b212df   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-05 09:28Z   •   
+        REPO shuccii/shuccii   •   BRANCH main   •   HEAD 6a04c5c   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-05 09:29Z   •   REPO shuccii/shuccii   •   BRANCH main   •   HEAD 6a04c5c   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-05 09:29Z   •   
       </text>
     </g>
     <rect x="246" y="8" width="544" height="28" fill="url(#tbFade)"/>
