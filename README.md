@@ -1,26 +1,18 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/header.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/light/header.svg" />
-  <img width="100%" alt="Repository telemetry" src="assets/dark/header.svg" />
-</picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/topbar.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/topbar.svg" /><img width="100%" alt="Status bar" src="assets/dark/topbar.svg" /></picture>
 
-<!-- ─── navigation ─────────────────────────────────────────────── -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/header.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/header.svg" /><img width="100%" alt="Contribution instrument" src="assets/dark/header.svg" /></picture>
 
 <a href="#-01--research"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/01-RESEARCH-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/01-RESEARCH-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="RESEARCH" src="https://img.shields.io/badge/01-RESEARCH-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-02--method"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/02-METHOD-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/02-METHOD-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="METHOD" src="https://img.shields.io/badge/02-METHOD-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-03--stack"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/03-STACK-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/03-STACK-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="STACK" src="https://img.shields.io/badge/03-STACK-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-04--activity"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/04-ACTIVITY-5fd8f2?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/04-ACTIVITY-0e7490?style=flat-square&labelColor=dbe7ee" /><img alt="ACTIVITY" src="https://img.shields.io/badge/04-ACTIVITY-5fd8f2?style=flat-square&labelColor=0b2733" /></picture></a> <a href="#-05--repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/05-REPOSITORIES-e8b455?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/05-REPOSITORIES-9a6a10?style=flat-square&labelColor=dbe7ee" /><img alt="REPOSITORIES" src="https://img.shields.io/badge/05-REPOSITORIES-e8b455?style=flat-square&labelColor=0b2733" /></picture></a> <a href="https://shuccii.github.io"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/↗-shuccii.github.io-e8b455?style=flat-square&labelColor=0b2733" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/↗-shuccii.github.io-9a6a10?style=flat-square&labelColor=dbe7ee" /><img alt="shuccii.github.io" src="https://img.shields.io/badge/↗-shuccii.github.io-e8b455?style=flat-square&labelColor=0b2733" /></picture></a>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/command-strip.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/light/command-strip.svg" />
-  <img width="100%" alt="git readout" src="assets/dark/command-strip.svg" />
-</picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/system.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/system.svg" /><img width="32%" alt="Repository index" src="assets/dark/system.svg" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/radar.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/radar.svg" /><img width="32%" alt="Contributions by weekday" src="assets/dark/radar.svg" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/globe.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/globe.svg" /><img width="32%" alt="Telemetry uplink" src="assets/dark/globe.svg" /></picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
-  <img width="100%" alt="" src="assets/dark/divider.svg" />
-</picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/pulse.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/pulse.svg" /><img width="49%" alt="Daily contribution pulse" src="assets/dark/pulse.svg" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/languages.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/languages.svg" /><img width="49%" alt="Language mix" src="assets/dark/languages.svg" /></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/log.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/log.svg" /><img width="100%" alt="Recent commits" src="assets/dark/log.svg" /></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/command-strip.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/command-strip.svg" /><img width="100%" alt="git readout" src="assets/dark/command-strip.svg" /></picture>
 
 </div>
 
@@ -85,35 +77,9 @@ flowchart LR
 
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/profile-details.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/profile-details.svg" />
-  <img width="98%" alt="account summary" src="assets/cards/dark/profile-details.svg" />
-</picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/profile-details.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/cards/light/profile-details.svg" /><img width="98%" alt="account summary" src="assets/cards/dark/profile-details.svg" /></picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/repos-per-language.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/repos-per-language.svg" />
-  <img width="45%" alt="languages by repository" src="assets/cards/dark/repos-per-language.svg" />
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/most-commit-language.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/most-commit-language.svg" />
-  <img width="45%" alt="languages by commit" src="assets/cards/dark/most-commit-language.svg" />
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/stats.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/stats.svg" />
-  <img width="45%" alt="totals" src="assets/cards/dark/stats.svg" />
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/productive-time.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/light/productive-time.svg" />
-  <img width="45%" alt="commits by hour" src="assets/cards/dark/productive-time.svg" />
-</picture>
-
-<br/>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/stats.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/cards/light/stats.svg" /><img width="45%" alt="totals" src="assets/cards/dark/stats.svg" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/dark/productive-time.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/cards/light/productive-time.svg" /><img width="45%" alt="commits by hour" src="assets/cards/dark/productive-time.svg" /></picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/shuccii/shuccii/output/github-snake-dark.svg" />
@@ -123,11 +89,7 @@ flowchart LR
 
 </div>
 
-<div align="center"><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
-  <img width="100%" alt="" src="assets/dark/divider.svg" />
-</picture></div>
+<div align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" /><img width="100%" alt="" src="assets/dark/divider.svg" /></picture></div>
 
 ## ◤ 05 · REPOSITORIES
 

@@ -10,9 +10,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-HAIR = 0.6
-LINE = 0.9
-ACCENT = 1.2
+HAIR = 0.45
+LINE = 0.7
+ACCENT = 1.0
 
 MONO = '"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace'
 
@@ -43,6 +43,9 @@ class Palette:
     aberration: float          # 0 disables the RGB fringe
     sweep_opacity: float
     pulse: str            # travelling highlight on the divider rail
+    glass_top: float      # panel fill alpha at the lit edge
+    glass_bottom: float   # ...and where it falls away
+    edge: str             # border of a glass panel
 
 
 DARK = Palette(
@@ -59,6 +62,7 @@ DARK = Palette(
     vignette="#000000", vignette_opacity=0.6,
     glow_scale=1.0, aberration=0.26, sweep_opacity=0.09,
     pulse="#eafcff",
+    glass_top=0.62, glass_bottom=0.34, edge="#5fd8f2",
 )
 
 LIGHT = Palette(
@@ -75,6 +79,7 @@ LIGHT = Palette(
     vignette="#3d6b80", vignette_opacity=0.16,
     glow_scale=0.45, aberration=0.0, sweep_opacity=0.07,
     pulse="#0b5570",
+    glass_top=0.58, glass_bottom=0.26, edge="#0e7490",
 )
 
 PALETTES = (DARK, LIGHT)
@@ -90,8 +95,9 @@ def defs(prefix: str, w: int, h: int, p: Palette, *, light=(-70, -70, 60)) -> st
     b1, b2 = 0.9 * p.glow_scale, 3.6 * p.glow_scale
     return f'''
   <radialGradient id="{prefix}Deep" cx="16%" cy="50%" r="88%">
-    <stop offset="0%" stop-color="{p.bg_inner}"/><stop offset="46%" stop-color="{p.bg_mid}"/>
-    <stop offset="100%" stop-color="{p.bg_outer}"/>
+    <stop offset="0%" stop-color="{p.bg_inner}" stop-opacity="{p.glass_top}"/>
+    <stop offset="46%" stop-color="{p.bg_mid}" stop-opacity="{(p.glass_top+p.glass_bottom)/2:.2f}"/>
+    <stop offset="100%" stop-color="{p.bg_outer}" stop-opacity="{p.glass_bottom}"/>
   </radialGradient>
   <radialGradient id="{prefix}Vig" cx="50%" cy="50%" r="74%">
     <stop offset="58%" stop-color="{p.vignette}" stop-opacity="0"/>
@@ -153,4 +159,69 @@ def frame(w: int, h: int, p: Palette, inset: int = 10, arm: int = 42) -> str:
     <path d="M{w-inset} {h-inset-24} V{h-inset} H{w-inset-arm}"/>
   </g>
   <rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="3" fill="none"
-        stroke="{p.dim}" stroke-width="0.8" opacity="0.6"/>'''
+        stroke="{p.edge}" stroke-width="0.5" opacity="0.5"/>'''
+
+
+PAD = 7          # room inside the viewBox for the drop shadow
+BAR = 21         # title bar height
+
+
+def chrome_defs(prefix: str, p: Palette) -> str:
+    """Gradients and filters that give a panel physical thickness.
+
+    A flat rectangle reads as a diagram; a panel needs a cast shadow, a lit top
+    edge and a body that falls off towards the bottom before it sits *above*
+    the page rather than on it.
+    """
+    lit = "#ffffff" if p.key == "dark" else "#ffffff"
+    return f'''
+  <linearGradient id="{prefix}Body" x1="0" y1="0" x2="0.3" y2="1">
+    <stop offset="0%" stop-color="{p.bg_inner}" stop-opacity="{p.glass_top}"/>
+    <stop offset="52%" stop-color="{p.bg_mid}" stop-opacity="{(p.glass_top+p.glass_bottom)/2:.2f}"/>
+    <stop offset="100%" stop-color="{p.bg_outer}" stop-opacity="{p.glass_bottom}"/>
+  </linearGradient>
+  <linearGradient id="{prefix}Bar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="{p.cyan}" stop-opacity="{0.16 if p.key == 'dark' else 0.13}"/>
+    <stop offset="100%" stop-color="{p.cyan}" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="{prefix}Lip" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="{lit}" stop-opacity="0"/>
+    <stop offset="18%" stop-color="{lit}" stop-opacity="{0.42 if p.key == 'dark' else 0.9}"/>
+    <stop offset="82%" stop-color="{lit}" stop-opacity="{0.42 if p.key == 'dark' else 0.9}"/>
+    <stop offset="100%" stop-color="{lit}" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="{prefix}Drop" x="-12%" y="-12%" width="124%" height="130%">
+    <feDropShadow dx="0" dy="2.4" stdDeviation="3.4"
+                  flood-color="{'#000000' if p.key == 'dark' else '#33586b'}"
+                  flood-opacity="{0.65 if p.key == 'dark' else 0.22}"/>
+  </filter>'''
+
+
+def chrome(prefix: str, w: int, h: int, p: Palette, title: str,
+           right: str = "", glyph: str = "") -> str:
+    """The panel shell: shadow, body, lit top edge, title bar, corner marks."""
+    x, y = PAD, PAD
+    iw, ih = w - 2 * PAD, h - 2 * PAD
+    marks = "".join(
+        f'<path d="{d}" stroke="{p.edge}" stroke-width="{HAIR}" fill="none" opacity="0.7"/>'
+        for d in (f"M{x+3} {y+9} V{y+3} H{x+9}",
+                  f"M{x+iw-9} {y+3} H{x+iw-3} V{y+9}",
+                  f"M{x+3} {y+ih-9} V{y+ih-3} H{x+9}",
+                  f"M{x+iw-9} {y+ih-3} H{x+iw-3} V{y+ih-9}"))
+    return f'''
+  <g filter="url(#{prefix}Drop)">
+    <rect x="{x}" y="{y}" width="{iw}" height="{ih}" rx="4" fill="url(#{prefix}Body)"/>
+  </g>
+  <rect x="{x}" y="{y}" width="{iw}" height="{BAR}" rx="4" fill="url(#{prefix}Bar)"/>
+  <rect x="{x}" y="{y+BAR}" width="{iw}" height="0.6" fill="{p.dim}" opacity="0.5"/>
+  <rect x="{x+6}" y="{y+0.5}" width="{iw-12}" height="0.9" fill="url(#{prefix}Lip)"/>
+  <rect x="{x+0.3}" y="{y+0.3}" width="{iw-0.6}" height="{ih-0.6}" rx="4" fill="none"
+        stroke="{p.edge}" stroke-width="0.5" opacity="0.55"/>
+  {marks}
+  <g class="t">
+    <circle cx="{x+13}" cy="{y+10.6}" r="2.6" fill="none" stroke="{p.cyan}" stroke-width="{HAIR}"/>
+    <circle cx="{x+13}" cy="{y+10.6}" r="0.9" fill="{p.cyan}"/>
+    <text x="{x+22}" y="{y+13.6}" fill="{p.cyan}" font-size="7.4" letter-spacing="2.8">{title}</text>
+    <text x="{x+iw-8}" y="{y+13.6}" fill="{p.dim}" font-size="6.8" letter-spacing="1.8"
+          text-anchor="end">{right}</text>
+  </g>'''

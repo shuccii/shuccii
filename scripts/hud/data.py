@@ -20,8 +20,21 @@ query($login: String!) {
     followers { totalCount }
     publicRepos: repositories(privacy: PUBLIC, ownerAffiliations: OWNER) { totalCount }
     owned: repositories(first: 100, ownerAffiliations: OWNER, isFork: false,
-                        orderBy: {field: STARGAZERS, direction: DESC}) {
-      nodes { name stargazerCount primaryLanguage { name } }
+                        orderBy: {field: PUSHED_AT, direction: DESC}) {
+      nodes {
+        name
+        stargazerCount
+        pushedAt
+        primaryLanguage { name }
+        defaultBranchRef {
+          name
+          target { ... on Commit { history(first: 6) { nodes { messageHeadline committedDate oid } } } }
+        }
+        languages(first: 8, orderBy: {field: SIZE, direction: DESC}) {
+          totalSize
+          edges { size node { name color } }
+        }
+      }
     }
     contributionsCollection {
       totalCommitContributions
@@ -54,6 +67,11 @@ class Telemetry:
     languages: list[tuple[str, int]] = field(default_factory=list)
     weeks: list[int] = field(default_factory=list)      # weekly contribution totals
     week_starts: list[str] = field(default_factory=list)
+    days: list[int] = field(default_factory=list)       # daily totals, most recent last
+    weekday: list[int] = field(default_factory=list)    # Sun..Sat totals over the year
+    repos_detail: list[dict] = field(default_factory=list)
+    commits_log: list[tuple[str, str, str]] = field(default_factory=list)  # (time, repo, headline)
+    lang_bytes: list[tuple[str, int, str]] = field(default_factory=list)   # (name, bytes, colour)
     sha: str = "—"
     branch: str = "main"
     synced: str = ""
@@ -131,5 +149,39 @@ def collect(login: str, token: str | None) -> Telemetry:
     t.top_language = t.languages[0][0] if t.languages else "—"
     t.weeks = [sum(d["contributionCount"] for d in w["contributionDays"]) for w in cal["weeks"]]
     t.week_starts = [w["firstDay"] for w in cal["weeks"]]
+    t.days = [d["contributionCount"] for w in cal["weeks"] for d in w["contributionDays"]]
+
+    by_weekday = [0] * 7
+    for w in cal["weeks"]:
+        for d in w["contributionDays"]:
+            # %w: Sunday == 0, matching the order GitHub lays the calendar out in
+            by_weekday[int(datetime.fromisoformat(d["date"]).strftime("%w"))] += d["contributionCount"]
+    t.weekday = by_weekday
+
+    sizes: dict[str, int] = {}
+    colours: dict[str, str] = {}
+    for node in nodes:
+        for edge in (node.get("languages") or {}).get("edges", []):
+            name = edge["node"]["name"]
+            sizes[name] = sizes.get(name, 0) + edge["size"]
+            colours.setdefault(name, edge["node"].get("color") or "#7d8590")
+    t.lang_bytes = sorted(((k, v, colours[k]) for k, v in sizes.items()),
+                          key=lambda kv: -kv[1])
+
+    log: list[tuple[str, str, str]] = []
+    for node in nodes:
+        branch = node.get("defaultBranchRef") or {}
+        target = branch.get("target") or {}
+        for c in (target.get("history") or {}).get("nodes", []):
+            log.append((c["committedDate"], node["name"], c["messageHeadline"]))
+    log.sort(reverse=True)
+    t.commits_log = [(d[11:16], r, m) for d, r, m in log[:9]]
+
+    t.repos_detail = [
+        {"name": n["name"], "stars": n["stargazerCount"],
+         "lang": (n.get("primaryLanguage") or {}).get("name") or "—",
+         "pushed": (n.get("pushedAt") or "")[:10]}
+        for n in nodes[:6]
+    ]
     t.live = True
     return t

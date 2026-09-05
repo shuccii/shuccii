@@ -15,10 +15,10 @@
     <feGaussianBlur in="SourceGraphic" stdDeviation="1.6"/>
   </filter>
 </defs>
-  <line x1="0" y1="11" x2="900" y2="11" stroke="url(#dRail)" stroke-width="0.6"/>
+  <line x1="0" y1="11" x2="900" y2="11" stroke="url(#dRail)" stroke-width="0.45"/>
   <line x1="150" y1="11" x2="410" y2="11" stroke="#5d8ba0" stroke-width="4" stroke-dasharray="0.7 6" opacity="0.75"/>
   <line x1="490" y1="11" x2="750" y2="11" stroke="#5d8ba0" stroke-width="4" stroke-dasharray="0.7 6" opacity="0.75"/>
-  <path d="M432 11 L442 5 L458 5 L468 11 L458 17 L442 17 Z" fill="none" stroke="#9a6a10" stroke-width="0.6"/>
+  <path d="M432 11 L442 5 L458 5 L468 11 L458 17 L442 17 Z" fill="none" stroke="#9a6a10" stroke-width="0.45"/>
   <circle cx="450" cy="11" r="1.6" fill="#0e7490" filter="url(#dGlow)">
     <animate attributeName="r" values="1.2;2.6;1.2" dur="2.8s" repeatCount="indefinite"/>
   </circle>

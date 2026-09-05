@@ -44,7 +44,7 @@ def _cells(p: Palette, x0: float, width: float, y_label: float, y_value: float,
         if i:
             out.append(f'<line x1="{x-14:.1f}" y1="{y_label-11:.0f}" x2="{x-14:.1f}" '
                        f'y2="{y_value+5:.0f}" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.55"/>')
-        out.append(f'<text x="{x:.1f}" y="{y_label}" fill="{p.dim}" font-size="8.5" '
+        out.append(f'<text x="{x:.1f}" y="{y_label}" fill="{p.dim}" font-size="7.8" '
                    f'letter-spacing="2.2">{label}</text>')
         out.append(f'<text x="{x:.1f}" y="{y_value}" fill="{p.pale}" font-size="{value_size}" '
                    f'letter-spacing="0.4">{value}</text>')
@@ -75,7 +75,7 @@ def header(t: Telemetry, p: Palette) -> str:
         x1, y1 = _pt(CX, CY, r_out, deg)
         spokes.append(
             f'<line x1="{x0:.1f}" y1="{y0:.1f}" x2="{x1:.1f}" y2="{y1:.1f}" '
-            f'stroke="{p.ramp[lvl]}" stroke-width="2.4" stroke-linecap="round" '
+            f'stroke="{p.ramp[lvl]}" stroke-width="2" stroke-linecap="round" '
             f'opacity="{0.7 if lvl == 0 else 0.95}"/>')
 
         if t.week_starts:
@@ -87,7 +87,7 @@ def header(t: Telemetry, p: Palette) -> str:
                 ticks.append(f'<line x1="{tx0:.1f}" y1="{ty0:.1f}" x2="{tx1:.1f}" y2="{ty1:.1f}" '
                              f'stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.85"/>')
                 lx, ly = _pt(CX, CY, R_MAX + 19, deg)
-                labels.append(f'<text x="{lx:.1f}" y="{ly+2.4:.1f}" fill="{p.dim}" font-size="6.6" '
+                labels.append(f'<text x="{lx:.1f}" y="{ly+2.4:.1f}" fill="{p.dim}" font-size="6.1" '
                               f'letter-spacing="1.1" text-anchor="middle" opacity="0.9">{MONTHS[m-1]}</text>')
 
     fringe = "" if not p.aberration else (
@@ -103,7 +103,7 @@ def header(t: Telemetry, p: Palette) -> str:
         f'<line x1="{px0:.1f}" y1="{py0:.1f}" x2="{px1:.1f}" y2="{py1:.1f}" '
         f'stroke="{p.gold}" stroke-width="{LINE}"/>'
         f'<circle cx="{px1:.1f}" cy="{py1:.1f}" r="1.7" fill="{p.gold}"/>'
-        f'<text x="{plx:.1f}" y="{ply+2.4:.1f}" fill="{p.gold}" font-size="6.6" '
+        f'<text x="{plx:.1f}" y="{ply+2.4:.1f}" fill="{p.gold}" font-size="6.1" '
         f'letter-spacing="1" text-anchor="middle">PEAK {peak}</text>')
 
     scale = "\n      ".join(
@@ -119,10 +119,10 @@ def header(t: Telemetry, p: Palette) -> str:
         ("STARS", f"{t.stars}"),
     ])
 
-    live = (f'<text x="{XE}" y="272" text-anchor="end" fill="{p.cyan}" font-size="9" letter-spacing="1.8">LIVE'
+    live = (f'<text x="{XE}" y="272" text-anchor="end" fill="{p.cyan}" font-size="8.3" letter-spacing="1.8">LIVE'
             f'<animate attributeName="opacity" values="1;1;0.2;1" keyTimes="0;0.6;0.66;1" '
             f'dur="2.4s" repeatCount="indefinite"/></text>') if t.live else \
-           f'<text x="{XE}" y="272" text-anchor="end" fill="{p.dim}" font-size="9" letter-spacing="1.8">CACHED</text>'
+           f'<text x="{XE}" y="272" text-anchor="end" fill="{p.dim}" font-size="8.3" letter-spacing="1.8">CACHED</text>'
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="{t.login} — {t.contributions} contributions in the last year">
 <defs>{defs(P, W, H, p)}</defs>
@@ -173,16 +173,16 @@ def header(t: Telemetry, p: Palette) -> str:
       <path d="{_arc(CX, CY, R_IN-15, 254, 346)}"/>
     </g>
 
-    <text x="{CX}" y="{CY+4}" text-anchor="middle" fill="{p.ink}" font-size="27" letter-spacing="0.5">{t.contributions}</text>
-    <text x="{CX}" y="{CY+19}" text-anchor="middle" fill="{p.dim}" font-size="6.8" letter-spacing="2.6">CONTRIBUTIONS</text>
-    <text x="{CX}" y="{CY-24}" text-anchor="middle" fill="{p.dim}" font-size="6.4" letter-spacing="2.4">LAST 12 MONTHS</text>
+    <text x="{CX}" y="{CY+4}" text-anchor="middle" fill="{p.ink}" font-size="24.8" letter-spacing="0.5">{t.contributions}</text>
+    <text x="{CX}" y="{CY+19}" text-anchor="middle" fill="{p.dim}" font-size="6.3" letter-spacing="2.6">CONTRIBUTIONS</text>
+    <text x="{CX}" y="{CY-24}" text-anchor="middle" fill="{p.dim}" font-size="5.9" letter-spacing="2.4">LAST 12 MONTHS</text>
 
   </g>
 
   <!-- ============ READOUT ============ -->
   <g class="t">
-    <text x="{X0}" y="60" fill="{p.gold}" font-size="10.5" letter-spacing="4.2">GITHUB.COM / {t.login.upper()}</text>
-    <text x="{XE}" y="60" fill="{p.dim}" font-size="10.5" letter-spacing="2.2" text-anchor="end">BRANCH {t.branch}</text>
+    <text x="{X0}" y="60" fill="{p.gold}" font-size="9.7" letter-spacing="4.2">GITHUB.COM / {t.login.upper()}</text>
+    <text x="{XE}" y="60" fill="{p.dim}" font-size="9.7" letter-spacing="2.2" text-anchor="end">BRANCH {t.branch}</text>
     <line x1="{X0}" y1="70" x2="{XE}" y2="70" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.5"/>
 
     <g font-size="38" letter-spacing="8.5">
@@ -193,12 +193,12 @@ def header(t: Telemetry, p: Palette) -> str:
     <line x1="{X0}" y1="138" x2="{XE}" y2="138" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.45"/>
     <line x1="{X0}" y1="138" x2="{X0+92}" y2="138" stroke="{p.gold}" stroke-width="{ACCENT}"/>
 
-    <text x="{X0}" y="164" fill="#8ecfe6" font-size="11.5" letter-spacing="3">MATERIALS INFORMATICS &#183; MACHINE LEARNING &#183; FUSION</text>
+    <text x="{X0}" y="164" fill="#8ecfe6" font-size="10.6" letter-spacing="3">MATERIALS INFORMATICS &#183; MACHINE LEARNING &#183; FUSION</text>
 
     {telemetry}
 
     <line x1="{X0}" y1="248" x2="{XE}" y2="248" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.45"/>
-    <g font-size="9" letter-spacing="1.7" fill="{p.dim}">
+    <g font-size="8.3" letter-spacing="1.7" fill="{p.dim}">
       <text x="{X0}" y="272">SYNC {t.synced}Z</text>
       <text x="{X0+190}" y="272">HEAD {t.sha}</text>
       <text x="{X0+310}" y="272">PEAK {t.peak_week}/WK</text>
@@ -237,8 +237,8 @@ def command_strip(t: Telemetry, p: Palette) -> str:
                 f'keyTimes="{keytimes}" values="{vals}" repeatCount="indefinite"/>')
         lines.append(
             f'<g opacity="{1 if i == 0 else 0}">{anim}'
-            f'<text x="96" y="22" fill="{p.pale}" font-size="12.5" letter-spacing="0.4">{cmd}</text>'
-            f'<text x="96" y="40" fill="{p.cyan_deep}" font-size="12.5" letter-spacing="0.4">{out}</text>'
+            f'<text x="96" y="22" fill="{p.pale}" font-size="11.5" letter-spacing="0.4">{cmd}</text>'
+            f'<text x="96" y="40" fill="{p.cyan_deep}" font-size="11.5" letter-spacing="0.4">{out}</text>'
             f'</g>')
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="git status readout">
@@ -246,8 +246,8 @@ def command_strip(t: Telemetry, p: Palette) -> str:
 <g clip-path="url(#{P}Clip)">
   <rect width="{W}" height="{H}" fill="url(#{P}Deep)"/>
   <line x1="78" y1="10" x2="78" y2="44" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.6"/>
-  <text class="t" x="24" y="22" fill="{p.gold}" font-size="10" letter-spacing="1.6">SHELL</text>
-  <text class="t" x="24" y="40" fill="{p.dim}" font-size="10" letter-spacing="1.6">STDOUT</text>
+  <text class="t" x="24" y="22" fill="{p.gold}" font-size="9.2" letter-spacing="1.6">SHELL</text>
+  <text class="t" x="24" y="40" fill="{p.dim}" font-size="9.2" letter-spacing="1.6">STDOUT</text>
   <g class="t">
     {chr(10).join("    " + l for l in lines).strip()}
   </g>
@@ -327,18 +327,18 @@ def footer(t: Telemetry, p: Palette) -> str:
   <rect width="{W}" height="{H}" fill="url(#{P}Deep)"/>
 
   <g class="t">
-    <text x="{x0}" y="24" fill="{p.dim}" font-size="8.5" letter-spacing="2.4">LAST 26 WEEKS</text>
+    <text x="{x0}" y="24" fill="{p.dim}" font-size="7.8" letter-spacing="2.4">LAST 26 WEEKS</text>
     <line x1="{x0}" y1="{base}" x2="{x1}" y2="{base}" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.7"/>
     <g>{chr(10).join("      " + b for b in bars).strip()}</g>
     <polyline points="{' '.join(pts)}" fill="none" stroke="{p.cyan}" stroke-width="{LINE}" opacity="0.9"/>
     <line x1="{x0}" y1="{top-6}" x2="{x0}" y2="{base}" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.5"/>
-    <text x="{x0-6}" y="{top-1}" fill="{p.dim}" font-size="7" text-anchor="end">{peak}</text>
-    <text x="{x0-6}" y="{base+3}" fill="{p.dim}" font-size="7" text-anchor="end">0</text>
+    <text x="{x0-6}" y="{top-1}" fill="{p.dim}" font-size="6.4" text-anchor="end">{peak}</text>
+    <text x="{x0-6}" y="{base+3}" fill="{p.dim}" font-size="6.4" text-anchor="end">0</text>
     <line x1="524" y1="24" x2="524" y2="94" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.55"/>
     {totals}
     <line x1="{x0}" y1="98" x2="{W-66}" y2="98" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.45"/>
-    <text x="{x0}" y="115" fill="{p.dim}" font-size="9" letter-spacing="1.7">{t.login}/{t.login} &#183; regenerated daily by github actions</text>
-    <text x="{W-66}" y="115" fill="{p.dim}" font-size="9" letter-spacing="1.7" text-anchor="end">SYNC {t.synced}Z</text>
+    <text x="{x0}" y="115" fill="{p.dim}" font-size="8.3" letter-spacing="1.7">{t.login}/{t.login} &#183; regenerated daily by github actions</text>
+    <text x="{W-66}" y="115" fill="{p.dim}" font-size="8.3" letter-spacing="1.7" text-anchor="end">SYNC {t.synced}Z</text>
   </g>
 {atmosphere(P, W, H, p, sweep_dur="8s")}
 {frame(W, H, p, inset=10, arm=36)}

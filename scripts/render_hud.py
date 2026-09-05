@@ -12,7 +12,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
-from hud import panels                                   # noqa: E402
+from hud import panels, widgets                          # noqa: E402
 from hud.theme import PALETTES                          # noqa: E402
 from hud.data import ROOT, collect                       # noqa: E402
 
@@ -41,6 +41,13 @@ def main() -> int:
             "command-strip.svg": panels.command_strip(t, pal),
             "divider.svg": panels.divider(pal),
             "footer.svg": panels.footer(t, pal),
+            "topbar.svg": widgets.topbar(t, pal),
+            "system.svg": widgets.system(t, pal),
+            "radar.svg": widgets.radar(t, pal),
+            "globe.svg": widgets.globe(t, pal),
+            "pulse.svg": widgets.pulse(t, pal),
+            "languages.svg": widgets.languages(t, pal),
+            "log.svg": widgets.log(t, pal),
         }.items():
             (d / name).write_text(svg)
             print(f"rendered {pal.key}/{name} ({len(svg)} bytes)")
