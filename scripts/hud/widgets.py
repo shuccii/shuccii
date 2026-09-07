@@ -334,59 +334,54 @@ def languages(t: Telemetry, p: Palette) -> str:
 
     grads, segs, spec, legend = [], [], [], []
     off = 0.0
-    cap = sw / 2          # a round cap adds half the stroke width at each end
-    gap = 2.6             # visual separation between neighbouring segments
+    gap = 1.1             # hairline parting so neighbours stay separable
+    rmax = R + sw / 2
+
+    def stop(radius: float) -> float:
+        return max(0.0, min(1.0, radius / rmax))
+
     for i, ((name, size, _github), (light, base, deep)) in enumerate(zip(shown, tones)):
         frac = size / total
         arc = circ * frac
-        # a round cap adds half a stroke width at each end, so the dash is
-        # shortened to land the caps on the true arc. Below the width of two
-        # caps that cannot work, and the share becomes a bead — sized by its
-        # own value, or four different fractions would all look identical
-        floor = 2 * cap + gap
-        bead = arc < floor
-        thick = sw if not bead else max(2.8, sw * math.sqrt(arc / floor))
-        drawn = max(arc - 2 * cap - gap, 0.01) if not bead else 0.01
+        drawn = max(arc - gap, 0.9)
         lead = off + (arc - drawn) / 2
-        mid = math.radians(-90 + 360 * (off + arc / 2) / circ)
-        gx, gy = cx + R * math.cos(mid), cy + R * math.sin(mid)
+
+        # Shade across the thickness of the band, not along the panel: dark at
+        # the inner lip, a highlight just outside centre, falling away again at
+        # the outer lip. Rotationally symmetric, so every part of the ring reads
+        # as the same round tube seen from above.
         grads.append(
-            f'<linearGradient id="{P}S{i}" gradientUnits="userSpaceOnUse" '
-            f'x1="{gx-sw*0.9:.1f}" y1="{gy-sw*0.9:.1f}" x2="{gx+sw*0.9:.1f}" y2="{gy+sw*0.9:.1f}">'
-            f'<stop offset="0%" stop-color="{light}" stop-opacity="0.95"/>'
-            f'<stop offset="46%" stop-color="{base}" stop-opacity="0.8"/>'
-            f'<stop offset="100%" stop-color="{deep}" stop-opacity="0.9"/></linearGradient>')
+            f'<radialGradient id="{P}S{i}" gradientUnits="userSpaceOnUse" '
+            f'cx="{cx}" cy="{cy}" r="{rmax:.2f}">'
+            f'<stop offset="{stop(R-sw/2):.4f}" stop-color="{deep}" stop-opacity="0.95"/>'
+            f'<stop offset="{stop(R-sw*0.22):.4f}" stop-color="{base}"/>'
+            f'<stop offset="{stop(R+sw*0.06):.4f}" stop-color="{light}" stop-opacity="0.92"/>'
+            f'<stop offset="{stop(R+sw*0.3):.4f}" stop-color="{base}"/>'
+            f'<stop offset="1" stop-color="{deep}" stop-opacity="0.95"/>'
+            f'</radialGradient>')
+
         dash = f'stroke-dasharray="{drawn:.2f} {circ-drawn:.2f}" stroke-dashoffset="{-lead:.2f}"'
         rot = f'transform="rotate(-90 {cx} {cy})"'
-        cap_attr = 'stroke-linecap="round"'
-        if bead:
-            bx, by = cx + R * math.cos(mid), cy + R * math.sin(mid)
-            segs.append(
-                f'<circle cx="{bx:.1f}" cy="{by:.1f}" r="{thick/2:.2f}" fill="{base}" '
-                f'opacity="0.32" filter="url(#{P}Glow)"/>'
-                f'<circle cx="{bx:.1f}" cy="{by:.1f}" r="{thick/2:.2f}" fill="url(#{P}S{i})" '
-                f'opacity="0.85"/>')
-            spec.append(
-                f'<circle cx="{bx:.1f}" cy="{by-thick*0.16:.1f}" r="{thick*0.24:.2f}" '
-                f'fill="#ffffff" opacity="0.42"/>')
-        else:
-            segs.append(
-                f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{base}" '
-                f'stroke-width="{sw}" {dash} {rot} {cap_attr} opacity="0.24" filter="url(#{P}Glow)"/>'
-                f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="url(#{P}S{i})" '
-                f'stroke-width="{sw}" {dash} {rot} {cap_attr} opacity="0.85"/>')
-            spec.append(
-                f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.28:.1f}" fill="none" stroke="#ffffff" '
-                f'stroke-width="{HAIR*1.4:.2f}" {dash} {rot} {cap_attr} opacity="0.4"/>'
-                f'<circle cx="{cx}" cy="{cy}" r="{R-sw*0.3:.1f}" fill="none" stroke="{deep}" '
-                f'stroke-width="{HAIR*1.2:.2f}" {dash} {rot} {cap_attr} opacity="0.5"/>')
+        segs.append(
+            f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{base}" '
+            f'stroke-width="{sw}" {dash} {rot} opacity="0.22" filter="url(#{P}Glow)"/>'
+            f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="url(#{P}S{i})" '
+            f'stroke-width="{sw}" {dash} {rot} opacity="0.82"/>')
+        # the lips that give the tube its silhouette
+        spec.append(
+            f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.44:.2f}" fill="none" stroke="{deep}" '
+            f'stroke-width="{HAIR}" {dash} {rot} opacity="0.55"/>'
+            f'<circle cx="{cx}" cy="{cy}" r="{R-sw*0.44:.2f}" fill="none" stroke="{deep}" '
+            f'stroke-width="{HAIR}" {dash} {rot} opacity="0.5"/>'
+            f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.1:.2f}" fill="none" stroke="#ffffff" '
+            f'stroke-width="{sw*0.13:.2f}" {dash} {rot} opacity="0.2"/>')
 
         ly = PAD + BAR + 22 + i * 18
         legend.append(
-            f'<rect x="{PAD+206}" y="{ly-7}" width="7" height="7" rx="3.5" fill="{base}" opacity="0.85"/>'
-            f'<rect x="{PAD+206}" y="{ly-7}" width="7" height="3" rx="1.5" fill="{light}" opacity="0.75"/>'
-            f'<rect x="{PAD+206.25}" y="{ly-6.75}" width="6.5" height="6.5" rx="3.25" fill="none" '
-            f'stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.7"/>'
+            f'<circle cx="{PAD+209.5}" cy="{ly-3.5}" r="3.6" fill="{base}" opacity="0.9"/>'
+            f'<circle cx="{PAD+208.6}" cy="{ly-4.6}" r="1.3" fill="{light}" opacity="0.9"/>'
+            f'<circle cx="{PAD+209.5}" cy="{ly-3.5}" r="3.6" fill="none" stroke="{deep}" '
+            f'stroke-width="{HAIR}" opacity="0.75"/>'
             f'<text x="{PAD+219}" y="{ly}" fill="{p.pale}" font-size="7.7">{_esc(_clip(name, 20))}</text>'
             f'<text x="{W-PAD-14}" y="{ly}" fill="{p.dim}" font-size="7.7" text-anchor="end">{frac*100:.1f}%</text>')
         off += arc
@@ -407,7 +402,7 @@ def languages(t: Telemetry, p: Palette) -> str:
     {"".join(grads)}
   </defs>
   <g class="t">
-    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.35" stroke-linecap="round"/>
+    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.3"/>
     {"".join(segs)}
     {"".join(spec)}
     <g clip-path="url(#{P}Ring)">
