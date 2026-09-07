@@ -203,15 +203,15 @@ def series_colours(n: int, p: Palette) -> list[tuple[str, str, str]]:
     gives more contrast between neighbours than either would alone.
     """
     dark = p.key == "dark"
-    sat = 0.58 if dark else 0.5
-    hi, lo = (0.72, 0.44) if dark else (0.56, 0.32)
+    sat = 0.62 if dark else 0.56
+    hi, lo = (0.78, 0.4) if dark else (0.6, 0.28)
     span = max(1, n - 2)
     out = []
     for i in range(max(1, n)):
         if i == n - 1 and n > 2:                      # the accent, on the smallest share
-            base_h, base_l, base_s = 42, (0.66 if dark else 0.44), 0.62
+            base_h, base_l, base_s = 40, (0.68 if dark else 0.46), 0.7
         else:
-            base_h = 188 + (i / span) * 78            # cyan -> blue -> violet
+            base_h = 186 + (i / span) * 122           # cyan -> blue -> violet -> purple
             base_l = hi - (hi - lo) * (i / span)
             base_s = sat
         out.append((_hsl(base_h, base_s, min(0.9, base_l + 0.16)),

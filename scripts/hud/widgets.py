@@ -326,7 +326,7 @@ def languages(t: Telemetry, p: Palette) -> str:
     W, H, P = 444, 176, "ln"
     cx = PAD + 92
     cy = PAD + BAR + (H - PAD * 2 - BAR) / 2
-    R, sw = 46, 9.5
+    R, sw = 46, 10
     shown = t.lang_bytes[:6]
     total = sum(b for _, b, _ in t.lang_bytes) or 1
     circ = 2 * math.pi * R
@@ -334,33 +334,59 @@ def languages(t: Telemetry, p: Palette) -> str:
 
     grads, segs, spec, legend = [], [], [], []
     off = 0.0
+    cap = sw / 2          # a round cap adds half the stroke width at each end
+    gap = 2.6             # visual separation between neighbouring segments
     for i, ((name, size, _github), (light, base, deep)) in enumerate(zip(shown, tones)):
         frac = size / total
         arc = circ * frac
+        # a round cap adds half a stroke width at each end, so the dash is
+        # shortened to land the caps on the true arc. Below the width of two
+        # caps that cannot work, and the share becomes a bead — sized by its
+        # own value, or four different fractions would all look identical
+        floor = 2 * cap + gap
+        bead = arc < floor
+        thick = sw if not bead else max(2.8, sw * math.sqrt(arc / floor))
+        drawn = max(arc - 2 * cap - gap, 0.01) if not bead else 0.01
+        lead = off + (arc - drawn) / 2
         mid = math.radians(-90 + 360 * (off + arc / 2) / circ)
         gx, gy = cx + R * math.cos(mid), cy + R * math.sin(mid)
         grads.append(
             f'<linearGradient id="{P}S{i}" gradientUnits="userSpaceOnUse" '
-            f'x1="{gx-sw:.1f}" y1="{gy-sw:.1f}" x2="{gx+sw:.1f}" y2="{gy+sw:.1f}">'
-            f'<stop offset="0%" stop-color="{light}"/>'
-            f'<stop offset="48%" stop-color="{base}"/>'
-            f'<stop offset="100%" stop-color="{deep}"/></linearGradient>')
-        dash = f'stroke-dasharray="{arc:.2f} {circ-arc:.2f}" stroke-dashoffset="{-off:.2f}"'
+            f'x1="{gx-sw*0.9:.1f}" y1="{gy-sw*0.9:.1f}" x2="{gx+sw*0.9:.1f}" y2="{gy+sw*0.9:.1f}">'
+            f'<stop offset="0%" stop-color="{light}" stop-opacity="0.95"/>'
+            f'<stop offset="46%" stop-color="{base}" stop-opacity="0.8"/>'
+            f'<stop offset="100%" stop-color="{deep}" stop-opacity="0.9"/></linearGradient>')
+        dash = f'stroke-dasharray="{drawn:.2f} {circ-drawn:.2f}" stroke-dashoffset="{-lead:.2f}"'
         rot = f'transform="rotate(-90 {cx} {cy})"'
-        segs.append(f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="url(#{P}S{i})" '
-                    f'stroke-width="{sw}" {dash} {rot} opacity="0.9"/>')
-        spec.append(
-            f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.34:.1f}" fill="none" stroke="#ffffff" '
-            f'stroke-width="{HAIR}" {dash} {rot} opacity="0.3"/>'
-            f'<circle cx="{cx}" cy="{cy}" r="{R-sw*0.36:.1f}" fill="none" stroke="{deep}" '
-            f'stroke-width="{HAIR}" {dash} {rot} opacity="0.5"/>')
+        cap_attr = 'stroke-linecap="round"'
+        if bead:
+            bx, by = cx + R * math.cos(mid), cy + R * math.sin(mid)
+            segs.append(
+                f'<circle cx="{bx:.1f}" cy="{by:.1f}" r="{thick/2:.2f}" fill="{base}" '
+                f'opacity="0.32" filter="url(#{P}Glow)"/>'
+                f'<circle cx="{bx:.1f}" cy="{by:.1f}" r="{thick/2:.2f}" fill="url(#{P}S{i})" '
+                f'opacity="0.85"/>')
+            spec.append(
+                f'<circle cx="{bx:.1f}" cy="{by-thick*0.16:.1f}" r="{thick*0.24:.2f}" '
+                f'fill="#ffffff" opacity="0.42"/>')
+        else:
+            segs.append(
+                f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{base}" '
+                f'stroke-width="{sw}" {dash} {rot} {cap_attr} opacity="0.24" filter="url(#{P}Glow)"/>'
+                f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="url(#{P}S{i})" '
+                f'stroke-width="{sw}" {dash} {rot} {cap_attr} opacity="0.85"/>')
+            spec.append(
+                f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.28:.1f}" fill="none" stroke="#ffffff" '
+                f'stroke-width="{HAIR*1.4:.2f}" {dash} {rot} {cap_attr} opacity="0.4"/>'
+                f'<circle cx="{cx}" cy="{cy}" r="{R-sw*0.3:.1f}" fill="none" stroke="{deep}" '
+                f'stroke-width="{HAIR*1.2:.2f}" {dash} {rot} {cap_attr} opacity="0.5"/>')
 
         ly = PAD + BAR + 22 + i * 18
         legend.append(
-            f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="8" rx="1.6" fill="{base}"/>'
-            f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="3.4" rx="1.6" fill="{light}" opacity="0.85"/>'
-            f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="8" rx="1.6" fill="none" '
-            f'stroke="#ffffff" stroke-width="0.4" opacity="0.35"/>'
+            f'<rect x="{PAD+206}" y="{ly-7}" width="7" height="7" rx="3.5" fill="{base}" opacity="0.85"/>'
+            f'<rect x="{PAD+206}" y="{ly-7}" width="7" height="3" rx="1.5" fill="{light}" opacity="0.75"/>'
+            f'<rect x="{PAD+206.25}" y="{ly-6.75}" width="6.5" height="6.5" rx="3.25" fill="none" '
+            f'stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.7"/>'
             f'<text x="{PAD+219}" y="{ly}" fill="{p.pale}" font-size="7.7">{_esc(_clip(name, 20))}</text>'
             f'<text x="{W-PAD-14}" y="{ly}" fill="{p.dim}" font-size="7.7" text-anchor="end">{frac*100:.1f}%</text>')
         off += arc
@@ -381,7 +407,7 @@ def languages(t: Telemetry, p: Palette) -> str:
     {"".join(grads)}
   </defs>
   <g class="t">
-    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.55"/>
+    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.35" stroke-linecap="round"/>
     {"".join(segs)}
     {"".join(spec)}
     <g clip-path="url(#{P}Ring)">
