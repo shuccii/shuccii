@@ -106,35 +106,35 @@
   <filter id="glCaustic" x="-40%" y="-60%" width="180%" height="260%">
     <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="glShape"><path d="M7.00 7.00H285.00V189.00H7.00Z"/></clipPath>
-  <clipPath id="glInner"><path d="M7.00 28.00H285.00V189.00H7.00Z"/></clipPath>
+  <clipPath id="glShape"><path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z"/></clipPath>
+  <clipPath id="glInner"><path d="M10.00 28.00H282.00A3.00 3.00 0 0 1 285.00 31.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V31.00A3.00 3.00 0 0 1 10.00 28.00Z"/></clipPath>
 </defs>
 
 
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="#dde8ef" opacity="0.26" filter="url(#glCast)"/>
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="#dde8ef" opacity="0.26" filter="url(#glCast)"/>
   <rect x="51.5" y="191.0" width="189.0" height="7"
         fill="url(#glIrisSoft)" opacity="0.42" filter="url(#glCaustic)"/>
 
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="url(#glFace)"/>
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="url(#glEdgeV)"/>
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#glFace)"/>
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#glEdgeV)"/>
 
   <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#glShape)">
-    <rect x="7" y="7" width="278" height="182" fill="none"
+    <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none"
           stroke="url(#glIrisSoft)" stroke-width="18"
           opacity="0.2"/>
     <rect x="-132.0" y="7" width="139.0" height="182"
           fill="url(#glSheen)" opacity="0.34" transform="skewX(-12)">
       <animate attributeName="x" values="-145.9;312.8" dur="17s" repeatCount="indefinite"/>
     </rect>
-    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#glGlint)" opacity="0.7"/><ellipse cx="285" cy="7" rx="10" ry="10" fill="url(#glGlint)" opacity="0.4"/><ellipse cx="7" cy="189" rx="10" ry="10" fill="url(#glGlint)" opacity="0.28"/><ellipse cx="285" cy="189" rx="10" ry="10" fill="url(#glGlint)" opacity="0.45"/>
+    <ellipse cx="10.0" cy="10.0" rx="10" ry="10" fill="url(#glGlint)" opacity="0.7"/><ellipse cx="282.0" cy="10.0" rx="10" ry="10" fill="url(#glGlint)" opacity="0.4"/><ellipse cx="10.0" cy="186.0" rx="10" ry="10" fill="url(#glGlint)" opacity="0.28"/><ellipse cx="282.0" cy="186.0" rx="10" ry="10" fill="url(#glGlint)" opacity="0.45"/>
   </g>
 
   <!-- polished arris along the top, ground edge along the bottom -->
-  <path d="M7.5 7.5H284.5" stroke="url(#glArris)" stroke-width="1"/>
-  <path d="M7.5 188.5H284.5" stroke="#dde8ef" stroke-width="1"
+  <path d="M10.0 7.5H282.0" stroke="url(#glArris)" stroke-width="1"/>
+  <path d="M10.0 188.5H282.0" stroke="#dde8ef" stroke-width="1"
         opacity="0.3"/>
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="none" stroke="url(#glIris)" stroke-width="0.9"
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none" stroke="url(#glIris)" stroke-width="0.9"
         opacity="0.6"/>
   <path d="M17 28 H275"
         stroke="url(#glIrisSoft)" stroke-width="0.6" opacity="0.75"/>
@@ -193,7 +193,7 @@
     <text x="18" y="42" fill="#5d8ba0" font-size="5.8" letter-spacing="1.6">ENDPOINT</text>
     <text x="18" y="52" fill="#1d4d61" font-size="6.8">api.github.com</text>
     <text x="273" y="167" fill="#5d8ba0" font-size="6.5" letter-spacing="1.6" text-anchor="end">SYNC</text>
-    <text x="273" y="178" fill="#1d4d61" font-size="7.2" text-anchor="end">08:16Z</text>
+    <text x="273" y="178" fill="#1d4d61" font-size="7.2" text-anchor="end">08:24Z</text>
   </g>
   <rect x="7" y="28" width="278" height="161" fill="url(#glScan)" opacity="0.2"/>
   <rect x="7" y="28" width="278" height="161" filter="url(#glGrain)" opacity="0.09"/>

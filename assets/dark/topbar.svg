@@ -106,7 +106,7 @@
   <filter id="tbCaustic" x="-40%" y="-60%" width="180%" height="260%">
     <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="tbShape"><path d="M7.00 7.00H893.00V37.00H7.00Z"/></clipPath>
+  <clipPath id="tbShape"><path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V34.00A3.00 3.00 0 0 1 890.00 37.00H10.00A3.00 3.00 0 0 1 7.00 34.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z"/></clipPath>
   <clipPath id="tbTick"><rect x="246" y="8" width="544" height="28"/></clipPath>
   <linearGradient id="tbFade" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%" stop-color="#0b2534"/><stop offset="6%" stop-color="#0b2534" stop-opacity="0"/>
@@ -114,30 +114,30 @@
   </linearGradient>
 </defs>
 
-  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#tbCast)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V34.00A3.00 3.00 0 0 1 890.00 37.00H10.00A3.00 3.00 0 0 1 7.00 34.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="#05141e" opacity="0.55" filter="url(#tbCast)"/>
   <rect x="148.8" y="39.0" width="602.5" height="7"
         fill="url(#tbIrisSoft)" opacity="0.3" filter="url(#tbCaustic)"/>
 
-  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="url(#tbFace)"/>
-  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="url(#tbEdgeV)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V34.00A3.00 3.00 0 0 1 890.00 37.00H10.00A3.00 3.00 0 0 1 7.00 34.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#tbFace)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V34.00A3.00 3.00 0 0 1 890.00 37.00H10.00A3.00 3.00 0 0 1 7.00 34.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#tbEdgeV)"/>
 
   <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#tbShape)">
-    <rect x="7" y="7" width="886" height="30" fill="none"
+    <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V34.00A3.00 3.00 0 0 1 890.00 37.00H10.00A3.00 3.00 0 0 1 7.00 34.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none"
           stroke="url(#tbIrisSoft)" stroke-width="18"
           opacity="0.17"/>
     <rect x="-436.0" y="7" width="443.0" height="30"
           fill="url(#tbSheen)" opacity="0.1" transform="skewX(-12)">
       <animate attributeName="x" values="-480.3;981.6" dur="17s" repeatCount="indefinite"/>
     </rect>
-    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.7"/><ellipse cx="893" cy="7" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.4"/><ellipse cx="7" cy="37" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.28"/><ellipse cx="893" cy="37" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.45"/>
+    <ellipse cx="10.0" cy="10.0" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.7"/><ellipse cx="890.0" cy="10.0" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.4"/><ellipse cx="10.0" cy="34.0" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.28"/><ellipse cx="890.0" cy="34.0" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.45"/>
   </g>
 
   <!-- polished arris along the top, ground edge along the bottom -->
-  <path d="M7.5 7.5H892.5" stroke="url(#tbArris)" stroke-width="1"/>
-  <path d="M7.5 36.5H892.5" stroke="#05141e" stroke-width="1"
+  <path d="M10.0 7.5H890.0" stroke="url(#tbArris)" stroke-width="1"/>
+  <path d="M10.0 36.5H890.0" stroke="#05141e" stroke-width="1"
         opacity="0.75"/>
-  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="none" stroke="url(#tbIris)" stroke-width="0.9"
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V34.00A3.00 3.00 0 0 1 890.00 37.00H10.00A3.00 3.00 0 0 1 7.00 34.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none" stroke="url(#tbIris)" stroke-width="0.9"
         opacity="0.5"/>
   <g class="t">
     <text x="22" y="25.6" fill="#f7feff" font-size="9.5" letter-spacing="4.6">S / T A N I</text>
@@ -149,7 +149,7 @@
     <g clip-path="url(#tbTick)">
       <text y="24.6" fill="#63a8c0" font-size="6.8" letter-spacing="2.4" xml:space="preserve">
         <animate attributeName="x" values="246;-899" dur="42s" repeatCount="indefinite"/>
-        REPO shuccii/shuccii   •   BRANCH main   •   HEAD 1830eb1   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 08:16Z   •   REPO shuccii/shuccii   •   BRANCH main   •   HEAD 1830eb1   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 08:16Z   •   
+        REPO shuccii/shuccii   •   BRANCH main   •   HEAD 3146bef   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 08:24Z   •   REPO shuccii/shuccii   •   BRANCH main   •   HEAD 3146bef   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 08:24Z   •   
       </text>
     </g>
     <rect x="246" y="8" width="544" height="28" fill="url(#tbFade)"/>

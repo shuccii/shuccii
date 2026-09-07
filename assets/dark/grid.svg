@@ -106,35 +106,35 @@
   <filter id="grCaustic" x="-40%" y="-60%" width="180%" height="260%">
     <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="grShape"><path d="M7.00 7.00H893.00V183.00H7.00Z"/></clipPath>
-  <clipPath id="grInner"><path d="M7.00 28.00H893.00V183.00H7.00Z"/></clipPath>
+  <clipPath id="grShape"><path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V180.00A3.00 3.00 0 0 1 890.00 183.00H10.00A3.00 3.00 0 0 1 7.00 180.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z"/></clipPath>
+  <clipPath id="grInner"><path d="M10.00 28.00H890.00A3.00 3.00 0 0 1 893.00 31.00V180.00A3.00 3.00 0 0 1 890.00 183.00H10.00A3.00 3.00 0 0 1 7.00 180.00V31.00A3.00 3.00 0 0 1 10.00 28.00Z"/></clipPath>
 </defs>
 
 
-  <path d="M7.00 7.00H893.00V183.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#grCast)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V180.00A3.00 3.00 0 0 1 890.00 183.00H10.00A3.00 3.00 0 0 1 7.00 180.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="#05141e" opacity="0.55" filter="url(#grCast)"/>
   <rect x="148.8" y="185.0" width="602.5" height="7"
         fill="url(#grIrisSoft)" opacity="0.3" filter="url(#grCaustic)"/>
 
-  <path d="M7.00 7.00H893.00V183.00H7.00Z" fill="url(#grFace)"/>
-  <path d="M7.00 7.00H893.00V183.00H7.00Z" fill="url(#grEdgeV)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V180.00A3.00 3.00 0 0 1 890.00 183.00H10.00A3.00 3.00 0 0 1 7.00 180.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#grFace)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V180.00A3.00 3.00 0 0 1 890.00 183.00H10.00A3.00 3.00 0 0 1 7.00 180.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#grEdgeV)"/>
 
   <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#grShape)">
-    <rect x="7" y="7" width="886" height="176" fill="none"
+    <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V180.00A3.00 3.00 0 0 1 890.00 183.00H10.00A3.00 3.00 0 0 1 7.00 180.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none"
           stroke="url(#grIrisSoft)" stroke-width="18"
           opacity="0.17"/>
     <rect x="-436.0" y="7" width="443.0" height="176"
           fill="url(#grSheen)" opacity="0.1" transform="skewX(-12)">
       <animate attributeName="x" values="-480.3;981.6" dur="17s" repeatCount="indefinite"/>
     </rect>
-    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#grGlint)" opacity="0.7"/><ellipse cx="893" cy="7" rx="10" ry="10" fill="url(#grGlint)" opacity="0.4"/><ellipse cx="7" cy="183" rx="10" ry="10" fill="url(#grGlint)" opacity="0.28"/><ellipse cx="893" cy="183" rx="10" ry="10" fill="url(#grGlint)" opacity="0.45"/>
+    <ellipse cx="10.0" cy="10.0" rx="10" ry="10" fill="url(#grGlint)" opacity="0.7"/><ellipse cx="890.0" cy="10.0" rx="10" ry="10" fill="url(#grGlint)" opacity="0.4"/><ellipse cx="10.0" cy="180.0" rx="10" ry="10" fill="url(#grGlint)" opacity="0.28"/><ellipse cx="890.0" cy="180.0" rx="10" ry="10" fill="url(#grGlint)" opacity="0.45"/>
   </g>
 
   <!-- polished arris along the top, ground edge along the bottom -->
-  <path d="M7.5 7.5H892.5" stroke="url(#grArris)" stroke-width="1"/>
-  <path d="M7.5 182.5H892.5" stroke="#05141e" stroke-width="1"
+  <path d="M10.0 7.5H890.0" stroke="url(#grArris)" stroke-width="1"/>
+  <path d="M10.0 182.5H890.0" stroke="#05141e" stroke-width="1"
         opacity="0.75"/>
-  <path d="M7.00 7.00H893.00V183.00H7.00Z" fill="none" stroke="url(#grIris)" stroke-width="0.9"
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V180.00A3.00 3.00 0 0 1 890.00 183.00H10.00A3.00 3.00 0 0 1 7.00 180.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none" stroke="url(#grIris)" stroke-width="0.9"
         opacity="0.5"/>
   <path d="M17 28 H883"
         stroke="url(#grIrisSoft)" stroke-width="0.6" opacity="0.75"/>

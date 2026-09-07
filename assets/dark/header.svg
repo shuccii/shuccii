@@ -106,32 +106,32 @@
   <filter id="hCaustic" x="-40%" y="-60%" width="180%" height="260%">
     <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="hShape"><path d="M7.00 7.00H893.00V293.00H7.00Z"/></clipPath></defs>
+  <clipPath id="hShape"><path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V290.00A3.00 3.00 0 0 1 890.00 293.00H10.00A3.00 3.00 0 0 1 7.00 290.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z"/></clipPath></defs>
 
-  <path d="M7.00 7.00H893.00V293.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#hCast)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V290.00A3.00 3.00 0 0 1 890.00 293.00H10.00A3.00 3.00 0 0 1 7.00 290.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="#05141e" opacity="0.55" filter="url(#hCast)"/>
   <rect x="148.8" y="295.0" width="602.5" height="7"
         fill="url(#hIrisSoft)" opacity="0.3" filter="url(#hCaustic)"/>
 
-  <path d="M7.00 7.00H893.00V293.00H7.00Z" fill="url(#hFace)"/>
-  <path d="M7.00 7.00H893.00V293.00H7.00Z" fill="url(#hEdgeV)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V290.00A3.00 3.00 0 0 1 890.00 293.00H10.00A3.00 3.00 0 0 1 7.00 290.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#hFace)"/>
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V290.00A3.00 3.00 0 0 1 890.00 293.00H10.00A3.00 3.00 0 0 1 7.00 290.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#hEdgeV)"/>
 
   <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#hShape)">
-    <rect x="7" y="7" width="886" height="286" fill="none"
+    <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V290.00A3.00 3.00 0 0 1 890.00 293.00H10.00A3.00 3.00 0 0 1 7.00 290.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none"
           stroke="url(#hIrisSoft)" stroke-width="18"
           opacity="0.17"/>
     <rect x="-436.0" y="7" width="443.0" height="286"
           fill="url(#hSheen)" opacity="0.1" transform="skewX(-12)">
       <animate attributeName="x" values="-480.3;981.6" dur="17s" repeatCount="indefinite"/>
     </rect>
-    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#hGlint)" opacity="0.7"/><ellipse cx="893" cy="7" rx="10" ry="10" fill="url(#hGlint)" opacity="0.4"/><ellipse cx="7" cy="293" rx="10" ry="10" fill="url(#hGlint)" opacity="0.28"/><ellipse cx="893" cy="293" rx="10" ry="10" fill="url(#hGlint)" opacity="0.45"/>
+    <ellipse cx="10.0" cy="10.0" rx="10" ry="10" fill="url(#hGlint)" opacity="0.7"/><ellipse cx="890.0" cy="10.0" rx="10" ry="10" fill="url(#hGlint)" opacity="0.4"/><ellipse cx="10.0" cy="290.0" rx="10" ry="10" fill="url(#hGlint)" opacity="0.28"/><ellipse cx="890.0" cy="290.0" rx="10" ry="10" fill="url(#hGlint)" opacity="0.45"/>
   </g>
 
   <!-- polished arris along the top, ground edge along the bottom -->
-  <path d="M7.5 7.5H892.5" stroke="url(#hArris)" stroke-width="1"/>
-  <path d="M7.5 292.5H892.5" stroke="#05141e" stroke-width="1"
+  <path d="M10.0 7.5H890.0" stroke="url(#hArris)" stroke-width="1"/>
+  <path d="M10.0 292.5H890.0" stroke="#05141e" stroke-width="1"
         opacity="0.75"/>
-  <path d="M7.00 7.00H893.00V293.00H7.00Z" fill="none" stroke="url(#hIris)" stroke-width="0.9"
+  <path d="M10.00 7.00H890.00A3.00 3.00 0 0 1 893.00 10.00V290.00A3.00 3.00 0 0 1 890.00 293.00H10.00A3.00 3.00 0 0 1 7.00 290.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none" stroke="url(#hIris)" stroke-width="0.9"
         opacity="0.5"/>
 <g clip-path="url(#hShape)">
 
@@ -292,8 +292,8 @@
 
     <line x1="312" y1="248" x2="872" y2="248" stroke="#63a8c0" stroke-width="0.45" opacity="0.45"/>
     <g font-size="8.3" letter-spacing="1.7" fill="#63a8c0">
-      <text x="312" y="272">SYNC 2026-09-07 08:16Z</text>
-      <text x="502" y="272">HEAD 1830eb1</text>
+      <text x="312" y="272">SYNC 2026-09-07 08:24Z</text>
+      <text x="502" y="272">HEAD 3146bef</text>
       <text x="622" y="272">PEAK 79/WK</text>
       <text x="732" y="272">ACTIVE 11/53</text>
     </g>

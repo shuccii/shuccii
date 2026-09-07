@@ -222,9 +222,25 @@ def series_colours(n: int, p: Palette) -> list[tuple[str, str, str]]:
 
 # --------------------------------------------------------------------------- glass
 
-def slab(x: float, y: float, w: float, h: float) -> str:
-    """A plain rectangular sheet. Real plate glass is cut, not moulded."""
-    return f"M{x:.2f} {y:.2f}H{x+w:.2f}V{y+h:.2f}H{x:.2f}Z"
+CORNER = 3.0     # just enough to read as a broken edge, not a rounded box
+
+
+def slab(x: float, y: float, w: float, h: float, r: float = CORNER) -> str:
+    """A cut sheet with the corners eased off.
+
+    Cut glass is not left perfectly sharp — the corners are knocked back so they
+    do not chip. A radius this small reads as that, where anything larger starts
+    to read as a moulded panel.
+    """
+    r = max(0.0, min(r, w / 2, h / 2))
+    if r < 0.05:
+        return f"M{x:.2f} {y:.2f}H{x+w:.2f}V{y+h:.2f}H{x:.2f}Z"
+    x2, y2 = x + w, y + h
+    return (f"M{x+r:.2f} {y:.2f}"
+            f"H{x2-r:.2f}A{r:.2f} {r:.2f} 0 0 1 {x2:.2f} {y+r:.2f}"
+            f"V{y2-r:.2f}A{r:.2f} {r:.2f} 0 0 1 {x2-r:.2f} {y2:.2f}"
+            f"H{x+r:.2f}A{r:.2f} {r:.2f} 0 0 1 {x:.2f} {y2-r:.2f}"
+            f"V{y+r:.2f}A{r:.2f} {r:.2f} 0 0 1 {x+r:.2f} {y:.2f}Z")
 
 
 def squircle(x: float, y: float, w: float, h: float, r: float = 0) -> str:
@@ -326,8 +342,8 @@ def glass_body(prefix: str, x: float, y: float, w: float, h: float,
     corners = "".join(
         f'<ellipse cx="{cx}" cy="{cy}" rx="{gl}" ry="{gl}" fill="url(#{prefix}Glint)" '
         f'opacity="{o}"/>'
-        for cx, cy, o in ((x, y, 0.7), (x + w, y, 0.4),
-                          (x, y + h, 0.28), (x + w, y + h, 0.45)))
+        for cx, cy, o in ((x + CORNER, y + CORNER, 0.7), (x + w - CORNER, y + CORNER, 0.4),
+                          (x + CORNER, y + h - CORNER, 0.28), (x + w - CORNER, y + h - CORNER, 0.45)))
     return f'''
   <path d="{path}" fill="{p.bg_outer}" opacity="{0.55 if dark else 0.26}" filter="url(#{prefix}Cast)"/>
   <rect x="{x+w*0.16:.1f}" y="{y+h+2:.1f}" width="{w*0.68:.1f}" height="7"
@@ -338,7 +354,7 @@ def glass_body(prefix: str, x: float, y: float, w: float, h: float,
 
   <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#{prefix}Shape)">
-    <rect x="{x}" y="{y}" width="{w}" height="{h}" fill="none"
+    <path d="{path}" fill="none"
           stroke="url(#{prefix}IrisSoft)" stroke-width="{band*2}"
           opacity="{0.17 if dark else 0.2}"/>
     <rect x="{x-w*0.5:.1f}" y="{y}" width="{w*0.5:.1f}" height="{h}"
@@ -349,8 +365,8 @@ def glass_body(prefix: str, x: float, y: float, w: float, h: float,
   </g>
 
   <!-- polished arris along the top, ground edge along the bottom -->
-  <path d="M{x+0.5:.1f} {y+0.5:.1f}H{x+w-0.5:.1f}" stroke="url(#{prefix}Arris)" stroke-width="1"/>
-  <path d="M{x+0.5:.1f} {y+h-0.5:.1f}H{x+w-0.5:.1f}" stroke="{p.bg_outer}" stroke-width="1"
+  <path d="M{x+CORNER:.1f} {y+0.5:.1f}H{x+w-CORNER:.1f}" stroke="url(#{prefix}Arris)" stroke-width="1"/>
+  <path d="M{x+CORNER:.1f} {y+h-0.5:.1f}H{x+w-CORNER:.1f}" stroke="{p.bg_outer}" stroke-width="1"
         opacity="{0.75 if dark else 0.3}"/>
   <path d="{path}" fill="none" stroke="url(#{prefix}Iris)" stroke-width="0.9"
         opacity="{0.5 if dark else 0.6}"/>'''

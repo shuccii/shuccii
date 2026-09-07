@@ -106,35 +106,35 @@
   <filter id="syCaustic" x="-40%" y="-60%" width="180%" height="260%">
     <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="syShape"><path d="M7.00 7.00H285.00V189.00H7.00Z"/></clipPath>
-  <clipPath id="syInner"><path d="M7.00 28.00H285.00V189.00H7.00Z"/></clipPath>
+  <clipPath id="syShape"><path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z"/></clipPath>
+  <clipPath id="syInner"><path d="M10.00 28.00H282.00A3.00 3.00 0 0 1 285.00 31.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V31.00A3.00 3.00 0 0 1 10.00 28.00Z"/></clipPath>
 </defs>
 
 
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#syCast)"/>
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="#05141e" opacity="0.55" filter="url(#syCast)"/>
   <rect x="51.5" y="191.0" width="189.0" height="7"
         fill="url(#syIrisSoft)" opacity="0.3" filter="url(#syCaustic)"/>
 
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="url(#syFace)"/>
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="url(#syEdgeV)"/>
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#syFace)"/>
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="url(#syEdgeV)"/>
 
   <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#syShape)">
-    <rect x="7" y="7" width="278" height="182" fill="none"
+    <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none"
           stroke="url(#syIrisSoft)" stroke-width="18"
           opacity="0.17"/>
     <rect x="-132.0" y="7" width="139.0" height="182"
           fill="url(#sySheen)" opacity="0.1" transform="skewX(-12)">
       <animate attributeName="x" values="-145.9;312.8" dur="17s" repeatCount="indefinite"/>
     </rect>
-    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#syGlint)" opacity="0.7"/><ellipse cx="285" cy="7" rx="10" ry="10" fill="url(#syGlint)" opacity="0.4"/><ellipse cx="7" cy="189" rx="10" ry="10" fill="url(#syGlint)" opacity="0.28"/><ellipse cx="285" cy="189" rx="10" ry="10" fill="url(#syGlint)" opacity="0.45"/>
+    <ellipse cx="10.0" cy="10.0" rx="10" ry="10" fill="url(#syGlint)" opacity="0.7"/><ellipse cx="282.0" cy="10.0" rx="10" ry="10" fill="url(#syGlint)" opacity="0.4"/><ellipse cx="10.0" cy="186.0" rx="10" ry="10" fill="url(#syGlint)" opacity="0.28"/><ellipse cx="282.0" cy="186.0" rx="10" ry="10" fill="url(#syGlint)" opacity="0.45"/>
   </g>
 
   <!-- polished arris along the top, ground edge along the bottom -->
-  <path d="M7.5 7.5H284.5" stroke="url(#syArris)" stroke-width="1"/>
-  <path d="M7.5 188.5H284.5" stroke="#05141e" stroke-width="1"
+  <path d="M10.0 7.5H282.0" stroke="url(#syArris)" stroke-width="1"/>
+  <path d="M10.0 188.5H282.0" stroke="#05141e" stroke-width="1"
         opacity="0.75"/>
-  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="none" stroke="url(#syIris)" stroke-width="0.9"
+  <path d="M10.00 7.00H282.00A3.00 3.00 0 0 1 285.00 10.00V186.00A3.00 3.00 0 0 1 282.00 189.00H10.00A3.00 3.00 0 0 1 7.00 186.00V10.00A3.00 3.00 0 0 1 10.00 7.00Z" fill="none" stroke="url(#syIris)" stroke-width="0.9"
         opacity="0.5"/>
   <path d="M17 28 H275"
         stroke="url(#syIrisSoft)" stroke-width="0.6" opacity="0.75"/>
