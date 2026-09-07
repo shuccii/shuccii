@@ -21,7 +21,7 @@ from datetime import date
 
 from .data import Telemetry
 from .theme import (BAR, HAIR, LINE, PAD, Palette, atmosphere, chrome,
-                    hue_ring,
+                    series_colours,
                     defs, glass_body, glass_defs, glass_shape_clip,
                     squircle)
 
@@ -326,11 +326,11 @@ def languages(t: Telemetry, p: Palette) -> str:
     W, H, P = 444, 176, "ln"
     cx = PAD + 92
     cy = PAD + BAR + (H - PAD * 2 - BAR) / 2
-    R, sw = 46, 15
+    R, sw = 46, 9.5
     shown = t.lang_bytes[:6]
     total = sum(b for _, b, _ in t.lang_bytes) or 1
     circ = 2 * math.pi * R
-    tones = hue_ring(len(shown), p)
+    tones = series_colours(len(shown), p)
 
     grads, segs, spec, legend = [], [], [], []
     off = 0.0
@@ -348,12 +348,12 @@ def languages(t: Telemetry, p: Palette) -> str:
         dash = f'stroke-dasharray="{arc:.2f} {circ-arc:.2f}" stroke-dashoffset="{-off:.2f}"'
         rot = f'transform="rotate(-90 {cx} {cy})"'
         segs.append(f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="url(#{P}S{i})" '
-                    f'stroke-width="{sw}" {dash} {rot} opacity="0.95"/>')
+                    f'stroke-width="{sw}" {dash} {rot} opacity="0.9"/>')
         spec.append(
-            f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.3:.1f}" fill="none" stroke="#ffffff" '
-            f'stroke-width="{sw*0.18:.1f}" {dash} {rot} opacity="0.24"/>'
-            f'<circle cx="{cx}" cy="{cy}" r="{R-sw*0.34:.1f}" fill="none" stroke="{deep}" '
-            f'stroke-width="{sw*0.22:.1f}" {dash} {rot} opacity="0.45"/>')
+            f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.34:.1f}" fill="none" stroke="#ffffff" '
+            f'stroke-width="{HAIR}" {dash} {rot} opacity="0.3"/>'
+            f'<circle cx="{cx}" cy="{cy}" r="{R-sw*0.36:.1f}" fill="none" stroke="{deep}" '
+            f'stroke-width="{HAIR}" {dash} {rot} opacity="0.5"/>')
 
         ly = PAD + BAR + 22 + i * 18
         legend.append(
@@ -361,7 +361,7 @@ def languages(t: Telemetry, p: Palette) -> str:
             f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="3.4" rx="1.6" fill="{light}" opacity="0.85"/>'
             f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="8" rx="1.6" fill="none" '
             f'stroke="#ffffff" stroke-width="0.4" opacity="0.35"/>'
-            f'<text x="{PAD+221}" y="{ly}" fill="{p.pale}" font-size="7.7">{_esc(_clip(name, 20))}</text>'
+            f'<text x="{PAD+219}" y="{ly}" fill="{p.pale}" font-size="7.7">{_esc(_clip(name, 20))}</text>'
             f'<text x="{W-PAD-14}" y="{ly}" fill="{p.dim}" font-size="7.7" text-anchor="end">{frac*100:.1f}%</text>')
         off += arc
 
@@ -381,13 +381,13 @@ def languages(t: Telemetry, p: Palette) -> str:
     {"".join(grads)}
   </defs>
   <g class="t">
-    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.7"/>
+    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.55"/>
     {"".join(segs)}
     {"".join(spec)}
     <g clip-path="url(#{P}Ring)">
       <g>
         <animateTransform attributeName="transform" type="rotate" from="0 {cx} {cy}" to="360 {cx} {cy}" dur="6.5s" repeatCount="indefinite"/>
-        <rect x="{cx}" y="{cy-2.6:.1f}" width="{R+sw}" height="5.2" fill="url(#{P}Scan)" opacity="0.5"/>
+        <rect x="{cx}" y="{cy-1.8:.1f}" width="{R+sw}" height="3.6" fill="url(#{P}Scan)" opacity="0.4"/>
       </g>
     </g>
     <g>

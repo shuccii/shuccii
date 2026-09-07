@@ -292,8 +292,8 @@
 
     <line x1="312" y1="248" x2="872" y2="248" stroke="#63a8c0" stroke-width="0.45" opacity="0.45"/>
     <g font-size="8.3" letter-spacing="1.7" fill="#63a8c0">
-      <text x="312" y="272">SYNC 2026-09-07 08:00Z</text>
-      <text x="502" y="272">HEAD 85cd275</text>
+      <text x="312" y="272">SYNC 2026-09-07 08:02Z</text>
+      <text x="502" y="272">HEAD 59c7e41</text>
       <text x="622" y="272">PEAK 79/WK</text>
       <text x="732" y="272">ACTIVE 11/53</text>
     </g>

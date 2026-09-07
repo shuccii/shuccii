@@ -193,24 +193,30 @@ def _hsl(h: float, sat: float, lum: float) -> str:
     return f"#{channel(h+1/3):02x}{channel(h):02x}{channel(h-1/3):02x}"
 
 
-def hue_ring(n: int, p: Palette) -> list[tuple[str, str, str]]:
-    """Evenly spaced hues, returned as (light, base, deep) for each slot.
+def series_colours(n: int, p: Palette) -> list[tuple[str, str, str]]:
+    """Distinguishable series colours that stay inside the theme.
 
-    GitHub's own language colours collide badly on a small chart — three of
-    this account's languages are near-identical blues and two are near-identical
-    oranges. Spacing the hues by construction is the only way the segments stay
-    tellable apart, and the three tones per slot are what let a segment be shaded
-    like glass rather than filled flat.
+    A full hue wheel separates cleanly but drags magenta, red and yellow-green
+    into a panel built on cyan and gold. Staying analogous — cyan through blue
+    to violet, with the theme's gold as the single accent — keeps the palette,
+    so separation has to come from lightness as much as from hue. Varying both
+    gives more contrast between neighbours than either would alone.
     """
     dark = p.key == "dark"
-    sat = 0.62 if dark else 0.58
-    base_l = 0.6 if dark else 0.46
+    sat = 0.58 if dark else 0.5
+    hi, lo = (0.72, 0.44) if dark else (0.56, 0.32)
+    span = max(1, n - 2)
     out = []
     for i in range(max(1, n)):
-        h = 192 + i * (360 / max(1, n))
-        out.append((_hsl(h, sat, min(0.88, base_l + 0.19)),
-                    _hsl(h, sat, base_l),
-                    _hsl(h, sat, max(0.14, base_l - 0.22))))
+        if i == n - 1 and n > 2:                      # the accent, on the smallest share
+            base_h, base_l, base_s = 42, (0.66 if dark else 0.44), 0.62
+        else:
+            base_h = 188 + (i / span) * 78            # cyan -> blue -> violet
+            base_l = hi - (hi - lo) * (i / span)
+            base_s = sat
+        out.append((_hsl(base_h, base_s, min(0.9, base_l + 0.16)),
+                    _hsl(base_h, base_s, base_l),
+                    _hsl(base_h, base_s, max(0.13, base_l - 0.2))))
     return out
 
 
