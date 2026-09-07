@@ -169,6 +169,51 @@ PAD = 7          # room inside the viewBox for the drop shadow
 BAR = 21         # title bar height
 
 
+def _hsl(h: float, sat: float, lum: float) -> str:
+    """HSL to hex. Kept local so the palette needs no dependency."""
+    h = (h % 360) / 360.0
+    if sat == 0:
+        v = round(lum * 255)
+        return f"#{v:02x}{v:02x}{v:02x}"
+    q = lum * (1 + sat) if lum < 0.5 else lum + sat - lum * sat
+    pp = 2 * lum - q
+
+    def channel(t: float) -> int:
+        t = t % 1.0
+        if t < 1 / 6:
+            c = pp + (q - pp) * 6 * t
+        elif t < 1 / 2:
+            c = q
+        elif t < 2 / 3:
+            c = pp + (q - pp) * (2 / 3 - t) * 6
+        else:
+            c = pp
+        return round(c * 255)
+
+    return f"#{channel(h+1/3):02x}{channel(h):02x}{channel(h-1/3):02x}"
+
+
+def hue_ring(n: int, p: Palette) -> list[tuple[str, str, str]]:
+    """Evenly spaced hues, returned as (light, base, deep) for each slot.
+
+    GitHub's own language colours collide badly on a small chart — three of
+    this account's languages are near-identical blues and two are near-identical
+    oranges. Spacing the hues by construction is the only way the segments stay
+    tellable apart, and the three tones per slot are what let a segment be shaded
+    like glass rather than filled flat.
+    """
+    dark = p.key == "dark"
+    sat = 0.62 if dark else 0.58
+    base_l = 0.6 if dark else 0.46
+    out = []
+    for i in range(max(1, n)):
+        h = 192 + i * (360 / max(1, n))
+        out.append((_hsl(h, sat, min(0.88, base_l + 0.19)),
+                    _hsl(h, sat, base_l),
+                    _hsl(h, sat, max(0.14, base_l - 0.22))))
+    return out
+
+
 # --------------------------------------------------------------------------- glass
 
 def slab(x: float, y: float, w: float, h: float) -> str:

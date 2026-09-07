@@ -21,6 +21,7 @@ from datetime import date
 
 from .data import Telemetry
 from .theme import (BAR, HAIR, LINE, PAD, Palette, atmosphere, chrome,
+                    hue_ring,
                     defs, glass_body, glass_defs, glass_shape_clip,
                     squircle)
 
@@ -317,55 +318,85 @@ def log(t: Telemetry, p: Palette) -> str:
 
 # ---------------------------------------------------------------- languages
 def languages(t: Telemetry, p: Palette) -> str:
-    """Motion: donut segments drawing on, then a counter-rotating collar."""
+    """Motion: a radial scan crossing the ring.
+
+    Segments are lit like glass — a gradient across each arc, a specular line
+    on the outer edge and a shadow on the inner one — rather than filled flat.
+    """
     W, H, P = 444, 176, "ln"
     cx = PAD + 92
     cy = PAD + BAR + (H - PAD * 2 - BAR) / 2
-    R, sw = 46, 13
+    R, sw = 46, 15
+    shown = t.lang_bytes[:6]
     total = sum(b for _, b, _ in t.lang_bytes) or 1
     circ = 2 * math.pi * R
+    tones = hue_ring(len(shown), p)
 
-    segs, legend, off = [], [], 0.0
-    for i, (name, size, colour) in enumerate(t.lang_bytes[:6]):
+    grads, segs, spec, legend = [], [], [], []
+    off = 0.0
+    for i, ((name, size, _github), (light, base, deep)) in enumerate(zip(shown, tones)):
         frac = size / total
         arc = circ * frac
-        segs.append(f'''
-    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{colour}" stroke-width="{sw}"
-            stroke-dasharray="{arc:.2f} {circ-arc:.2f}" stroke-dashoffset="{-off:.2f}"
-            transform="rotate(-90 {cx} {cy})" opacity="0.92"/>''')
+        mid = math.radians(-90 + 360 * (off + arc / 2) / circ)
+        gx, gy = cx + R * math.cos(mid), cy + R * math.sin(mid)
+        grads.append(
+            f'<linearGradient id="{P}S{i}" gradientUnits="userSpaceOnUse" '
+            f'x1="{gx-sw:.1f}" y1="{gy-sw:.1f}" x2="{gx+sw:.1f}" y2="{gy+sw:.1f}">'
+            f'<stop offset="0%" stop-color="{light}"/>'
+            f'<stop offset="48%" stop-color="{base}"/>'
+            f'<stop offset="100%" stop-color="{deep}"/></linearGradient>')
+        dash = f'stroke-dasharray="{arc:.2f} {circ-arc:.2f}" stroke-dashoffset="{-off:.2f}"'
+        rot = f'transform="rotate(-90 {cx} {cy})"'
+        segs.append(f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="url(#{P}S{i})" '
+                    f'stroke-width="{sw}" {dash} {rot} opacity="0.95"/>')
+        spec.append(
+            f'<circle cx="{cx}" cy="{cy}" r="{R+sw*0.3:.1f}" fill="none" stroke="#ffffff" '
+            f'stroke-width="{sw*0.18:.1f}" {dash} {rot} opacity="0.24"/>'
+            f'<circle cx="{cx}" cy="{cy}" r="{R-sw*0.34:.1f}" fill="none" stroke="{deep}" '
+            f'stroke-width="{sw*0.22:.1f}" {dash} {rot} opacity="0.45"/>')
+
         ly = PAD + BAR + 22 + i * 18
         legend.append(
-            f'<rect x="{PAD+206}" y="{ly-7}" width="7" height="7" rx="1.5" fill="{colour}"/>'
-            f'<text x="{PAD+220}" y="{ly}" fill="{p.pale}" font-size="7.7">{_esc(_clip(name, 20))}</text>'
+            f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="8" rx="1.6" fill="{base}"/>'
+            f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="3.4" rx="1.6" fill="{light}" opacity="0.85"/>'
+            f'<rect x="{PAD+206}" y="{ly-7.5}" width="8" height="8" rx="1.6" fill="none" '
+            f'stroke="#ffffff" stroke-width="0.4" opacity="0.35"/>'
+            f'<text x="{PAD+221}" y="{ly}" fill="{p.pale}" font-size="7.7">{_esc(_clip(name, 20))}</text>'
             f'<text x="{W-PAD-14}" y="{ly}" fill="{p.dim}" font-size="7.7" text-anchor="end">{frac*100:.1f}%</text>')
         off += arc
 
     ticks = "".join(
-        f'<line x1="{cx + (R+11)*math.cos(math.radians(a)):.1f}" y1="{cy + (R+11)*math.sin(math.radians(a)):.1f}" '
+        f'<line x1="{cx + (R+12)*math.cos(math.radians(a)):.1f}" y1="{cy + (R+12)*math.sin(math.radians(a)):.1f}" '
         f'x2="{cx + (R+15)*math.cos(math.radians(a)):.1f}" y2="{cy + (R+15)*math.sin(math.radians(a)):.1f}" '
-        f'stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.7"/>' for a in range(0, 360, 15))
+        f'stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.65"/>' for a in range(0, 360, 15))
 
     return _shell(P, W, H, p, "LANGUAGE MIX", f"{total/1048576:.1f} MB", f'''
   <defs>
     <clipPath id="{P}Ring"><circle cx="{cx}" cy="{cy}" r="{R+sw/2:.1f}"/></clipPath>
+    <linearGradient id="{P}Scan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    {"".join(grads)}
   </defs>
   <g class="t">
-    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.8"/>
-    {''.join(segs)}
-    <circle cx="{cx}" cy="{cy}" r="{R-sw/2-1.5:.1f}" fill="none" stroke="{p.bg_outer}" stroke-width="1.4" opacity="0.7"/>
+    <circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{p.faint}" stroke-width="{sw}" opacity="0.7"/>
+    {"".join(segs)}
+    {"".join(spec)}
+    <g clip-path="url(#{P}Ring)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 {cx} {cy}" to="360 {cx} {cy}" dur="6.5s" repeatCount="indefinite"/>
+        <rect x="{cx}" y="{cy-2.6:.1f}" width="{R+sw}" height="5.2" fill="url(#{P}Scan)" opacity="0.5"/>
+      </g>
+    </g>
     <g>
       <animateTransform attributeName="transform" type="rotate" from="360 {cx} {cy}" to="0 {cx} {cy}" dur="40s" repeatCount="indefinite"/>
       {ticks}
     </g>
-    <g clip-path="url(#{P}Ring)">
-      <g>
-        <animateTransform attributeName="transform" type="rotate" from="0 {cx} {cy}" to="360 {cx} {cy}" dur="6.5s" repeatCount="indefinite"/>
-        <rect x="{cx}" y="{cy-1.6}" width="{R+sw}" height="3.2" fill="#ffffff" opacity="0.3"/>
-      </g>
-    </g>
     <text x="{cx}" y="{cy+1}" fill="{p.ink}" font-size="13.5" text-anchor="middle">{len(t.lang_bytes)}</text>
     <text x="{cx}" y="{cy+13}" fill="{p.dim}" font-size="5.8" letter-spacing="1.8" text-anchor="middle">LANGUAGES</text>
-    {''.join(legend)}
+    {"".join(legend)}
   </g>''', "language mix by bytes")
 
 
