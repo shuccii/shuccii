@@ -21,7 +21,8 @@ from datetime import date
 
 from .data import Telemetry
 from .theme import (BAR, HAIR, LINE, PAD, Palette, atmosphere, chrome,
-                    chrome_defs, defs)
+                    defs, glass_body, glass_defs, glass_shape_clip, liquid,
+                    squircle)
 
 
 def _esc(s: str) -> str:
@@ -36,14 +37,15 @@ def _clip(s: str, n: int) -> str:
 def _shell(prefix: str, w: int, h: int, p: Palette, title: str, right: str,
            body: str, label: str, sweep: str = "11s") -> str:
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{_esc(label)}">
-<defs>{defs(prefix, w, h, p)}{chrome_defs(prefix, p)}
-  <clipPath id="{prefix}Inner"><rect x="{PAD}" y="{PAD+BAR}" width="{w-2*PAD}" height="{h-2*PAD-BAR}"/></clipPath>
+<defs>{defs(prefix, w, h, p)}{glass_defs(prefix, w, h, p)}
+  {glass_shape_clip(prefix, w, h)}
+  <clipPath id="{prefix}Inner"><path d="{squircle(PAD, PAD+BAR, w-2*PAD, h-2*PAD-BAR, 12)}"/></clipPath>
 </defs>
 {chrome(prefix, w, h, p, title, right)}
 <g clip-path="url(#{prefix}Inner)">
 {body}
-  <rect x="{PAD}" y="{PAD+BAR}" width="{w-2*PAD}" height="{h-2*PAD-BAR}" fill="url(#{prefix}Scan)" opacity="0.3"/>
-  <rect x="{PAD}" y="{PAD+BAR}" width="{w-2*PAD}" height="{h-2*PAD-BAR}" filter="url(#{prefix}Grain)" opacity="{p.grain_opacity*0.8:.2f}"/>
+  <rect x="{PAD}" y="{PAD+BAR}" width="{w-2*PAD}" height="{h-2*PAD-BAR}" fill="url(#{prefix}Scan)" opacity="0.2"/>
+  <rect x="{PAD}" y="{PAD+BAR}" width="{w-2*PAD}" height="{h-2*PAD-BAR}" filter="url(#{prefix}Grain)" opacity="{p.grain_opacity*0.5:.2f}"/>
 </g>
 </svg>
 '''
@@ -62,19 +64,15 @@ def topbar(t: Telemetry, p: Palette) -> str:
     width = len(strip) * 6.98
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="status bar">
-<defs>{defs(P, W, H, p)}{chrome_defs(P, p)}
+<defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
+  {glass_shape_clip(P, W, H, 15)}
   <clipPath id="{P}Tick"><rect x="246" y="8" width="{W-356}" height="{H-16}"/></clipPath>
   <linearGradient id="{P}Fade" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%" stop-color="{p.bg_mid}"/><stop offset="6%" stop-color="{p.bg_mid}" stop-opacity="0"/>
     <stop offset="94%" stop-color="{p.bg_mid}" stop-opacity="0"/><stop offset="100%" stop-color="{p.bg_mid}"/>
   </linearGradient>
 </defs>
-  <g filter="url(#{P}Drop)">
-    <rect x="{PAD}" y="{PAD}" width="{W-2*PAD}" height="{H-2*PAD}" rx="4" fill="url(#{P}Body)"/>
-  </g>
-  <rect x="{PAD+6}" y="{PAD+0.5}" width="{W-2*PAD-12}" height="0.9" fill="url(#{P}Lip)"/>
-  <rect x="{PAD+0.4}" y="{PAD+0.4}" width="{W-2*PAD-0.8}" height="{H-2*PAD-0.8}" rx="4" fill="none"
-        stroke="{p.dim}" stroke-width="0.7" opacity="0.65"/>
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 15, seed=4)}
   <g class="t">
     <text x="22" y="25.6" fill="{p.ink}" font-size="9.5" letter-spacing="4.6">S / T A N I</text>
     <circle cx="176" cy="22" r="2.8" fill="{p.cyan}" filter="url(#{P}Glow)">

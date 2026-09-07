@@ -10,7 +10,8 @@ import math
 from datetime import date
 
 from .data import Telemetry
-from .theme import ACCENT, HAIR, LINE, Palette, atmosphere, defs, frame
+from .theme import (ACCENT, HAIR, LINE, PAD, Palette, atmosphere, defs,
+                    glass_body, glass_defs, glass_shape_clip, liquid, squircle)
 
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
           "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
@@ -125,9 +126,10 @@ def header(t: Telemetry, p: Palette) -> str:
            f'<text x="{XE}" y="272" text-anchor="end" fill="{p.dim}" font-size="8.3" letter-spacing="1.8">CACHED</text>'
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="{t.login} — {t.contributions} contributions in the last year">
-<defs>{defs(P, W, H, p)}</defs>
-<g clip-path="url(#{P}Clip)">
-  <rect width="{W}" height="{H}" fill="url(#{P}Deep)"/>
+<defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
+  {glass_shape_clip(P, W, H, 22)}</defs>
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 22, seed=1)}
+<g clip-path="url(#{P}Shape)">
 
   <!-- ============ CONTRIBUTION INSTRUMENT : one spoke per week ============ -->
   <g class="t">
@@ -211,7 +213,6 @@ def header(t: Telemetry, p: Palette) -> str:
     <line x1="{XE+4}" y1="74" x2="{XE+4}" y2="226" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.6"/>
   </g>
 {atmosphere(P, W, H, p)}
-{frame(W, H, p)}
 </g>
 </svg>
 '''
@@ -242,9 +243,10 @@ def command_strip(t: Telemetry, p: Palette) -> str:
             f'</g>')
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="git status readout">
-<defs>{defs(P, W, H, p)}</defs>
-<g clip-path="url(#{P}Clip)">
-  <rect width="{W}" height="{H}" fill="url(#{P}Deep)"/>
+<defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
+  {glass_shape_clip(P, W, H, 22)}</defs>
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 22, seed=1)}
+<g clip-path="url(#{P}Shape)">
   <line x1="78" y1="10" x2="78" y2="44" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.6"/>
   <text class="t" x="24" y="22" fill="{p.gold}" font-size="9.2" letter-spacing="1.6">SHELL</text>
   <text class="t" x="24" y="40" fill="{p.dim}" font-size="9.2" letter-spacing="1.6">STDOUT</text>
@@ -258,7 +260,6 @@ def command_strip(t: Telemetry, p: Palette) -> str:
     <animate attributeName="opacity" values="0.95;0.3;0.95" dur="2.6s" repeatCount="indefinite"/>
   </circle>
 {atmosphere(P, W, H, p, sweep_dur="7s")}
-  <rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="3" fill="none" stroke="{p.dim}" stroke-width="0.8" opacity="0.6"/>
 </g>
 </svg>
 '''
@@ -322,9 +323,10 @@ def footer(t: Telemetry, p: Palette) -> str:
     ], value_size=17)
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="recent activity and account totals">
-<defs>{defs(P, W, H, p)}</defs>
-<g clip-path="url(#{P}Clip)">
-  <rect width="{W}" height="{H}" fill="url(#{P}Deep)"/>
+<defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
+  {glass_shape_clip(P, W, H, 22)}</defs>
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 22, seed=1)}
+<g clip-path="url(#{P}Shape)">
 
   <g class="t">
     <text x="{x0}" y="24" fill="{p.dim}" font-size="7.8" letter-spacing="2.4">LAST 26 WEEKS</text>
@@ -341,7 +343,6 @@ def footer(t: Telemetry, p: Palette) -> str:
     <text x="{W-66}" y="115" fill="{p.dim}" font-size="8.3" letter-spacing="1.7" text-anchor="end">SYNC {t.synced}Z</text>
   </g>
 {atmosphere(P, W, H, p, sweep_dur="8s")}
-{frame(W, H, p, inset=10, arm=36)}
 </g>
 </svg>
 '''

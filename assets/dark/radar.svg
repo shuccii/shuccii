@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 196" width="292" height="196" role="img" aria-label="contributions by weekday">
 <defs>
   <radialGradient id="rdDeep" cx="16%" cy="50%" r="88%">
-    <stop offset="0%" stop-color="#07202b" stop-opacity="0.62"/>
-    <stop offset="46%" stop-color="#040f18" stop-opacity="0.48"/>
-    <stop offset="100%" stop-color="#01050a" stop-opacity="0.34"/>
+    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.66"/>
+    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.53"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
   </radialGradient>
   <radialGradient id="rdVig" cx="50%" cy="50%" r="74%">
     <stop offset="58%" stop-color="#000000" stop-opacity="0"/>
@@ -11,9 +11,9 @@
   </radialGradient>
   <radialGradient id="rdCore" cx="50%" cy="42%" r="58%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="26%" stop-color="#dff8ff" stop-opacity="1"/><stop offset="60%" stop-color="#54c8e8" stop-opacity="0.62"/><stop offset="100%" stop-color="#0a4b61" stop-opacity="0"/></radialGradient>
   <linearGradient id="rdSweep" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#5fd8f2" stop-opacity="0"/>
-    <stop offset="52%" stop-color="#5fd8f2" stop-opacity="0.45"/>
-    <stop offset="100%" stop-color="#5fd8f2" stop-opacity="0"/>
+    <stop offset="0%" stop-color="#6fe0f7" stop-opacity="0"/>
+    <stop offset="52%" stop-color="#6fe0f7" stop-opacity="0.45"/>
+    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0"/>
   </linearGradient>
   <filter id="rdBevel" x="-60%" y="-60%" width="220%" height="220%">
     <feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="hh"/>
@@ -44,65 +44,106 @@
   </pattern>
   <clipPath id="rdClip"><rect width="292" height="196" rx="3"/></clipPath>
   <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
-  <linearGradient id="rdBody" x1="0" y1="0" x2="0.3" y2="1">
-    <stop offset="0%" stop-color="#07202b" stop-opacity="0.62"/>
-    <stop offset="52%" stop-color="#040f18" stop-opacity="0.48"/>
-    <stop offset="100%" stop-color="#01050a" stop-opacity="0.34"/>
+  <linearGradient id="rdGlass" x1="0.1" y1="0" x2="0.6" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.66"/>
+    <stop offset="38%"  stop-color="#0b2534"   stop-opacity="0.53"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
   </linearGradient>
-  <linearGradient id="rdBar" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#5fd8f2" stop-opacity="0.16"/>
-    <stop offset="100%" stop-color="#5fd8f2" stop-opacity="0"/>
+
+  <!-- the rim catches light twice: once top-left, once bottom-right -->
+  <linearGradient id="rdRim" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
+    <stop offset="16%"  stop-color="#6fe0f7" stop-opacity="0.72"/>
+    <stop offset="45%"  stop-color="#7fe4fa" stop-opacity="0.24"/>
+    <stop offset="72%"  stop-color="#6fe0f7" stop-opacity="0.5"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55"/>
   </linearGradient>
-  <linearGradient id="rdLip" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="18%" stop-color="#ffffff" stop-opacity="0.42"/>
-    <stop offset="82%" stop-color="#ffffff" stop-opacity="0.42"/>
+
+  <!-- light bends through the thickness at the edge, so the rim band is not flat -->
+  <linearGradient id="rdRefract" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.42"/>
+    <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="76%"  stop-color="#6fe0f7" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0.22"/>
+  </linearGradient>
+
+  <linearGradient id="rdSheen" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="45%"  stop-color="#ffffff" stop-opacity="0.5"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.5"/>
     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
-  <filter id="rdDrop" x="-12%" y="-12%" width="124%" height="130%">
-    <feDropShadow dx="0" dy="2.4" stdDeviation="3.4"
-                  flood-color="#000000"
-                  flood-opacity="0.65"/>
+
+  <radialGradient id="rdBlob" cx="42%" cy="36%" r="62%">
+    <stop offset="0%"   stop-color="#6fe0f7" stop-opacity="0.5"/>
+    <stop offset="65%"  stop-color="#6fe0f7" stop-opacity="0.22"/>
+    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0"/>
+  </radialGradient>
+
+  <!-- blobs blurred then hard-thresholded: near ones merge, parting ones neck -->
+  <filter id="rdGoo" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="soft"/>
+    <feColorMatrix in="soft" type="matrix" result="goo"
+      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -4.6"/>
+    <feGaussianBlur in="goo" stdDeviation="7"/>
   </filter>
-  <clipPath id="rdInner"><rect x="7" y="28" width="278" height="161"/></clipPath>
+
+  <filter id="rdCast" x="-16%" y="-16%" width="132%" height="140%">
+    <feDropShadow dx="0" dy="3.2" stdDeviation="5"
+                  flood-color="#000814"
+                  flood-opacity="0.62"/>
+  </filter>
+  <clipPath id="rdShape"><path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z"/></clipPath>
+  <clipPath id="rdInner"><path d="M24.04 28.00L267.96 28.00C277.56 28.00 285.00 35.44 285.00 45.04L285.00 171.96C285.00 181.56 277.56 189.00 267.96 189.00L24.04 189.00C14.44 189.00 7.00 181.56 7.00 171.96L7.00 45.04C7.00 35.44 14.44 28.00 24.04 28.00Z"/></clipPath>
 </defs>
 
-  <g filter="url(#rdDrop)">
-    <rect x="7" y="7" width="278" height="182" rx="4" fill="url(#rdBody)"/>
+
+  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="#05141e" opacity="0.5" filter="url(#rdCast)"/>
+  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#rdGlass)"/>
+<g clip-path="url(#rdShape)" filter="url(#rdGoo)" opacity="0.24"><circle r="40.0" fill="url(#rdBlob)"><animate attributeName="cx" values="68.2;104.3;42.9;68.2" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;68.9;68.9;68.9" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="52.8" fill="url(#rdBlob)"><animate attributeName="cx" values="68.2;49.9;80.9;68.2" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;57.2;78.2;68.9" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="65.5" fill="url(#rdBlob)"><animate attributeName="cx" values="68.2;50.4;80.6;68.2" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;90.2;51.8;68.9" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
+  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#rdGlass)" opacity="0.55"/>
+  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#rdRefract)" opacity="0.9"/>
+  <g clip-path="url(#rdShape)">
+    <rect x="-145.9" y="7" width="152.9" height="182"
+          fill="url(#rdSheen)" opacity="0.2"
+          transform="skewX(-14)">
+      <animate attributeName="x" values="-159.8;326.7"
+               dur="14s" repeatCount="indefinite"/>
+    </rect>
   </g>
-  <rect x="7" y="7" width="278" height="21" rx="4" fill="url(#rdBar)"/>
-  <rect x="7" y="28" width="278" height="0.6" fill="#3f7f96" opacity="0.5"/>
-  <rect x="13" y="7.5" width="266" height="0.9" fill="url(#rdLip)"/>
-  <rect x="7.3" y="7.3" width="277.4" height="181.4" rx="4" fill="none"
-        stroke="#5fd8f2" stroke-width="0.5" opacity="0.55"/>
-  <path d="M10 16 V10 H16" stroke="#5fd8f2" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M276 10 H282 V16" stroke="#5fd8f2" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M10 180 V186 H16" stroke="#5fd8f2" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M276 186 H282 V180" stroke="#5fd8f2" stroke-width="0.45" fill="none" opacity="0.7"/>
+  <path d="M31.89 8.60L260.11 8.60C273.23 8.60 283.40 18.77 283.40 31.89L283.40 164.11C283.40 177.23 273.23 187.40 260.11 187.40L31.89 187.40C18.77 187.40 8.60 177.23 8.60 164.11L8.60 31.89C8.60 18.77 18.77 8.60 31.89 8.60Z" fill="none" stroke="#ffffff" stroke-width="0.5"
+        opacity="0.32"/>
+  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="none" stroke="url(#rdRim)" stroke-width="1.2"/>
+<g clip-path="url(#rdShape)" filter="url(#rdGoo)" opacity="0.24"><circle r="52.8" fill="url(#rdBlob)"><animate attributeName="cx" values="146.0;110.1;171.1;146.0" dur="20s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="108.9;121.7;98.7;108.9" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="65.5" fill="url(#rdBlob)"><animate attributeName="cx" values="146.0;167.5;130.9;146.0" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="108.9;107.6;109.9;108.9" dur="34s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="40.0" fill="url(#rdBlob)"><animate attributeName="cx" values="146.0;160.2;136.1;146.0" dur="32s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="108.9;98.5;117.3;108.9" dur="42s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
+  <path d="M16.0 28 H276.0"
+        stroke="#7fe4fa" stroke-width="0.5" opacity="0.4"/>
   <g class="t">
-    <circle cx="20" cy="17.6" r="2.6" fill="none" stroke="#5fd8f2" stroke-width="0.45"/>
-    <circle cx="20" cy="17.6" r="0.9" fill="#5fd8f2"/>
-    <text x="29" y="20.6" fill="#5fd8f2" font-size="7.4" letter-spacing="2.8">WEEKLY RHYTHM</text>
-    <text x="277" y="20.6" fill="#3f7f96" font-size="6.8" letter-spacing="1.8"
+    <circle cx="22" cy="19" r="2.6" fill="none" stroke="#6fe0f7" stroke-width="0.45"/>
+    <circle cx="22" cy="19" r="0.9" fill="#6fe0f7"/>
+    <text x="31" y="22" fill="#6fe0f7" font-size="7.4" letter-spacing="2.8">WEEKLY RHYTHM</text>
+    <text x="271" y="22" fill="#63a8c0" font-size="6.8" letter-spacing="1.8"
           text-anchor="end">PEAK TUE</text>
   </g>
 <g clip-path="url(#rdInner)">
 
   <defs>
     <radialGradient id="rdWedge" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#5fd8f2" stop-opacity="0.34"/>
-      <stop offset="100%" stop-color="#5fd8f2" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#6fe0f7" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <g class="t">
-    <circle cx="146.0" cy="112.5" r="19.7" fill="none" stroke="#3f7f96" stroke-width="0.45" opacity="0.4"/><circle cx="146.0" cy="112.5" r="32.5" fill="none" stroke="#3f7f96" stroke-width="0.45" opacity="0.7"/><circle cx="146.0" cy="112.5" r="45.2" fill="none" stroke="#3f7f96" stroke-width="0.45" opacity="0.4"/><circle cx="146.0" cy="112.5" r="58.0" fill="none" stroke="#3f7f96" stroke-width="0.45" opacity="0.7"/>
-    <path d="M146.0 112.5 L134.2 86.7 A28.4 28.4 0 0 1 157.8 86.7 Z" fill="#5fd8f2" opacity="0.30" stroke="#5fd8f2" stroke-width="0.45"/><path d="M146.0 112.5 L154.1 96.6 A17.9 17.9 0 0 1 163.3 108.2 Z" fill="#5fd8f2" opacity="0.21" stroke="#5fd8f2" stroke-width="0.45"/><path d="M146.0 112.5 L202.8 100.8 A58.0 58.0 0 0 1 192.1 147.7 Z" fill="#5fd8f2" opacity="0.54" stroke="#5fd8f2" stroke-width="0.45"/><path d="M146.0 112.5 L168.6 131.3 A29.3 29.3 0 0 1 146.6 141.8 Z" fill="#5fd8f2" opacity="0.30" stroke="#5fd8f2" stroke-width="0.45"/><path d="M146.0 112.5 L145.1 153.3 A40.8 40.8 0 0 1 114.6 138.6 Z" fill="#5fd8f2" opacity="0.40" stroke="#5fd8f2" stroke-width="0.45"/><path d="M146.0 112.5 L121.2 131.5 A31.3 31.3 0 0 1 115.4 106.2 Z" fill="#5fd8f2" opacity="0.32" stroke="#5fd8f2" stroke-width="0.45"/><path d="M146.0 112.5 L134.2 109.5 A12.1 12.1 0 0 1 140.5 101.7 Z" fill="#5fd8f2" opacity="0.16" stroke="#5fd8f2" stroke-width="0.45"/>
+    <circle cx="146.0" cy="112.5" r="19.7" fill="none" stroke="#63a8c0" stroke-width="0.45" opacity="0.4"/><circle cx="146.0" cy="112.5" r="32.5" fill="none" stroke="#63a8c0" stroke-width="0.45" opacity="0.7"/><circle cx="146.0" cy="112.5" r="45.2" fill="none" stroke="#63a8c0" stroke-width="0.45" opacity="0.4"/><circle cx="146.0" cy="112.5" r="58.0" fill="none" stroke="#63a8c0" stroke-width="0.45" opacity="0.7"/>
+    <path d="M146.0 112.5 L134.2 86.7 A28.4 28.4 0 0 1 157.8 86.7 Z" fill="#6fe0f7" opacity="0.30" stroke="#6fe0f7" stroke-width="0.45"/><path d="M146.0 112.5 L154.1 96.6 A17.9 17.9 0 0 1 163.3 108.2 Z" fill="#6fe0f7" opacity="0.21" stroke="#6fe0f7" stroke-width="0.45"/><path d="M146.0 112.5 L202.8 100.8 A58.0 58.0 0 0 1 192.1 147.7 Z" fill="#6fe0f7" opacity="0.54" stroke="#6fe0f7" stroke-width="0.45"/><path d="M146.0 112.5 L168.6 131.3 A29.3 29.3 0 0 1 146.6 141.8 Z" fill="#6fe0f7" opacity="0.30" stroke="#6fe0f7" stroke-width="0.45"/><path d="M146.0 112.5 L145.1 153.3 A40.8 40.8 0 0 1 114.6 138.6 Z" fill="#6fe0f7" opacity="0.40" stroke="#6fe0f7" stroke-width="0.45"/><path d="M146.0 112.5 L121.2 131.5 A31.3 31.3 0 0 1 115.4 106.2 Z" fill="#6fe0f7" opacity="0.32" stroke="#6fe0f7" stroke-width="0.45"/><path d="M146.0 112.5 L134.2 109.5 A12.1 12.1 0 0 1 140.5 101.7 Z" fill="#6fe0f7" opacity="0.16" stroke="#6fe0f7" stroke-width="0.45"/>
     <g>
       <animateTransform attributeName="transform" type="rotate" from="-90 146.0 112.5" to="270 146.0 112.5" dur="7s" repeatCount="indefinite"/>
       <path d="M146.0 112.5 L204.0 112.5 A58 58 0 0 0 186.3 70.8 Z" fill="url(#rdWedge)"/>
-      <line x1="146.0" y1="112.5" x2="204.0" y2="112.5" stroke="#5fd8f2" stroke-width="0.7" filter="url(#rdGlow)"/>
+      <line x1="146.0" y1="112.5" x2="204.0" y2="112.5" stroke="#6fe0f7" stroke-width="0.7" filter="url(#rdGlow)"/>
     </g>
-    <text x="146.0" y="43.7" fill="#3f7f96" font-size="5.8" letter-spacing="1" text-anchor="middle">SUN</text><text x="146.0" y="51.1" fill="#3f7f96" font-size="5.9" text-anchor="middle">20</text><text x="201.5" y="70.4" fill="#3f7f96" font-size="5.8" letter-spacing="1" text-anchor="middle">MON</text><text x="201.5" y="77.8" fill="#3f7f96" font-size="5.9" text-anchor="middle">9</text><text x="215.2" y="130.5" fill="#e8b455" font-size="5.8" letter-spacing="1" text-anchor="middle">TUE</text><text x="215.2" y="137.9" fill="#cfeefb" font-size="5.9" text-anchor="middle">51</text><text x="176.8" y="178.7" fill="#3f7f96" font-size="5.8" letter-spacing="1" text-anchor="middle">WED</text><text x="176.8" y="186.1" fill="#3f7f96" font-size="5.9" text-anchor="middle">21</text><text x="115.2" y="178.7" fill="#3f7f96" font-size="5.8" letter-spacing="1" text-anchor="middle">THU</text><text x="115.2" y="186.1" fill="#3f7f96" font-size="5.9" text-anchor="middle">33</text><text x="76.8" y="130.5" fill="#3f7f96" font-size="5.8" letter-spacing="1" text-anchor="middle">FRI</text><text x="76.8" y="137.9" fill="#3f7f96" font-size="5.9" text-anchor="middle">23</text><text x="90.5" y="70.4" fill="#3f7f96" font-size="5.8" letter-spacing="1" text-anchor="middle">SAT</text><text x="90.5" y="77.8" fill="#3f7f96" font-size="5.9" text-anchor="middle">3</text>
-    <circle cx="146.0" cy="112.5" r="1.8" fill="#e8b455"/>
+    <text x="146.0" y="43.7" fill="#63a8c0" font-size="5.8" letter-spacing="1" text-anchor="middle">SUN</text><text x="146.0" y="51.1" fill="#63a8c0" font-size="5.9" text-anchor="middle">20</text><text x="201.5" y="70.4" fill="#63a8c0" font-size="5.8" letter-spacing="1" text-anchor="middle">MON</text><text x="201.5" y="77.8" fill="#63a8c0" font-size="5.9" text-anchor="middle">9</text><text x="215.2" y="130.5" fill="#f0c069" font-size="5.8" letter-spacing="1" text-anchor="middle">TUE</text><text x="215.2" y="137.9" fill="#dcf3fd" font-size="5.9" text-anchor="middle">51</text><text x="176.8" y="178.7" fill="#63a8c0" font-size="5.8" letter-spacing="1" text-anchor="middle">WED</text><text x="176.8" y="186.1" fill="#63a8c0" font-size="5.9" text-anchor="middle">21</text><text x="115.2" y="178.7" fill="#63a8c0" font-size="5.8" letter-spacing="1" text-anchor="middle">THU</text><text x="115.2" y="186.1" fill="#63a8c0" font-size="5.9" text-anchor="middle">33</text><text x="76.8" y="130.5" fill="#63a8c0" font-size="5.8" letter-spacing="1" text-anchor="middle">FRI</text><text x="76.8" y="137.9" fill="#63a8c0" font-size="5.9" text-anchor="middle">23</text><text x="90.5" y="70.4" fill="#63a8c0" font-size="5.8" letter-spacing="1" text-anchor="middle">SAT</text><text x="90.5" y="77.8" fill="#63a8c0" font-size="5.9" text-anchor="middle">3</text>
+    <circle cx="146.0" cy="112.5" r="1.8" fill="#f0c069"/>
   </g>
-  <rect x="7" y="28" width="278" height="161" fill="url(#rdScan)" opacity="0.3"/>
-  <rect x="7" y="28" width="278" height="161" filter="url(#rdGrain)" opacity="0.26"/>
+  <rect x="7" y="28" width="278" height="161" fill="url(#rdScan)" opacity="0.2"/>
+  <rect x="7" y="28" width="278" height="161" filter="url(#rdGrain)" opacity="0.16"/>
 </g>
 </svg>

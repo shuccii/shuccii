@@ -44,43 +44,84 @@
   </pattern>
   <clipPath id="smClip"><rect width="900" height="178" rx="3"/></clipPath>
   <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
-  <linearGradient id="smBody" x1="0" y1="0" x2="0.3" y2="1">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58"/>
-    <stop offset="52%" stop-color="#eef4f8" stop-opacity="0.42"/>
+  <linearGradient id="smGlass" x1="0.1" y1="0" x2="0.6" y2="1">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.58"/>
+    <stop offset="38%"  stop-color="#eef4f8"   stop-opacity="0.42"/>
     <stop offset="100%" stop-color="#dde8ef" stop-opacity="0.26"/>
   </linearGradient>
-  <linearGradient id="smBar" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#0e7490" stop-opacity="0.13"/>
-    <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+
+  <!-- the rim catches light twice: once top-left, once bottom-right -->
+  <linearGradient id="smRim" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="1"/>
+    <stop offset="16%"  stop-color="#0e7490" stop-opacity="0.55"/>
+    <stop offset="45%"  stop-color="#0e7490" stop-opacity="0.2"/>
+    <stop offset="72%"  stop-color="#0e7490" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.75"/>
   </linearGradient>
-  <linearGradient id="smLip" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="18%" stop-color="#ffffff" stop-opacity="0.9"/>
-    <stop offset="82%" stop-color="#ffffff" stop-opacity="0.9"/>
+
+  <!-- light bends through the thickness at the edge, so the rim band is not flat -->
+  <linearGradient id="smRefract" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
+    <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="76%"  stop-color="#0e7490" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#0e7490" stop-opacity="0.3"/>
+  </linearGradient>
+
+  <linearGradient id="smSheen" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="45%"  stop-color="#ffffff" stop-opacity="0.8"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.8"/>
     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
-  <filter id="smDrop" x="-12%" y="-12%" width="124%" height="130%">
-    <feDropShadow dx="0" dy="2.4" stdDeviation="3.4"
-                  flood-color="#33586b"
-                  flood-opacity="0.22"/>
+
+  <radialGradient id="smBlob" cx="42%" cy="36%" r="62%">
+    <stop offset="0%"   stop-color="#0e7490" stop-opacity="0.42"/>
+    <stop offset="65%"  stop-color="#0e7490" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+  </radialGradient>
+
+  <!-- blobs blurred then hard-thresholded: near ones merge, parting ones neck -->
+  <filter id="smGoo" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="soft"/>
+    <feColorMatrix in="soft" type="matrix" result="goo"
+      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -4.6"/>
+    <feGaussianBlur in="goo" stdDeviation="7"/>
   </filter>
-  <clipPath id="smInner"><rect x="7" y="28" width="886" height="143"/></clipPath>
+
+  <filter id="smCast" x="-16%" y="-16%" width="132%" height="140%">
+    <feDropShadow dx="0" dy="2.6" stdDeviation="4"
+                  flood-color="#2c5468"
+                  flood-opacity="0.2"/>
+  </filter>
+  <clipPath id="smShape"><path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 145.44C893.00 159.84 881.84 171.00 867.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z"/></clipPath>
+  <clipPath id="smInner"><path d="M24.04 28.00L875.96 28.00C885.56 28.00 893.00 35.44 893.00 45.04L893.00 153.96C893.00 163.56 885.56 171.00 875.96 171.00L24.04 171.00C14.44 171.00 7.00 163.56 7.00 153.96L7.00 45.04C7.00 35.44 14.44 28.00 24.04 28.00Z"/></clipPath>
 </defs>
 
-  <g filter="url(#smDrop)">
-    <rect x="7" y="7" width="886" height="164" rx="4" fill="url(#smBody)"/>
+
+  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 145.44C893.00 159.84 881.84 171.00 867.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="#dde8ef" opacity="0.24" filter="url(#smCast)"/>
+  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 145.44C893.00 159.84 881.84 171.00 867.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#smGlass)"/>
+<g clip-path="url(#smShape)" filter="url(#smGoo)" opacity="0.22"><circle r="36.1" fill="url(#smBlob)"><animate attributeName="cx" values="201.9;317.1;121.3;201.9" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;62.8;62.8;62.8" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="47.6" fill="url(#smBlob)"><animate attributeName="cx" values="201.9;143.8;242.6;201.9" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;52.3;71.2;62.8" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="59.0" fill="url(#smBlob)"><animate attributeName="cx" values="201.9;145.5;241.4;201.9" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;82.0;47.4;62.8" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
+  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 145.44C893.00 159.84 881.84 171.00 867.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#smGlass)" opacity="0.55"/>
+  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 145.44C893.00 159.84 881.84 171.00 867.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#smRefract)" opacity="0.9"/>
+  <g clip-path="url(#smShape)">
+    <rect x="-480.3" y="7" width="487.3" height="164"
+          fill="url(#smSheen)" opacity="0.5"
+          transform="skewX(-14)">
+      <animate attributeName="x" values="-524.6;1025.9"
+               dur="14s" repeatCount="indefinite"/>
+    </rect>
   </g>
-  <rect x="7" y="7" width="886" height="21" rx="4" fill="url(#smBar)"/>
-  <rect x="7" y="28" width="886" height="0.6" fill="#5d8ba0" opacity="0.5"/>
-  <rect x="13" y="7.5" width="874" height="0.9" fill="url(#smLip)"/>
-  <rect x="7.3" y="7.3" width="885.4" height="163.4" rx="4" fill="none"
-        stroke="#0e7490" stroke-width="0.5" opacity="0.55"/>
-  <path d="M10 16 V10 H16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M884 10 H890 V16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M10 162 V168 H16" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/><path d="M884 168 H890 V162" stroke="#0e7490" stroke-width="0.45" fill="none" opacity="0.7"/>
+  <path d="M31.89 8.60L868.11 8.60C881.23 8.60 891.40 18.77 891.40 31.89L891.40 146.11C891.40 159.23 881.23 169.40 868.11 169.40L31.89 169.40C18.77 169.40 8.60 159.23 8.60 146.11L8.60 31.89C8.60 18.77 18.77 8.60 31.89 8.60Z" fill="none" stroke="#ffffff" stroke-width="0.5"
+        opacity="0.55"/>
+  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 145.44C893.00 159.84 881.84 171.00 867.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="none" stroke="url(#smRim)" stroke-width="1.2"/>
+<g clip-path="url(#smShape)" filter="url(#smGoo)" opacity="0.22"><circle r="36.1" fill="url(#smBlob)"><animate attributeName="cx" values="201.9;309.4;126.7;201.9" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="98.8;72.9;119.6;98.8" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="47.6" fill="url(#smBlob)"><animate attributeName="cx" values="201.9;112.0;264.9;201.9" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="98.8;124.3;78.5;98.8" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="59.0" fill="url(#smBlob)"><animate attributeName="cx" values="201.9;185.3;213.6;201.9" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="98.8;78.1;115.4;98.8" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
+  <path d="M16.0 28 H884.0"
+        stroke="#0e7490" stroke-width="0.5" opacity="0.4"/>
   <g class="t">
-    <circle cx="20" cy="17.6" r="2.6" fill="none" stroke="#0e7490" stroke-width="0.45"/>
-    <circle cx="20" cy="17.6" r="0.9" fill="#0e7490"/>
-    <text x="29" y="20.6" fill="#0e7490" font-size="7.4" letter-spacing="2.8">ACCOUNT SUMMARY</text>
-    <text x="885" y="20.6" fill="#5d8ba0" font-size="6.8" letter-spacing="1.8"
+    <circle cx="22" cy="19" r="2.6" fill="none" stroke="#0e7490" stroke-width="0.45"/>
+    <circle cx="22" cy="19" r="0.9" fill="#0e7490"/>
+    <text x="31" y="22" fill="#0e7490" font-size="7.4" letter-spacing="2.8">ACCOUNT SUMMARY</text>
+    <text x="879" y="22" fill="#5d8ba0" font-size="6.8" letter-spacing="1.8"
           text-anchor="end">SHUCCII &#183; SINCE 2023</text>
   </g>
 <g clip-path="url(#smInner)">
@@ -114,7 +155,7 @@
       </animateMotion>
     </circle>
   </g>
-  <rect x="7" y="28" width="886" height="143" fill="url(#smScan)" opacity="0.3"/>
-  <rect x="7" y="28" width="886" height="143" filter="url(#smGrain)" opacity="0.14"/>
+  <rect x="7" y="28" width="886" height="143" fill="url(#smScan)" opacity="0.2"/>
+  <rect x="7" y="28" width="886" height="143" filter="url(#smGrain)" opacity="0.09"/>
 </g>
 </svg>
