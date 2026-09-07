@@ -11,7 +11,7 @@ from datetime import date
 
 from .data import Telemetry
 from .theme import (ACCENT, HAIR, LINE, PAD, Palette, atmosphere, defs,
-                    glass_body, glass_defs, glass_shape_clip, liquid, squircle)
+                    glass_body, glass_defs, glass_shape_clip, squircle)
 
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
           "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
@@ -127,8 +127,8 @@ def header(t: Telemetry, p: Palette) -> str:
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="{t.login} — {t.contributions} contributions in the last year">
 <defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
-  {glass_shape_clip(P, W, H, 22)}</defs>
-{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 22, seed=1)}
+  {glass_shape_clip(P, W, H)}</defs>
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 0, seed=1)}
 <g clip-path="url(#{P}Shape)">
 
   <!-- ============ CONTRIBUTION INSTRUMENT : one spoke per week ============ -->
@@ -244,8 +244,8 @@ def command_strip(t: Telemetry, p: Palette) -> str:
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="git status readout">
 <defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
-  {glass_shape_clip(P, W, H, 22)}</defs>
-{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 22, seed=1)}
+  {glass_shape_clip(P, W, H)}</defs>
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 0, seed=1)}
 <g clip-path="url(#{P}Shape)">
   <line x1="78" y1="10" x2="78" y2="44" stroke="{p.dim}" stroke-width="{HAIR}" opacity="0.6"/>
   <text class="t" x="24" y="22" fill="{p.gold}" font-size="9.2" letter-spacing="1.6">SHELL</text>
@@ -324,8 +324,8 @@ def footer(t: Telemetry, p: Palette) -> str:
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="recent activity and account totals">
 <defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
-  {glass_shape_clip(P, W, H, 22)}</defs>
-{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 22, seed=1)}
+  {glass_shape_clip(P, W, H)}</defs>
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 0, seed=1)}
 <g clip-path="url(#{P}Shape)">
 
   <g class="t">

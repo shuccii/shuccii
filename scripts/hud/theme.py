@@ -46,6 +46,7 @@ class Palette:
     glass_top: float      # panel fill alpha at the lit edge
     glass_bottom: float   # ...and where it falls away
     edge: str             # border of a glass panel
+    dispersion: tuple[str, str, str, str, str]  # hues the edge splits light into
 
 
 DARK = Palette(
@@ -62,7 +63,8 @@ DARK = Palette(
     vignette="#000000", vignette_opacity=0.6,
     glow_scale=1.0, aberration=0.26, sweep_opacity=0.09,
     pulse="#eafcff",
-    glass_top=0.66, glass_bottom=0.4, edge="#7fe4fa",
+    glass_top=0.5, glass_bottom=0.3, edge="#7fe4fa",
+    dispersion=("#7fe4fa", "#69f0d0", "#eaf6ff", "#b79cff", "#ffcf7a"),
 )
 
 LIGHT = Palette(
@@ -79,7 +81,8 @@ LIGHT = Palette(
     vignette="#3d6b80", vignette_opacity=0.16,
     glow_scale=0.45, aberration=0.0, sweep_opacity=0.07,
     pulse="#0b5570",
-    glass_top=0.58, glass_bottom=0.26, edge="#0e7490",
+    glass_top=0.4, glass_bottom=0.2, edge="#0e7490",
+    dispersion=("#2aa6c4", "#3fc9a8", "#ffffff", "#8f7ae0", "#e0a54a"),
 )
 
 PALETTES = (DARK, LIGHT)
@@ -166,47 +169,154 @@ PAD = 7          # room inside the viewBox for the drop shadow
 BAR = 21         # title bar height
 
 
-def _legacy_chrome_defs(prefix: str, p: Palette) -> str:
-    """Gradients and filters that give a panel physical thickness.
+# --------------------------------------------------------------------------- glass
 
-    A flat rectangle reads as a diagram; a panel needs a cast shadow, a lit top
-    edge and a body that falls off towards the bottom before it sits *above*
-    the page rather than on it.
+def slab(x: float, y: float, w: float, h: float) -> str:
+    """A plain rectangular sheet. Real plate glass is cut, not moulded."""
+    return f"M{x:.2f} {y:.2f}H{x+w:.2f}V{y+h:.2f}H{x:.2f}Z"
+
+
+def squircle(x: float, y: float, w: float, h: float, r: float = 0) -> str:
+    """Kept for callers that still pass a radius; r=0 gives the plain slab."""
+    if r <= 0.01:
+        return slab(x, y, w, h)
+    r = min(r, w / 2, h / 2)
+    e, c = r * 1.42, r * 0.62
+    x2, y2 = x + w, y + h
+    return (f"M{x+e:.2f} {y:.2f}L{x2-e:.2f} {y:.2f}"
+            f"C{x2-c:.2f} {y:.2f} {x2:.2f} {y+c:.2f} {x2:.2f} {y+e:.2f}"
+            f"L{x2:.2f} {y2-e:.2f}C{x2:.2f} {y2-c:.2f} {x2-c:.2f} {y2:.2f} {x2-e:.2f} {y2:.2f}"
+            f"L{x+e:.2f} {y2:.2f}C{x+c:.2f} {y2:.2f} {x:.2f} {y2-c:.2f} {x:.2f} {y2-e:.2f}"
+            f"L{x:.2f} {y+e:.2f}C{x:.2f} {y+c:.2f} {x+c:.2f} {y:.2f} {x+e:.2f} {y:.2f}Z")
+
+
+def glass_defs(prefix: str, w: int, h: int, p: Palette) -> str:
+    """The optics of one sheet of glass.
+
+    Three things make glass look like glass rather than a tinted rectangle:
+    it is most transparent where you look straight through it and most
+    reflective at a grazing angle (Fresnel), its edges split light into colour
+    (dispersion), and its corners concentrate that light into a glint.
     """
-    lit = "#ffffff" if p.key == "dark" else "#ffffff"
+    dark = p.key == "dark"
+    a, b, c, d, e = p.dispersion
     return f'''
-  <linearGradient id="{prefix}Body" x1="0" y1="0" x2="0.3" y2="1">
-    <stop offset="0%" stop-color="{p.bg_inner}" stop-opacity="{p.glass_top}"/>
-    <stop offset="52%" stop-color="{p.bg_mid}" stop-opacity="{(p.glass_top+p.glass_bottom)/2:.2f}"/>
-    <stop offset="100%" stop-color="{p.bg_outer}" stop-opacity="{p.glass_bottom}"/>
+  <!-- Fresnel: transparent looking straight through, reflective at the edges -->
+  <linearGradient id="{prefix}Face" x1="0.12" y1="0" x2="0.55" y2="1">
+    <stop offset="0%"   stop-color="{p.bg_inner}" stop-opacity="{p.glass_top}"/>
+    <stop offset="46%"  stop-color="{p.bg_mid}"   stop-opacity="{p.glass_bottom}"/>
+    <stop offset="100%" stop-color="{p.bg_outer}" stop-opacity="{(p.glass_top+p.glass_bottom)/2:.2f}"/>
   </linearGradient>
-  <linearGradient id="{prefix}Bar" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="{p.cyan}" stop-opacity="{0.16 if p.key == 'dark' else 0.13}"/>
-    <stop offset="100%" stop-color="{p.cyan}" stop-opacity="0"/>
+  <linearGradient id="{prefix}EdgeV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="{p.bg_inner}" stop-opacity="{0.5 if dark else 0.55}"/>
+    <stop offset="14%"  stop-color="{p.bg_mid}"   stop-opacity="0"/>
+    <stop offset="86%"  stop-color="{p.bg_outer}" stop-opacity="0"/>
+    <stop offset="100%" stop-color="{p.bg_outer}" stop-opacity="{0.62 if dark else 0.34}"/>
   </linearGradient>
-  <linearGradient id="{prefix}Lip" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="{lit}" stop-opacity="0"/>
-    <stop offset="18%" stop-color="{lit}" stop-opacity="{0.42 if p.key == 'dark' else 0.9}"/>
-    <stop offset="82%" stop-color="{lit}" stop-opacity="{0.42 if p.key == 'dark' else 0.9}"/>
-    <stop offset="100%" stop-color="{lit}" stop-opacity="0"/>
+
+  <!-- dispersion: the hues travel along the edge, so the colour itself flows -->
+  <linearGradient id="{prefix}Iris" x1="0" y1="0" x2="1" y2="0.35"
+                  gradientUnits="objectBoundingBox">
+    <stop offset="0.00" stop-color="{a}"/>
+    <stop offset="0.26" stop-color="{b}"/>
+    <stop offset="0.48" stop-color="{c}"/>
+    <stop offset="0.71" stop-color="{d}"/>
+    <stop offset="1.00" stop-color="{e}"/>
+    <animate attributeName="x1" values="-1;0;1" dur="19s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0;1;2" dur="19s" repeatCount="indefinite"/>
   </linearGradient>
-  <filter id="{prefix}Drop" x="-12%" y="-12%" width="124%" height="130%">
-    <feDropShadow dx="0" dy="2.4" stdDeviation="3.4"
-                  flood-color="{'#000000' if p.key == 'dark' else '#33586b'}"
-                  flood-opacity="{0.65 if p.key == 'dark' else 0.22}"/>
+  <linearGradient id="{prefix}IrisSoft" x1="0" y1="0" x2="1" y2="0.6">
+    <stop offset="0.00" stop-color="{b}" stop-opacity="{0.4 if dark else 0.36}"/>
+    <stop offset="0.34" stop-color="{c}" stop-opacity="{0.3 if dark else 0.28}"/>
+    <stop offset="0.62" stop-color="{d}" stop-opacity="{0.36 if dark else 0.32}"/>
+    <stop offset="1.00" stop-color="{a}" stop-opacity="{0.32 if dark else 0.3}"/>
+    <animate attributeName="x1" values="-0.8;0.2;1.2" dur="26s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0.2;1.2;2.2" dur="26s" repeatCount="indefinite"/>
+  </linearGradient>
+
+  <!-- the polished top arris, and the ground bottom one -->
+  <linearGradient id="{prefix}Arris" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="8%"   stop-color="#ffffff" stop-opacity="{0.7 if dark else 0.95}"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="{0.3 if dark else 0.6}"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="{prefix}Sheen" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="50%"  stop-color="#ffffff" stop-opacity="{0.42 if dark else 0.72}"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+
+  <!-- a corner glint: light funnelled into the 90-degree arris -->
+  <radialGradient id="{prefix}Glint" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="{0.85 if dark else 1}"/>
+    <stop offset="38%"  stop-color="{c}" stop-opacity="{0.4 if dark else 0.45}"/>
+    <stop offset="100%" stop-color="{c}" stop-opacity="0"/>
+  </radialGradient>
+
+  <filter id="{prefix}Cast" x="-14%" y="-14%" width="128%" height="140%">
+    <feDropShadow dx="0" dy="{4 if dark else 3}" stdDeviation="{6 if dark else 4.5}"
+                  flood-color="{'#00070f' if dark else '#26495c'}"
+                  flood-opacity="{0.7 if dark else 0.32}"/>
+  </filter>
+  <filter id="{prefix}Caustic" x="-40%" y="-60%" width="180%" height="260%">
+    <feGaussianBlur stdDeviation="5"/>
   </filter>'''
 
 
+def glass_body(prefix: str, x: float, y: float, w: float, h: float,
+               p: Palette, radius: float = 0, seed: int = 0) -> str:
+    """Shadow with its caustic, the sheet, the dispersed edges, the corners."""
+    dark = p.key == "dark"
+    path = slab(x, y, w, h)
+    band = 9                       # how far the Fresnel edge reaches inward
+    gl = 10                        # corner glint radius
+    corners = "".join(
+        f'<ellipse cx="{cx}" cy="{cy}" rx="{gl}" ry="{gl}" fill="url(#{prefix}Glint)" '
+        f'opacity="{o}"/>'
+        for cx, cy, o in ((x, y, 0.7), (x + w, y, 0.4),
+                          (x, y + h, 0.28), (x + w, y + h, 0.45)))
+    return f'''
+  <path d="{path}" fill="{p.bg_outer}" opacity="{0.55 if dark else 0.26}" filter="url(#{prefix}Cast)"/>
+  <rect x="{x+w*0.16:.1f}" y="{y+h+2:.1f}" width="{w*0.68:.1f}" height="7"
+        fill="url(#{prefix}IrisSoft)" opacity="{0.3 if dark else 0.42}" filter="url(#{prefix}Caustic)"/>
+
+  <path d="{path}" fill="url(#{prefix}Face)"/>
+  <path d="{path}" fill="url(#{prefix}EdgeV)"/>
+
+  <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
+  <g clip-path="url(#{prefix}Shape)">
+    <rect x="{x}" y="{y}" width="{w}" height="{h}" fill="none"
+          stroke="url(#{prefix}IrisSoft)" stroke-width="{band*2}"
+          opacity="{0.17 if dark else 0.2}"/>
+    <rect x="{x-w*0.5:.1f}" y="{y}" width="{w*0.5:.1f}" height="{h}"
+          fill="url(#{prefix}Sheen)" opacity="{0.1 if dark else 0.34}" transform="skewX(-12)">
+      <animate attributeName="x" values="{x-w*0.55:.1f};{x+w*1.1:.1f}" dur="17s" repeatCount="indefinite"/>
+    </rect>
+    {corners}
+  </g>
+
+  <!-- polished arris along the top, ground edge along the bottom -->
+  <path d="M{x+0.5:.1f} {y+0.5:.1f}H{x+w-0.5:.1f}" stroke="url(#{prefix}Arris)" stroke-width="1"/>
+  <path d="M{x+0.5:.1f} {y+h-0.5:.1f}H{x+w-0.5:.1f}" stroke="{p.bg_outer}" stroke-width="1"
+        opacity="{0.75 if dark else 0.3}"/>
+  <path d="{path}" fill="none" stroke="url(#{prefix}Iris)" stroke-width="0.9"
+        opacity="{0.5 if dark else 0.6}"/>'''
+
+
+def glass_shape_clip(prefix: str, w: int, h: int, radius: float = 0) -> str:
+    return (f'<clipPath id="{prefix}Shape">'
+            f'<path d="{slab(PAD, PAD, w - 2*PAD, h - 2*PAD)}"/></clipPath>')
 def chrome(prefix: str, w: int, h: int, p: Palette, title: str,
-           right: str = "", radius: float = 18) -> str:
-    """A tile: one sheet of liquid glass with a title bar floated on top of it."""
+           right: str = "", radius: float = 0) -> str:
+    """A tile: one sheet of glass with a title bar floated on top of it."""
     x, y = PAD, PAD
     iw, ih = w - 2 * PAD, h - 2 * PAD
     return f'''
 {glass_body(prefix, x, y, iw, ih, p, radius)}
-{liquid(prefix, x, y, iw, ih, p, seed=len(title))}
-  <path d="M{x + radius * 0.5:.1f} {y + BAR} H{x + iw - radius * 0.5:.1f}"
-        stroke="{p.edge}" stroke-width="0.5" opacity="0.4"/>
+  <path d="M{x+10} {y + BAR} H{x + iw - 10}"
+        stroke="url(#{prefix}IrisSoft)" stroke-width="0.6" opacity="0.75"/>
   <g class="t">
     <circle cx="{x+15}" cy="{y+12}" r="2.6" fill="none" stroke="{p.cyan}" stroke-width="{HAIR}"/>
     <circle cx="{x+15}" cy="{y+12}" r="0.9" fill="{p.cyan}"/>
@@ -214,146 +324,3 @@ def chrome(prefix: str, w: int, h: int, p: Palette, title: str,
     <text x="{x+iw-14}" y="{y+15}" fill="{p.dim}" font-size="6.8" letter-spacing="1.8"
           text-anchor="end">{right}</text>
   </g>'''
-
-
-def glass_shape_clip(prefix: str, w: int, h: int, radius: float = 18) -> str:
-    """The clip every glass effect is bounded by."""
-    return (f'<clipPath id="{prefix}Shape">'
-            f'<path d="{squircle(PAD, PAD, w - 2*PAD, h - 2*PAD, radius)}"/></clipPath>')
-
-
-# --------------------------------------------------------------------------- liquid glass
-def squircle(x: float, y: float, w: float, h: float, r: float) -> str:
-    """A continuous-curvature rounded rectangle.
-
-    A plain `rx` corner jumps from straight to circular in one step, which is
-    what makes a rounded box read as a box. Extending the corner region and
-    pulling the control points further along it removes that break, which is
-    the shape Apple's glass sits in.
-    """
-    r = min(r, w / 2, h / 2)
-    e = r * 1.42          # how far the corner reaches along each edge
-    c = r * 0.62          # control-point pull back towards the corner
-    x2, y2 = x + w, y + h
-    return (f"M{x+e:.2f} {y:.2f}"
-            f"L{x2-e:.2f} {y:.2f}"
-            f"C{x2-c:.2f} {y:.2f} {x2:.2f} {y+c:.2f} {x2:.2f} {y+e:.2f}"
-            f"L{x2:.2f} {y2-e:.2f}"
-            f"C{x2:.2f} {y2-c:.2f} {x2-c:.2f} {y2:.2f} {x2-e:.2f} {y2:.2f}"
-            f"L{x+e:.2f} {y2:.2f}"
-            f"C{x+c:.2f} {y2:.2f} {x:.2f} {y2-c:.2f} {x:.2f} {y2-e:.2f}"
-            f"L{x:.2f} {y+e:.2f}"
-            f"C{x:.2f} {y+c:.2f} {x+c:.2f} {y:.2f} {x+e:.2f} {y:.2f}Z")
-
-
-def glass_defs(prefix: str, w: int, h: int, p: Palette) -> str:
-    """Gradients and filters for one sheet of liquid glass."""
-    dark = p.key == "dark"
-    return f'''
-  <linearGradient id="{prefix}Glass" x1="0.1" y1="0" x2="0.6" y2="1">
-    <stop offset="0%"   stop-color="{p.bg_inner}" stop-opacity="{p.glass_top}"/>
-    <stop offset="38%"  stop-color="{p.bg_mid}"   stop-opacity="{(p.glass_top+p.glass_bottom)/2:.2f}"/>
-    <stop offset="100%" stop-color="{p.bg_outer}" stop-opacity="{p.glass_bottom}"/>
-  </linearGradient>
-
-  <!-- the rim catches light twice: once top-left, once bottom-right -->
-  <linearGradient id="{prefix}Rim" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="{0.85 if dark else 1}"/>
-    <stop offset="16%"  stop-color="{p.cyan}" stop-opacity="{0.72 if dark else 0.55}"/>
-    <stop offset="45%"  stop-color="{p.edge}" stop-opacity="{0.24 if dark else 0.2}"/>
-    <stop offset="72%"  stop-color="{p.cyan}" stop-opacity="{0.5 if dark else 0.4}"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="{0.55 if dark else 0.75}"/>
-  </linearGradient>
-
-  <!-- light bends through the thickness at the edge, so the rim band is not flat -->
-  <linearGradient id="{prefix}Refract" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="{0.42 if dark else 0.85}"/>
-    <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="76%"  stop-color="{p.cyan}" stop-opacity="0"/>
-    <stop offset="100%" stop-color="{p.cyan}" stop-opacity="{0.22 if dark else 0.3}"/>
-  </linearGradient>
-
-  <linearGradient id="{prefix}Sheen" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%"  stop-color="#ffffff" stop-opacity="{0.5 if dark else 0.8}"/>
-    <stop offset="55%"  stop-color="#ffffff" stop-opacity="{0.5 if dark else 0.8}"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-  </linearGradient>
-
-  <radialGradient id="{prefix}Blob" cx="42%" cy="36%" r="62%">
-    <stop offset="0%"   stop-color="{p.cyan}" stop-opacity="{0.5 if dark else 0.42}"/>
-    <stop offset="65%"  stop-color="{p.cyan}" stop-opacity="{0.22 if dark else 0.18}"/>
-    <stop offset="100%" stop-color="{p.cyan}" stop-opacity="0"/>
-  </radialGradient>
-
-  <!-- blobs blurred then hard-thresholded: near ones merge, parting ones neck -->
-  <filter id="{prefix}Goo" x="-30%" y="-30%" width="160%" height="160%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="soft"/>
-    <feColorMatrix in="soft" type="matrix" result="goo"
-      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -4.6"/>
-    <feGaussianBlur in="goo" stdDeviation="7"/>
-  </filter>
-
-  <filter id="{prefix}Cast" x="-16%" y="-16%" width="132%" height="140%">
-    <feDropShadow dx="0" dy="{3.2 if dark else 2.6}" stdDeviation="{5 if dark else 4}"
-                  flood-color="{'#000814' if dark else '#2c5468'}"
-                  flood-opacity="{0.62 if dark else 0.2}"/>
-  </filter>'''
-
-
-def liquid(prefix: str, x: float, y: float, w: float, h: float, p: Palette,
-           seed: int = 0) -> str:
-    """Blobs drifting behind the content, merging where they meet."""
-    import math as _m
-    blobs = []
-    for i in range(3):
-        a = seed * 1.7 + i * 2.1
-        r = min(w, h) * (0.22 + 0.07 * ((i + seed) % 3))
-        cx0 = x + w * (0.22 + 0.28 * ((i * 3 + seed) % 3))
-        cy0 = y + h * (0.34 + 0.22 * ((i * 2 + seed) % 2))
-        dx = w * 0.13 * _m.cos(a)
-        dy = h * 0.16 * _m.sin(a * 1.3)
-        dur = 17 + i * 6 + (seed % 3) * 3
-        blobs.append(
-            f'<circle r="{r:.1f}" fill="url(#{prefix}Blob)">'
-            f'<animate attributeName="cx" values="{cx0:.1f};{cx0+dx:.1f};{cx0-dx*0.7:.1f};{cx0:.1f}" '
-            f'dur="{dur}s" repeatCount="indefinite" calcMode="spline" '
-            f'keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>'
-            f'<animate attributeName="cy" values="{cy0:.1f};{cy0-dy:.1f};{cy0+dy*0.8:.1f};{cy0:.1f}" '
-            f'dur="{dur*1.3:.0f}s" repeatCount="indefinite" calcMode="spline" '
-            f'keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>'
-            f'</circle>')
-    return (f'<g clip-path="url(#{prefix}Shape)" filter="url(#{prefix}Goo)" '
-            f'opacity="{0.24 if p.key == "dark" else 0.22}">{"".join(blobs)}</g>')
-
-
-def glass_body(prefix: str, x: float, y: float, w: float, h: float,
-               p: Palette, radius: float = 20, seed: int = 0) -> str:
-    """The sheet: shadow, back face, liquid *inside* the material, then the
-    front face over it.
-
-    Order matters. Blobs painted on top of the glass read as bubbles sitting on
-    a window; painted underneath the front face they read as something moving
-    within it, which is the whole point of the material.
-    """
-    path = squircle(x, y, w, h, radius)
-    inner = squircle(x + 1.6, y + 1.6, w - 3.2, h - 3.2, radius - 1.6)
-    return f'''
-  <path d="{path}" fill="{p.bg_outer}" opacity="{0.5 if p.key == 'dark' else 0.24}" filter="url(#{prefix}Cast)"/>
-  <path d="{path}" fill="url(#{prefix}Glass)"/>
-{liquid(prefix, x, y, w, h, p, seed)}
-  <path d="{path}" fill="url(#{prefix}Glass)" opacity="0.55"/>
-  <path d="{path}" fill="url(#{prefix}Refract)" opacity="0.9"/>
-  <g clip-path="url(#{prefix}Shape)">
-    <rect x="{x-w*0.55:.1f}" y="{y}" width="{w*0.55:.1f}" height="{h}"
-          fill="url(#{prefix}Sheen)" opacity="{0.2 if p.key == 'dark' else 0.5}"
-          transform="skewX(-14)">
-      <animate attributeName="x" values="{x-w*0.6:.1f};{x+w*1.15:.1f}"
-               dur="14s" repeatCount="indefinite"/>
-    </rect>
-  </g>
-  <path d="{inner}" fill="none" stroke="#ffffff" stroke-width="0.5"
-        opacity="{0.32 if p.key == 'dark' else 0.55}"/>
-  <path d="{path}" fill="none" stroke="url(#{prefix}Rim)" stroke-width="1.2"/>'''
-
-

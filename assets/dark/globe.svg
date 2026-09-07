@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 196" width="292" height="196" role="img" aria-label="telemetry uplink">
 <defs>
   <radialGradient id="glDeep" cx="16%" cy="50%" r="88%">
-    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.40"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.3"/>
   </radialGradient>
   <radialGradient id="glVig" cx="50%" cy="50%" r="74%">
     <stop offset="58%" stop-color="#000000" stop-opacity="0"/>
@@ -44,79 +44,100 @@
   </pattern>
   <clipPath id="glClip"><rect width="292" height="196" rx="3"/></clipPath>
   <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
-  <linearGradient id="glGlass" x1="0.1" y1="0" x2="0.6" y2="1">
-    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="38%"  stop-color="#0b2534"   stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+  <!-- Fresnel: transparent looking straight through, reflective at the edges -->
+  <linearGradient id="glFace" x1="0.12" y1="0" x2="0.55" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%"  stop-color="#0b2534"   stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.40"/>
+  </linearGradient>
+  <linearGradient id="glEdgeV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="14%"  stop-color="#0b2534"   stop-opacity="0"/>
+    <stop offset="86%"  stop-color="#05141e" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.62"/>
   </linearGradient>
 
-  <!-- the rim catches light twice: once top-left, once bottom-right -->
-  <linearGradient id="glRim" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
-    <stop offset="16%"  stop-color="#6fe0f7" stop-opacity="0.72"/>
-    <stop offset="45%"  stop-color="#7fe4fa" stop-opacity="0.24"/>
-    <stop offset="72%"  stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55"/>
+  <!-- dispersion: the hues travel along the edge, so the colour itself flows -->
+  <linearGradient id="glIris" x1="0" y1="0" x2="1" y2="0.35"
+                  gradientUnits="objectBoundingBox">
+    <stop offset="0.00" stop-color="#7fe4fa"/>
+    <stop offset="0.26" stop-color="#69f0d0"/>
+    <stop offset="0.48" stop-color="#eaf6ff"/>
+    <stop offset="0.71" stop-color="#b79cff"/>
+    <stop offset="1.00" stop-color="#ffcf7a"/>
+    <animate attributeName="x1" values="-1;0;1" dur="19s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0;1;2" dur="19s" repeatCount="indefinite"/>
+  </linearGradient>
+  <linearGradient id="glIrisSoft" x1="0" y1="0" x2="1" y2="0.6">
+    <stop offset="0.00" stop-color="#69f0d0" stop-opacity="0.4"/>
+    <stop offset="0.34" stop-color="#eaf6ff" stop-opacity="0.3"/>
+    <stop offset="0.62" stop-color="#b79cff" stop-opacity="0.36"/>
+    <stop offset="1.00" stop-color="#7fe4fa" stop-opacity="0.32"/>
+    <animate attributeName="x1" values="-0.8;0.2;1.2" dur="26s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0.2;1.2;2.2" dur="26s" repeatCount="indefinite"/>
   </linearGradient>
 
-  <!-- light bends through the thickness at the edge, so the rim band is not flat -->
-  <linearGradient id="glRefract" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.42"/>
-    <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="76%"  stop-color="#6fe0f7" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0.22"/>
+  <!-- the polished top arris, and the ground bottom one -->
+  <linearGradient id="glArris" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="8%"   stop-color="#ffffff" stop-opacity="0.7"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
   <linearGradient id="glSheen" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%"  stop-color="#ffffff" stop-opacity="0.5"/>
-    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.5"/>
+    <stop offset="50%"  stop-color="#ffffff" stop-opacity="0.42"/>
     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
-  <radialGradient id="glBlob" cx="42%" cy="36%" r="62%">
-    <stop offset="0%"   stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="65%"  stop-color="#6fe0f7" stop-opacity="0.22"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0"/>
+  <!-- a corner glint: light funnelled into the 90-degree arris -->
+  <radialGradient id="glGlint" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
+    <stop offset="38%"  stop-color="#eaf6ff" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#eaf6ff" stop-opacity="0"/>
   </radialGradient>
 
-  <!-- blobs blurred then hard-thresholded: near ones merge, parting ones neck -->
-  <filter id="glGoo" x="-30%" y="-30%" width="160%" height="160%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="soft"/>
-    <feColorMatrix in="soft" type="matrix" result="goo"
-      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -4.6"/>
-    <feGaussianBlur in="goo" stdDeviation="7"/>
+  <filter id="glCast" x="-14%" y="-14%" width="128%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="6"
+                  flood-color="#00070f"
+                  flood-opacity="0.7"/>
   </filter>
-
-  <filter id="glCast" x="-16%" y="-16%" width="132%" height="140%">
-    <feDropShadow dx="0" dy="3.2" stdDeviation="5"
-                  flood-color="#000814"
-                  flood-opacity="0.62"/>
+  <filter id="glCaustic" x="-40%" y="-60%" width="180%" height="260%">
+    <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="glShape"><path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z"/></clipPath>
-  <clipPath id="glInner"><path d="M24.04 28.00L267.96 28.00C277.56 28.00 285.00 35.44 285.00 45.04L285.00 171.96C285.00 181.56 277.56 189.00 267.96 189.00L24.04 189.00C14.44 189.00 7.00 181.56 7.00 171.96L7.00 45.04C7.00 35.44 14.44 28.00 24.04 28.00Z"/></clipPath>
+  <clipPath id="glShape"><path d="M7.00 7.00H285.00V189.00H7.00Z"/></clipPath>
+  <clipPath id="glInner"><path d="M7.00 28.00H285.00V189.00H7.00Z"/></clipPath>
 </defs>
 
 
-  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="#05141e" opacity="0.5" filter="url(#glCast)"/>
-  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#glGlass)"/>
-<g clip-path="url(#glShape)" filter="url(#glGoo)" opacity="0.24"><circle r="40.0" fill="url(#glBlob)"><animate attributeName="cx" values="68.2;104.3;42.9;68.2" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;68.9;68.9;68.9" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="52.8" fill="url(#glBlob)"><animate attributeName="cx" values="68.2;49.9;80.9;68.2" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;57.2;78.2;68.9" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="65.5" fill="url(#glBlob)"><animate attributeName="cx" values="68.2;50.4;80.6;68.2" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;90.2;51.8;68.9" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
-  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#glGlass)" opacity="0.55"/>
-  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#glRefract)" opacity="0.9"/>
+  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#glCast)"/>
+  <rect x="51.5" y="191.0" width="189.0" height="7"
+        fill="url(#glIrisSoft)" opacity="0.3" filter="url(#glCaustic)"/>
+
+  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="url(#glFace)"/>
+  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="url(#glEdgeV)"/>
+
+  <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#glShape)">
-    <rect x="-145.9" y="7" width="152.9" height="182"
-          fill="url(#glSheen)" opacity="0.2"
-          transform="skewX(-14)">
-      <animate attributeName="x" values="-159.8;326.7"
-               dur="14s" repeatCount="indefinite"/>
+    <rect x="7" y="7" width="278" height="182" fill="none"
+          stroke="url(#glIrisSoft)" stroke-width="18"
+          opacity="0.17"/>
+    <rect x="-132.0" y="7" width="139.0" height="182"
+          fill="url(#glSheen)" opacity="0.1" transform="skewX(-12)">
+      <animate attributeName="x" values="-145.9;312.8" dur="17s" repeatCount="indefinite"/>
     </rect>
+    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#glGlint)" opacity="0.7"/><ellipse cx="285" cy="7" rx="10" ry="10" fill="url(#glGlint)" opacity="0.4"/><ellipse cx="7" cy="189" rx="10" ry="10" fill="url(#glGlint)" opacity="0.28"/><ellipse cx="285" cy="189" rx="10" ry="10" fill="url(#glGlint)" opacity="0.45"/>
   </g>
-  <path d="M31.89 8.60L260.11 8.60C273.23 8.60 283.40 18.77 283.40 31.89L283.40 164.11C283.40 177.23 273.23 187.40 260.11 187.40L31.89 187.40C18.77 187.40 8.60 177.23 8.60 164.11L8.60 31.89C8.60 18.77 18.77 8.60 31.89 8.60Z" fill="none" stroke="#ffffff" stroke-width="0.5"
-        opacity="0.32"/>
-  <path d="M32.56 7.00L259.44 7.00C273.84 7.00 285.00 18.16 285.00 32.56L285.00 163.44C285.00 177.84 273.84 189.00 259.44 189.00L32.56 189.00C18.16 189.00 7.00 177.84 7.00 163.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="none" stroke="url(#glRim)" stroke-width="1.2"/>
-<g clip-path="url(#glShape)" filter="url(#glGoo)" opacity="0.24"><circle r="40.0" fill="url(#glBlob)"><animate attributeName="cx" values="68.2;42.3;86.2;68.2" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;50.3;83.8;68.9" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="52.8" fill="url(#glBlob)"><animate attributeName="cx" values="68.2;103.0;43.8;68.2" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;77.0;62.4;68.9" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="65.5" fill="url(#glBlob)"><animate attributeName="cx" values="68.2;58.8;74.7;68.2" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="68.9;72.6;65.9;68.9" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
-  <path d="M16.0 28 H276.0"
-        stroke="#7fe4fa" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- polished arris along the top, ground edge along the bottom -->
+  <path d="M7.5 7.5H284.5" stroke="url(#glArris)" stroke-width="1"/>
+  <path d="M7.5 188.5H284.5" stroke="#05141e" stroke-width="1"
+        opacity="0.75"/>
+  <path d="M7.00 7.00H285.00V189.00H7.00Z" fill="none" stroke="url(#glIris)" stroke-width="0.9"
+        opacity="0.5"/>
+  <path d="M17 28 H275"
+        stroke="url(#glIrisSoft)" stroke-width="0.6" opacity="0.75"/>
   <g class="t">
     <circle cx="22" cy="19" r="2.6" fill="none" stroke="#6fe0f7" stroke-width="0.45"/>
     <circle cx="22" cy="19" r="0.9" fill="#6fe0f7"/>
@@ -172,7 +193,7 @@
     <text x="18" y="42" fill="#63a8c0" font-size="5.8" letter-spacing="1.6">ENDPOINT</text>
     <text x="18" y="52" fill="#dcf3fd" font-size="6.8">api.github.com</text>
     <text x="273" y="167" fill="#63a8c0" font-size="6.5" letter-spacing="1.6" text-anchor="end">SYNC</text>
-    <text x="273" y="178" fill="#dcf3fd" font-size="7.2" text-anchor="end">07:44Z</text>
+    <text x="273" y="178" fill="#dcf3fd" font-size="7.2" text-anchor="end">07:53Z</text>
   </g>
   <rect x="7" y="28" width="278" height="161" fill="url(#glScan)" opacity="0.2"/>
   <rect x="7" y="28" width="278" height="161" filter="url(#glGrain)" opacity="0.16"/>

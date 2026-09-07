@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 186" width="900" height="186" role="img" aria-label="recent commits">
 <defs>
   <radialGradient id="lgDeep" cx="16%" cy="50%" r="88%">
-    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.40"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.3"/>
   </radialGradient>
   <radialGradient id="lgVig" cx="50%" cy="50%" r="74%">
     <stop offset="58%" stop-color="#000000" stop-opacity="0"/>
@@ -44,79 +44,100 @@
   </pattern>
   <clipPath id="lgClip"><rect width="900" height="186" rx="3"/></clipPath>
   <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
-  <linearGradient id="lgGlass" x1="0.1" y1="0" x2="0.6" y2="1">
-    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="38%"  stop-color="#0b2534"   stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+  <!-- Fresnel: transparent looking straight through, reflective at the edges -->
+  <linearGradient id="lgFace" x1="0.12" y1="0" x2="0.55" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%"  stop-color="#0b2534"   stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.40"/>
+  </linearGradient>
+  <linearGradient id="lgEdgeV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="14%"  stop-color="#0b2534"   stop-opacity="0"/>
+    <stop offset="86%"  stop-color="#05141e" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.62"/>
   </linearGradient>
 
-  <!-- the rim catches light twice: once top-left, once bottom-right -->
-  <linearGradient id="lgRim" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
-    <stop offset="16%"  stop-color="#6fe0f7" stop-opacity="0.72"/>
-    <stop offset="45%"  stop-color="#7fe4fa" stop-opacity="0.24"/>
-    <stop offset="72%"  stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55"/>
+  <!-- dispersion: the hues travel along the edge, so the colour itself flows -->
+  <linearGradient id="lgIris" x1="0" y1="0" x2="1" y2="0.35"
+                  gradientUnits="objectBoundingBox">
+    <stop offset="0.00" stop-color="#7fe4fa"/>
+    <stop offset="0.26" stop-color="#69f0d0"/>
+    <stop offset="0.48" stop-color="#eaf6ff"/>
+    <stop offset="0.71" stop-color="#b79cff"/>
+    <stop offset="1.00" stop-color="#ffcf7a"/>
+    <animate attributeName="x1" values="-1;0;1" dur="19s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0;1;2" dur="19s" repeatCount="indefinite"/>
+  </linearGradient>
+  <linearGradient id="lgIrisSoft" x1="0" y1="0" x2="1" y2="0.6">
+    <stop offset="0.00" stop-color="#69f0d0" stop-opacity="0.4"/>
+    <stop offset="0.34" stop-color="#eaf6ff" stop-opacity="0.3"/>
+    <stop offset="0.62" stop-color="#b79cff" stop-opacity="0.36"/>
+    <stop offset="1.00" stop-color="#7fe4fa" stop-opacity="0.32"/>
+    <animate attributeName="x1" values="-0.8;0.2;1.2" dur="26s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0.2;1.2;2.2" dur="26s" repeatCount="indefinite"/>
   </linearGradient>
 
-  <!-- light bends through the thickness at the edge, so the rim band is not flat -->
-  <linearGradient id="lgRefract" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.42"/>
-    <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="76%"  stop-color="#6fe0f7" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0.22"/>
+  <!-- the polished top arris, and the ground bottom one -->
+  <linearGradient id="lgArris" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="8%"   stop-color="#ffffff" stop-opacity="0.7"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
   <linearGradient id="lgSheen" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%"  stop-color="#ffffff" stop-opacity="0.5"/>
-    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.5"/>
+    <stop offset="50%"  stop-color="#ffffff" stop-opacity="0.42"/>
     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
-  <radialGradient id="lgBlob" cx="42%" cy="36%" r="62%">
-    <stop offset="0%"   stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="65%"  stop-color="#6fe0f7" stop-opacity="0.22"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0"/>
+  <!-- a corner glint: light funnelled into the 90-degree arris -->
+  <radialGradient id="lgGlint" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
+    <stop offset="38%"  stop-color="#eaf6ff" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#eaf6ff" stop-opacity="0"/>
   </radialGradient>
 
-  <!-- blobs blurred then hard-thresholded: near ones merge, parting ones neck -->
-  <filter id="lgGoo" x="-30%" y="-30%" width="160%" height="160%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="soft"/>
-    <feColorMatrix in="soft" type="matrix" result="goo"
-      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -4.6"/>
-    <feGaussianBlur in="goo" stdDeviation="7"/>
+  <filter id="lgCast" x="-14%" y="-14%" width="128%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="6"
+                  flood-color="#00070f"
+                  flood-opacity="0.7"/>
   </filter>
-
-  <filter id="lgCast" x="-16%" y="-16%" width="132%" height="140%">
-    <feDropShadow dx="0" dy="3.2" stdDeviation="5"
-                  flood-color="#000814"
-                  flood-opacity="0.62"/>
+  <filter id="lgCaustic" x="-40%" y="-60%" width="180%" height="260%">
+    <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="lgShape"><path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 153.44C893.00 167.84 881.84 179.00 867.44 179.00L32.56 179.00C18.16 179.00 7.00 167.84 7.00 153.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z"/></clipPath>
-  <clipPath id="lgInner"><path d="M24.04 28.00L875.96 28.00C885.56 28.00 893.00 35.44 893.00 45.04L893.00 161.96C893.00 171.56 885.56 179.00 875.96 179.00L24.04 179.00C14.44 179.00 7.00 171.56 7.00 161.96L7.00 45.04C7.00 35.44 14.44 28.00 24.04 28.00Z"/></clipPath>
+  <clipPath id="lgShape"><path d="M7.00 7.00H893.00V179.00H7.00Z"/></clipPath>
+  <clipPath id="lgInner"><path d="M7.00 28.00H893.00V179.00H7.00Z"/></clipPath>
 </defs>
 
 
-  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 153.44C893.00 167.84 881.84 179.00 867.44 179.00L32.56 179.00C18.16 179.00 7.00 167.84 7.00 153.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="#05141e" opacity="0.5" filter="url(#lgCast)"/>
-  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 153.44C893.00 167.84 881.84 179.00 867.44 179.00L32.56 179.00C18.16 179.00 7.00 167.84 7.00 153.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#lgGlass)"/>
-<g clip-path="url(#lgShape)" filter="url(#lgGoo)" opacity="0.24"><circle r="37.8" fill="url(#lgBlob)"><animate attributeName="cx" values="201.9;317.1;121.3;201.9" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="65.5;65.5;65.5;65.5" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="49.9" fill="url(#lgBlob)"><animate attributeName="cx" values="201.9;143.8;242.6;201.9" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="65.5;54.5;74.3;65.5" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="61.9" fill="url(#lgBlob)"><animate attributeName="cx" values="201.9;145.5;241.4;201.9" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="65.5;85.7;49.3;65.5" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
-  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 153.44C893.00 167.84 881.84 179.00 867.44 179.00L32.56 179.00C18.16 179.00 7.00 167.84 7.00 153.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#lgGlass)" opacity="0.55"/>
-  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 153.44C893.00 167.84 881.84 179.00 867.44 179.00L32.56 179.00C18.16 179.00 7.00 167.84 7.00 153.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#lgRefract)" opacity="0.9"/>
+  <path d="M7.00 7.00H893.00V179.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#lgCast)"/>
+  <rect x="148.8" y="181.0" width="602.5" height="7"
+        fill="url(#lgIrisSoft)" opacity="0.3" filter="url(#lgCaustic)"/>
+
+  <path d="M7.00 7.00H893.00V179.00H7.00Z" fill="url(#lgFace)"/>
+  <path d="M7.00 7.00H893.00V179.00H7.00Z" fill="url(#lgEdgeV)"/>
+
+  <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#lgShape)">
-    <rect x="-480.3" y="7" width="487.3" height="172"
-          fill="url(#lgSheen)" opacity="0.2"
-          transform="skewX(-14)">
-      <animate attributeName="x" values="-524.6;1025.9"
-               dur="14s" repeatCount="indefinite"/>
+    <rect x="7" y="7" width="886" height="172" fill="none"
+          stroke="url(#lgIrisSoft)" stroke-width="18"
+          opacity="0.17"/>
+    <rect x="-436.0" y="7" width="443.0" height="172"
+          fill="url(#lgSheen)" opacity="0.1" transform="skewX(-12)">
+      <animate attributeName="x" values="-480.3;981.6" dur="17s" repeatCount="indefinite"/>
     </rect>
+    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#lgGlint)" opacity="0.7"/><ellipse cx="893" cy="7" rx="10" ry="10" fill="url(#lgGlint)" opacity="0.4"/><ellipse cx="7" cy="179" rx="10" ry="10" fill="url(#lgGlint)" opacity="0.28"/><ellipse cx="893" cy="179" rx="10" ry="10" fill="url(#lgGlint)" opacity="0.45"/>
   </g>
-  <path d="M31.89 8.60L868.11 8.60C881.23 8.60 891.40 18.77 891.40 31.89L891.40 154.11C891.40 167.23 881.23 177.40 868.11 177.40L31.89 177.40C18.77 177.40 8.60 167.23 8.60 154.11L8.60 31.89C8.60 18.77 18.77 8.60 31.89 8.60Z" fill="none" stroke="#ffffff" stroke-width="0.5"
-        opacity="0.32"/>
-  <path d="M32.56 7.00L867.44 7.00C881.84 7.00 893.00 18.16 893.00 32.56L893.00 153.44C893.00 167.84 881.84 179.00 867.44 179.00L32.56 179.00C18.16 179.00 7.00 167.84 7.00 153.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="none" stroke="url(#lgRim)" stroke-width="1.2"/>
-<g clip-path="url(#lgShape)" filter="url(#lgGoo)" opacity="0.24"><circle r="49.9" fill="url(#lgBlob)"><animate attributeName="cx" values="450.0;335.5;530.1;450.0" dur="20s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="103.3;115.4;93.6;103.3" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="61.9" fill="url(#lgBlob)"><animate attributeName="cx" values="450.0;518.6;402.0;450.0" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="103.3;102.1;104.3;103.3" dur="34s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="37.8" fill="url(#lgBlob)"><animate attributeName="cx" values="450.0;495.2;418.3;450.0" dur="32s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="103.3;93.4;111.2;103.3" dur="42s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
-  <path d="M16.0 28 H884.0"
-        stroke="#7fe4fa" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- polished arris along the top, ground edge along the bottom -->
+  <path d="M7.5 7.5H892.5" stroke="url(#lgArris)" stroke-width="1"/>
+  <path d="M7.5 178.5H892.5" stroke="#05141e" stroke-width="1"
+        opacity="0.75"/>
+  <path d="M7.00 7.00H893.00V179.00H7.00Z" fill="none" stroke="url(#lgIris)" stroke-width="0.9"
+        opacity="0.5"/>
+  <path d="M17 28 H883"
+        stroke="url(#lgIrisSoft)" stroke-width="0.6" opacity="0.75"/>
   <g class="t">
     <circle cx="22" cy="19" r="2.6" fill="none" stroke="#6fe0f7" stroke-width="0.45"/>
     <circle cx="22" cy="19" r="0.9" fill="#6fe0f7"/>
@@ -130,7 +151,7 @@
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -153"
                         dur="23s" calcMode="linear" repeatCount="indefinite"/>
-      <text x="23" y="44" fill="#63a8c0" font-size="8.1">20:35</text><text x="69" y="44" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="44" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="36" width="2" height="10" fill="#6fe0f7" opacity="0.9"/><text x="23" y="61" fill="#63a8c0" font-size="8.1">20:31</text><text x="69" y="61" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="61" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="53" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="78" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="78" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="78" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="70" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="95" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="95" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="95" fill="#dcf3fd" font-size="8.1">fix: stop the refresh workflow racing every push</text><rect x="17" y="87" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="112" fill="#63a8c0" font-size="8.1">09:28</text><text x="69" y="112" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="112" fill="#dcf3fd" font-size="8.1">feat: draw the activity section too, and drop the last third-party im…</text><rect x="17" y="104" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="129" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="129" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="129" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="121" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="146" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="146" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="146" fill="#dcf3fd" font-size="8.1">feat: break the banner into a board of instruments</text><rect x="17" y="138" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="163" fill="#63a8c0" font-size="8.1">03:49</text><text x="69" y="163" fill="#f0c069" font-size="8.1">conductivity-claude</text><text x="237" y="163" fill="#dcf3fd" font-size="8.1">Add annotated CLAUDE data assimilation example</text><rect x="17" y="155" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="180" fill="#63a8c0" font-size="8.1">20:54</text><text x="69" y="180" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="180" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="172" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="197" fill="#63a8c0" font-size="8.1">20:35</text><text x="69" y="197" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="197" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="189" width="2" height="10" fill="#6fe0f7" opacity="0.9"/><text x="23" y="214" fill="#63a8c0" font-size="8.1">20:31</text><text x="69" y="214" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="214" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="206" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="231" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="231" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="231" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="223" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="248" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="248" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="248" fill="#dcf3fd" font-size="8.1">fix: stop the refresh workflow racing every push</text><rect x="17" y="240" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="265" fill="#63a8c0" font-size="8.1">09:28</text><text x="69" y="265" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="265" fill="#dcf3fd" font-size="8.1">feat: draw the activity section too, and drop the last third-party im…</text><rect x="17" y="257" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="282" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="282" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="282" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="274" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="299" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="299" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="299" fill="#dcf3fd" font-size="8.1">feat: break the banner into a board of instruments</text><rect x="17" y="291" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="316" fill="#63a8c0" font-size="8.1">03:49</text><text x="69" y="316" fill="#f0c069" font-size="8.1">conductivity-claude</text><text x="237" y="316" fill="#dcf3fd" font-size="8.1">Add annotated CLAUDE data assimilation example</text><rect x="17" y="308" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="333" fill="#63a8c0" font-size="8.1">20:54</text><text x="69" y="333" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="333" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="325" width="2" height="10" fill="#6fe0f7" opacity="0.25"/>
+      <text x="23" y="44" fill="#63a8c0" font-size="8.1">07:44</text><text x="69" y="44" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="44" fill="#dcf3fd" font-size="8.1">feat: rebuild the material as liquid glass</text><rect x="17" y="36" width="2" height="10" fill="#6fe0f7" opacity="0.9"/><text x="23" y="61" fill="#63a8c0" font-size="8.1">20:35</text><text x="69" y="61" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="61" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="53" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="78" fill="#63a8c0" font-size="8.1">20:31</text><text x="69" y="78" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="78" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="70" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="95" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="95" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="95" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="87" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="112" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="112" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="112" fill="#dcf3fd" font-size="8.1">fix: stop the refresh workflow racing every push</text><rect x="17" y="104" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="129" fill="#63a8c0" font-size="8.1">09:28</text><text x="69" y="129" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="129" fill="#dcf3fd" font-size="8.1">feat: draw the activity section too, and drop the last third-party im…</text><rect x="17" y="121" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="146" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="146" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="146" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="138" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="163" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="163" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="163" fill="#dcf3fd" font-size="8.1">feat: break the banner into a board of instruments</text><rect x="17" y="155" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="180" fill="#63a8c0" font-size="8.1">03:49</text><text x="69" y="180" fill="#f0c069" font-size="8.1">conductivity-claude</text><text x="237" y="180" fill="#dcf3fd" font-size="8.1">Add annotated CLAUDE data assimilation example</text><rect x="17" y="172" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="197" fill="#63a8c0" font-size="8.1">07:44</text><text x="69" y="197" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="197" fill="#dcf3fd" font-size="8.1">feat: rebuild the material as liquid glass</text><rect x="17" y="189" width="2" height="10" fill="#6fe0f7" opacity="0.9"/><text x="23" y="214" fill="#63a8c0" font-size="8.1">20:35</text><text x="69" y="214" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="214" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="206" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="231" fill="#63a8c0" font-size="8.1">20:31</text><text x="69" y="231" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="231" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="223" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="248" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="248" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="248" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="240" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="265" fill="#63a8c0" font-size="8.1">09:29</text><text x="69" y="265" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="265" fill="#dcf3fd" font-size="8.1">fix: stop the refresh workflow racing every push</text><rect x="17" y="257" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="282" fill="#63a8c0" font-size="8.1">09:28</text><text x="69" y="282" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="282" fill="#dcf3fd" font-size="8.1">feat: draw the activity section too, and drop the last third-party im…</text><rect x="17" y="274" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="299" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="299" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="299" fill="#dcf3fd" font-size="8.1">chore: refresh telemetry panels</text><rect x="17" y="291" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="316" fill="#63a8c0" font-size="8.1">09:18</text><text x="69" y="316" fill="#f0c069" font-size="8.1">shuccii</text><text x="237" y="316" fill="#dcf3fd" font-size="8.1">feat: break the banner into a board of instruments</text><rect x="17" y="308" width="2" height="10" fill="#6fe0f7" opacity="0.25"/><text x="23" y="333" fill="#63a8c0" font-size="8.1">03:49</text><text x="69" y="333" fill="#f0c069" font-size="8.1">conductivity-claude</text><text x="237" y="333" fill="#dcf3fd" font-size="8.1">Add annotated CLAUDE data assimilation example</text><rect x="17" y="325" width="2" height="10" fill="#6fe0f7" opacity="0.25"/>
     </g>
   </g>
   <rect x="7" y="28" width="886" height="151" fill="url(#lgScan)" opacity="0.2"/>

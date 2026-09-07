@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 44" width="900" height="44" role="img" aria-label="status bar">
 <defs>
   <radialGradient id="tbDeep" cx="16%" cy="50%" r="88%">
-    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.40"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.3"/>
   </radialGradient>
   <radialGradient id="tbVig" cx="50%" cy="50%" r="74%">
     <stop offset="58%" stop-color="#000000" stop-opacity="0"/>
@@ -44,56 +44,69 @@
   </pattern>
   <clipPath id="tbClip"><rect width="900" height="44" rx="3"/></clipPath>
   <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
-  <linearGradient id="tbGlass" x1="0.1" y1="0" x2="0.6" y2="1">
-    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="38%"  stop-color="#0b2534"   stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+  <!-- Fresnel: transparent looking straight through, reflective at the edges -->
+  <linearGradient id="tbFace" x1="0.12" y1="0" x2="0.55" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%"  stop-color="#0b2534"   stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.40"/>
+  </linearGradient>
+  <linearGradient id="tbEdgeV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="14%"  stop-color="#0b2534"   stop-opacity="0"/>
+    <stop offset="86%"  stop-color="#05141e" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.62"/>
   </linearGradient>
 
-  <!-- the rim catches light twice: once top-left, once bottom-right -->
-  <linearGradient id="tbRim" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
-    <stop offset="16%"  stop-color="#6fe0f7" stop-opacity="0.72"/>
-    <stop offset="45%"  stop-color="#7fe4fa" stop-opacity="0.24"/>
-    <stop offset="72%"  stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55"/>
+  <!-- dispersion: the hues travel along the edge, so the colour itself flows -->
+  <linearGradient id="tbIris" x1="0" y1="0" x2="1" y2="0.35"
+                  gradientUnits="objectBoundingBox">
+    <stop offset="0.00" stop-color="#7fe4fa"/>
+    <stop offset="0.26" stop-color="#69f0d0"/>
+    <stop offset="0.48" stop-color="#eaf6ff"/>
+    <stop offset="0.71" stop-color="#b79cff"/>
+    <stop offset="1.00" stop-color="#ffcf7a"/>
+    <animate attributeName="x1" values="-1;0;1" dur="19s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0;1;2" dur="19s" repeatCount="indefinite"/>
+  </linearGradient>
+  <linearGradient id="tbIrisSoft" x1="0" y1="0" x2="1" y2="0.6">
+    <stop offset="0.00" stop-color="#69f0d0" stop-opacity="0.4"/>
+    <stop offset="0.34" stop-color="#eaf6ff" stop-opacity="0.3"/>
+    <stop offset="0.62" stop-color="#b79cff" stop-opacity="0.36"/>
+    <stop offset="1.00" stop-color="#7fe4fa" stop-opacity="0.32"/>
+    <animate attributeName="x1" values="-0.8;0.2;1.2" dur="26s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0.2;1.2;2.2" dur="26s" repeatCount="indefinite"/>
   </linearGradient>
 
-  <!-- light bends through the thickness at the edge, so the rim band is not flat -->
-  <linearGradient id="tbRefract" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.42"/>
-    <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="76%"  stop-color="#6fe0f7" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0.22"/>
+  <!-- the polished top arris, and the ground bottom one -->
+  <linearGradient id="tbArris" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="8%"   stop-color="#ffffff" stop-opacity="0.7"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
   <linearGradient id="tbSheen" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%"  stop-color="#ffffff" stop-opacity="0.5"/>
-    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.5"/>
+    <stop offset="50%"  stop-color="#ffffff" stop-opacity="0.42"/>
     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
-  <radialGradient id="tbBlob" cx="42%" cy="36%" r="62%">
-    <stop offset="0%"   stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="65%"  stop-color="#6fe0f7" stop-opacity="0.22"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0"/>
+  <!-- a corner glint: light funnelled into the 90-degree arris -->
+  <radialGradient id="tbGlint" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
+    <stop offset="38%"  stop-color="#eaf6ff" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#eaf6ff" stop-opacity="0"/>
   </radialGradient>
 
-  <!-- blobs blurred then hard-thresholded: near ones merge, parting ones neck -->
-  <filter id="tbGoo" x="-30%" y="-30%" width="160%" height="160%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="soft"/>
-    <feColorMatrix in="soft" type="matrix" result="goo"
-      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -4.6"/>
-    <feGaussianBlur in="goo" stdDeviation="7"/>
+  <filter id="tbCast" x="-14%" y="-14%" width="128%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="6"
+                  flood-color="#00070f"
+                  flood-opacity="0.7"/>
   </filter>
-
-  <filter id="tbCast" x="-16%" y="-16%" width="132%" height="140%">
-    <feDropShadow dx="0" dy="3.2" stdDeviation="5"
-                  flood-color="#000814"
-                  flood-opacity="0.62"/>
+  <filter id="tbCaustic" x="-40%" y="-60%" width="180%" height="260%">
+    <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="tbShape"><path d="M28.30 7.00L871.70 7.00C883.70 7.00 893.00 16.30 893.00 28.30L893.00 15.70C893.00 27.70 883.70 37.00 871.70 37.00L28.30 37.00C16.30 37.00 7.00 27.70 7.00 15.70L7.00 28.30C7.00 16.30 16.30 7.00 28.30 7.00Z"/></clipPath>
+  <clipPath id="tbShape"><path d="M7.00 7.00H893.00V37.00H7.00Z"/></clipPath>
   <clipPath id="tbTick"><rect x="246" y="8" width="544" height="28"/></clipPath>
   <linearGradient id="tbFade" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%" stop-color="#0b2534"/><stop offset="6%" stop-color="#0b2534" stop-opacity="0"/>
@@ -101,22 +114,31 @@
   </linearGradient>
 </defs>
 
-  <path d="M28.30 7.00L871.70 7.00C883.70 7.00 893.00 16.30 893.00 28.30L893.00 15.70C893.00 27.70 883.70 37.00 871.70 37.00L28.30 37.00C16.30 37.00 7.00 27.70 7.00 15.70L7.00 28.30C7.00 16.30 16.30 7.00 28.30 7.00Z" fill="#05141e" opacity="0.5" filter="url(#tbCast)"/>
-  <path d="M28.30 7.00L871.70 7.00C883.70 7.00 893.00 16.30 893.00 28.30L893.00 15.70C893.00 27.70 883.70 37.00 871.70 37.00L28.30 37.00C16.30 37.00 7.00 27.70 7.00 15.70L7.00 28.30C7.00 16.30 16.30 7.00 28.30 7.00Z" fill="url(#tbGlass)"/>
-<g clip-path="url(#tbShape)" filter="url(#tbGoo)" opacity="0.24"><circle r="8.7" fill="url(#tbBlob)"><animate attributeName="cx" values="450.0;550.1;379.9;450.0" dur="20s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="17.2;14.6;19.3;17.2" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="10.8" fill="url(#tbBlob)"><animate attributeName="cx" values="450.0;350.3;519.8;450.0" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="17.2;21.2;14.0;17.2" dur="34s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="6.6" fill="url(#tbBlob)"><animate attributeName="cx" values="450.0;450.5;449.6;450.0" dur="32s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="17.2;12.5;21.0;17.2" dur="42s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
-  <path d="M28.30 7.00L871.70 7.00C883.70 7.00 893.00 16.30 893.00 28.30L893.00 15.70C893.00 27.70 883.70 37.00 871.70 37.00L28.30 37.00C16.30 37.00 7.00 27.70 7.00 15.70L7.00 28.30C7.00 16.30 16.30 7.00 28.30 7.00Z" fill="url(#tbGlass)" opacity="0.55"/>
-  <path d="M28.30 7.00L871.70 7.00C883.70 7.00 893.00 16.30 893.00 28.30L893.00 15.70C893.00 27.70 883.70 37.00 871.70 37.00L28.30 37.00C16.30 37.00 7.00 27.70 7.00 15.70L7.00 28.30C7.00 16.30 16.30 7.00 28.30 7.00Z" fill="url(#tbRefract)" opacity="0.9"/>
+  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#tbCast)"/>
+  <rect x="148.8" y="39.0" width="602.5" height="7"
+        fill="url(#tbIrisSoft)" opacity="0.3" filter="url(#tbCaustic)"/>
+
+  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="url(#tbFace)"/>
+  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="url(#tbEdgeV)"/>
+
+  <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#tbShape)">
-    <rect x="-480.3" y="7" width="487.3" height="30"
-          fill="url(#tbSheen)" opacity="0.2"
-          transform="skewX(-14)">
-      <animate attributeName="x" values="-524.6;1025.9"
-               dur="14s" repeatCount="indefinite"/>
+    <rect x="7" y="7" width="886" height="30" fill="none"
+          stroke="url(#tbIrisSoft)" stroke-width="18"
+          opacity="0.17"/>
+    <rect x="-436.0" y="7" width="443.0" height="30"
+          fill="url(#tbSheen)" opacity="0.1" transform="skewX(-12)">
+      <animate attributeName="x" values="-480.3;981.6" dur="17s" repeatCount="indefinite"/>
     </rect>
+    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.7"/><ellipse cx="893" cy="7" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.4"/><ellipse cx="7" cy="37" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.28"/><ellipse cx="893" cy="37" rx="10" ry="10" fill="url(#tbGlint)" opacity="0.45"/>
   </g>
-  <path d="M27.63 8.60L872.37 8.60C883.09 8.60 891.40 16.91 891.40 27.63L891.40 16.37C891.40 27.09 883.09 35.40 872.37 35.40L27.63 35.40C16.91 35.40 8.60 27.09 8.60 16.37L8.60 27.63C8.60 16.91 16.91 8.60 27.63 8.60Z" fill="none" stroke="#ffffff" stroke-width="0.5"
-        opacity="0.32"/>
-  <path d="M28.30 7.00L871.70 7.00C883.70 7.00 893.00 16.30 893.00 28.30L893.00 15.70C893.00 27.70 883.70 37.00 871.70 37.00L28.30 37.00C16.30 37.00 7.00 27.70 7.00 15.70L7.00 28.30C7.00 16.30 16.30 7.00 28.30 7.00Z" fill="none" stroke="url(#tbRim)" stroke-width="1.2"/>
+
+  <!-- polished arris along the top, ground edge along the bottom -->
+  <path d="M7.5 7.5H892.5" stroke="url(#tbArris)" stroke-width="1"/>
+  <path d="M7.5 36.5H892.5" stroke="#05141e" stroke-width="1"
+        opacity="0.75"/>
+  <path d="M7.00 7.00H893.00V37.00H7.00Z" fill="none" stroke="url(#tbIris)" stroke-width="0.9"
+        opacity="0.5"/>
   <g class="t">
     <text x="22" y="25.6" fill="#f7feff" font-size="9.5" letter-spacing="4.6">S / T A N I</text>
     <circle cx="176" cy="22" r="2.8" fill="#6fe0f7" filter="url(#tbGlow)">
@@ -127,7 +149,7 @@
     <g clip-path="url(#tbTick)">
       <text y="24.6" fill="#63a8c0" font-size="6.8" letter-spacing="2.4" xml:space="preserve">
         <animate attributeName="x" values="246;-899" dur="42s" repeatCount="indefinite"/>
-        REPO shuccii/shuccii   •   BRANCH HEAD   •   HEAD 5a50275   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 07:44Z   •   REPO shuccii/shuccii   •   BRANCH HEAD   •   HEAD 5a50275   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 07:44Z   •   
+        REPO shuccii/shuccii   •   BRANCH main   •   HEAD 1f4cabc   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 07:53Z   •   REPO shuccii/shuccii   •   BRANCH main   •   HEAD 1f4cabc   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-07 07:53Z   •   
       </text>
     </g>
     <rect x="246" y="8" width="544" height="28" fill="url(#tbFade)"/>

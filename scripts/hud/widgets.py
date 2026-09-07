@@ -21,7 +21,7 @@ from datetime import date
 
 from .data import Telemetry
 from .theme import (BAR, HAIR, LINE, PAD, Palette, atmosphere, chrome,
-                    defs, glass_body, glass_defs, glass_shape_clip, liquid,
+                    defs, glass_body, glass_defs, glass_shape_clip,
                     squircle)
 
 
@@ -39,7 +39,7 @@ def _shell(prefix: str, w: int, h: int, p: Palette, title: str, right: str,
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{_esc(label)}">
 <defs>{defs(prefix, w, h, p)}{glass_defs(prefix, w, h, p)}
   {glass_shape_clip(prefix, w, h)}
-  <clipPath id="{prefix}Inner"><path d="{squircle(PAD, PAD+BAR, w-2*PAD, h-2*PAD-BAR, 12)}"/></clipPath>
+  <clipPath id="{prefix}Inner"><path d="{squircle(PAD, PAD+BAR, w-2*PAD, h-2*PAD-BAR, 0)}"/></clipPath>
 </defs>
 {chrome(prefix, w, h, p, title, right)}
 <g clip-path="url(#{prefix}Inner)">
@@ -65,14 +65,14 @@ def topbar(t: Telemetry, p: Palette) -> str:
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="status bar">
 <defs>{defs(P, W, H, p)}{glass_defs(P, W, H, p)}
-  {glass_shape_clip(P, W, H, 15)}
+  {glass_shape_clip(P, W, H)}
   <clipPath id="{P}Tick"><rect x="246" y="8" width="{W-356}" height="{H-16}"/></clipPath>
   <linearGradient id="{P}Fade" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%" stop-color="{p.bg_mid}"/><stop offset="6%" stop-color="{p.bg_mid}" stop-opacity="0"/>
     <stop offset="94%" stop-color="{p.bg_mid}" stop-opacity="0"/><stop offset="100%" stop-color="{p.bg_mid}"/>
   </linearGradient>
 </defs>
-{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 15, seed=4)}
+{glass_body(P, PAD, PAD, W-2*PAD, H-2*PAD, p, 0, seed=4)}
   <g class="t">
     <text x="22" y="25.6" fill="{p.ink}" font-size="9.5" letter-spacing="4.6">S / T A N I</text>
     <circle cx="176" cy="22" r="2.8" fill="{p.cyan}" filter="url(#{P}Glow)">

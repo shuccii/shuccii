@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 178" width="444" height="178" role="img" aria-label="activity ledger">
 <defs>
   <radialGradient id="ldDeep" cx="16%" cy="50%" r="88%">
-    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+    <stop offset="0%" stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%" stop-color="#0b2534" stop-opacity="0.40"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.3"/>
   </radialGradient>
   <radialGradient id="ldVig" cx="50%" cy="50%" r="74%">
     <stop offset="58%" stop-color="#000000" stop-opacity="0"/>
@@ -44,79 +44,100 @@
   </pattern>
   <clipPath id="ldClip"><rect width="444" height="178" rx="3"/></clipPath>
   <style>.t{font-family:"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;}</style>
-  <linearGradient id="ldGlass" x1="0.1" y1="0" x2="0.6" y2="1">
-    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.66"/>
-    <stop offset="38%"  stop-color="#0b2534"   stop-opacity="0.53"/>
-    <stop offset="100%" stop-color="#05141e" stop-opacity="0.4"/>
+  <!-- Fresnel: transparent looking straight through, reflective at the edges -->
+  <linearGradient id="ldFace" x1="0.12" y1="0" x2="0.55" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="46%"  stop-color="#0b2534"   stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.40"/>
+  </linearGradient>
+  <linearGradient id="ldEdgeV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#123a4e" stop-opacity="0.5"/>
+    <stop offset="14%"  stop-color="#0b2534"   stop-opacity="0"/>
+    <stop offset="86%"  stop-color="#05141e" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#05141e" stop-opacity="0.62"/>
   </linearGradient>
 
-  <!-- the rim catches light twice: once top-left, once bottom-right -->
-  <linearGradient id="ldRim" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
-    <stop offset="16%"  stop-color="#6fe0f7" stop-opacity="0.72"/>
-    <stop offset="45%"  stop-color="#7fe4fa" stop-opacity="0.24"/>
-    <stop offset="72%"  stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55"/>
+  <!-- dispersion: the hues travel along the edge, so the colour itself flows -->
+  <linearGradient id="ldIris" x1="0" y1="0" x2="1" y2="0.35"
+                  gradientUnits="objectBoundingBox">
+    <stop offset="0.00" stop-color="#7fe4fa"/>
+    <stop offset="0.26" stop-color="#69f0d0"/>
+    <stop offset="0.48" stop-color="#eaf6ff"/>
+    <stop offset="0.71" stop-color="#b79cff"/>
+    <stop offset="1.00" stop-color="#ffcf7a"/>
+    <animate attributeName="x1" values="-1;0;1" dur="19s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0;1;2" dur="19s" repeatCount="indefinite"/>
+  </linearGradient>
+  <linearGradient id="ldIrisSoft" x1="0" y1="0" x2="1" y2="0.6">
+    <stop offset="0.00" stop-color="#69f0d0" stop-opacity="0.4"/>
+    <stop offset="0.34" stop-color="#eaf6ff" stop-opacity="0.3"/>
+    <stop offset="0.62" stop-color="#b79cff" stop-opacity="0.36"/>
+    <stop offset="1.00" stop-color="#7fe4fa" stop-opacity="0.32"/>
+    <animate attributeName="x1" values="-0.8;0.2;1.2" dur="26s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="0.2;1.2;2.2" dur="26s" repeatCount="indefinite"/>
   </linearGradient>
 
-  <!-- light bends through the thickness at the edge, so the rim band is not flat -->
-  <linearGradient id="ldRefract" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.42"/>
-    <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="76%"  stop-color="#6fe0f7" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0.22"/>
+  <!-- the polished top arris, and the ground bottom one -->
+  <linearGradient id="ldArris" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="8%"   stop-color="#ffffff" stop-opacity="0.7"/>
+    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
   <linearGradient id="ldSheen" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%"  stop-color="#ffffff" stop-opacity="0.5"/>
-    <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.5"/>
+    <stop offset="50%"  stop-color="#ffffff" stop-opacity="0.42"/>
     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
   </linearGradient>
 
-  <radialGradient id="ldBlob" cx="42%" cy="36%" r="62%">
-    <stop offset="0%"   stop-color="#6fe0f7" stop-opacity="0.5"/>
-    <stop offset="65%"  stop-color="#6fe0f7" stop-opacity="0.22"/>
-    <stop offset="100%" stop-color="#6fe0f7" stop-opacity="0"/>
+  <!-- a corner glint: light funnelled into the 90-degree arris -->
+  <radialGradient id="ldGlint" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85"/>
+    <stop offset="38%"  stop-color="#eaf6ff" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#eaf6ff" stop-opacity="0"/>
   </radialGradient>
 
-  <!-- blobs blurred then hard-thresholded: near ones merge, parting ones neck -->
-  <filter id="ldGoo" x="-30%" y="-30%" width="160%" height="160%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="soft"/>
-    <feColorMatrix in="soft" type="matrix" result="goo"
-      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -4.6"/>
-    <feGaussianBlur in="goo" stdDeviation="7"/>
+  <filter id="ldCast" x="-14%" y="-14%" width="128%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="6"
+                  flood-color="#00070f"
+                  flood-opacity="0.7"/>
   </filter>
-
-  <filter id="ldCast" x="-16%" y="-16%" width="132%" height="140%">
-    <feDropShadow dx="0" dy="3.2" stdDeviation="5"
-                  flood-color="#000814"
-                  flood-opacity="0.62"/>
+  <filter id="ldCaustic" x="-40%" y="-60%" width="180%" height="260%">
+    <feGaussianBlur stdDeviation="5"/>
   </filter>
-  <clipPath id="ldShape"><path d="M32.56 7.00L411.44 7.00C425.84 7.00 437.00 18.16 437.00 32.56L437.00 145.44C437.00 159.84 425.84 171.00 411.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z"/></clipPath>
-  <clipPath id="ldInner"><path d="M24.04 28.00L419.96 28.00C429.56 28.00 437.00 35.44 437.00 45.04L437.00 153.96C437.00 163.56 429.56 171.00 419.96 171.00L24.04 171.00C14.44 171.00 7.00 163.56 7.00 153.96L7.00 45.04C7.00 35.44 14.44 28.00 24.04 28.00Z"/></clipPath>
+  <clipPath id="ldShape"><path d="M7.00 7.00H437.00V171.00H7.00Z"/></clipPath>
+  <clipPath id="ldInner"><path d="M7.00 28.00H437.00V171.00H7.00Z"/></clipPath>
 </defs>
 
 
-  <path d="M32.56 7.00L411.44 7.00C425.84 7.00 437.00 18.16 437.00 32.56L437.00 145.44C437.00 159.84 425.84 171.00 411.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="#05141e" opacity="0.5" filter="url(#ldCast)"/>
-  <path d="M32.56 7.00L411.44 7.00C425.84 7.00 437.00 18.16 437.00 32.56L437.00 145.44C437.00 159.84 425.84 171.00 411.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#ldGlass)"/>
-<g clip-path="url(#ldShape)" filter="url(#ldGoo)" opacity="0.24"><circle r="36.1" fill="url(#ldBlob)"><animate attributeName="cx" values="101.6;157.5;62.5;101.6" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;62.8;62.8;62.8" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="47.6" fill="url(#ldBlob)"><animate attributeName="cx" values="101.6;73.4;121.4;101.6" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;52.3;71.2;62.8" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="59.0" fill="url(#ldBlob)"><animate attributeName="cx" values="101.6;74.2;120.8;101.6" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;82.0;47.4;62.8" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
-  <path d="M32.56 7.00L411.44 7.00C425.84 7.00 437.00 18.16 437.00 32.56L437.00 145.44C437.00 159.84 425.84 171.00 411.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#ldGlass)" opacity="0.55"/>
-  <path d="M32.56 7.00L411.44 7.00C425.84 7.00 437.00 18.16 437.00 32.56L437.00 145.44C437.00 159.84 425.84 171.00 411.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="url(#ldRefract)" opacity="0.9"/>
+  <path d="M7.00 7.00H437.00V171.00H7.00Z" fill="#05141e" opacity="0.55" filter="url(#ldCast)"/>
+  <rect x="75.8" y="173.0" width="292.4" height="7"
+        fill="url(#ldIrisSoft)" opacity="0.3" filter="url(#ldCaustic)"/>
+
+  <path d="M7.00 7.00H437.00V171.00H7.00Z" fill="url(#ldFace)"/>
+  <path d="M7.00 7.00H437.00V171.00H7.00Z" fill="url(#ldEdgeV)"/>
+
+  <!-- edge band: dispersion strongest where the sheet is seen at a grazing angle -->
   <g clip-path="url(#ldShape)">
-    <rect x="-229.5" y="7" width="236.5" height="164"
-          fill="url(#ldSheen)" opacity="0.2"
-          transform="skewX(-14)">
-      <animate attributeName="x" values="-251.0;501.5"
-               dur="14s" repeatCount="indefinite"/>
+    <rect x="7" y="7" width="430" height="164" fill="none"
+          stroke="url(#ldIrisSoft)" stroke-width="18"
+          opacity="0.17"/>
+    <rect x="-208.0" y="7" width="215.0" height="164"
+          fill="url(#ldSheen)" opacity="0.1" transform="skewX(-12)">
+      <animate attributeName="x" values="-229.5;480.0" dur="17s" repeatCount="indefinite"/>
     </rect>
+    <ellipse cx="7" cy="7" rx="10" ry="10" fill="url(#ldGlint)" opacity="0.7"/><ellipse cx="437" cy="7" rx="10" ry="10" fill="url(#ldGlint)" opacity="0.4"/><ellipse cx="7" cy="171" rx="10" ry="10" fill="url(#ldGlint)" opacity="0.28"/><ellipse cx="437" cy="171" rx="10" ry="10" fill="url(#ldGlint)" opacity="0.45"/>
   </g>
-  <path d="M31.89 8.60L412.11 8.60C425.23 8.60 435.40 18.77 435.40 31.89L435.40 146.11C435.40 159.23 425.23 169.40 412.11 169.40L31.89 169.40C18.77 169.40 8.60 159.23 8.60 146.11L8.60 31.89C8.60 18.77 18.77 8.60 31.89 8.60Z" fill="none" stroke="#ffffff" stroke-width="0.5"
-        opacity="0.32"/>
-  <path d="M32.56 7.00L411.44 7.00C425.84 7.00 437.00 18.16 437.00 32.56L437.00 145.44C437.00 159.84 425.84 171.00 411.44 171.00L32.56 171.00C18.16 171.00 7.00 159.84 7.00 145.44L7.00 32.56C7.00 18.16 18.16 7.00 32.56 7.00Z" fill="none" stroke="url(#ldRim)" stroke-width="1.2"/>
-<g clip-path="url(#ldShape)" filter="url(#ldGoo)" opacity="0.24"><circle r="36.1" fill="url(#ldBlob)"><animate attributeName="cx" values="101.6;61.7;129.5;101.6" dur="17s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;46.0;76.2;62.8" dur="22s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="47.6" fill="url(#ldBlob)"><animate attributeName="cx" values="101.6;155.5;63.9;101.6" dur="23s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;70.1;56.9;62.8" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle><circle r="59.0" fill="url(#ldBlob)"><animate attributeName="cx" values="101.6;87.1;111.8;101.6" dur="29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/><animate attributeName="cy" values="62.8;66.2;60.0;62.8" dur="38s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/></circle></g>
-  <path d="M16.0 28 H428.0"
-        stroke="#7fe4fa" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- polished arris along the top, ground edge along the bottom -->
+  <path d="M7.5 7.5H436.5" stroke="url(#ldArris)" stroke-width="1"/>
+  <path d="M7.5 170.5H436.5" stroke="#05141e" stroke-width="1"
+        opacity="0.75"/>
+  <path d="M7.00 7.00H437.00V171.00H7.00Z" fill="none" stroke="url(#ldIris)" stroke-width="0.9"
+        opacity="0.5"/>
+  <path d="M17 28 H427"
+        stroke="url(#ldIrisSoft)" stroke-width="0.6" opacity="0.75"/>
   <g class="t">
     <circle cx="22" cy="19" r="2.6" fill="none" stroke="#6fe0f7" stroke-width="0.45"/>
     <circle cx="22" cy="19" r="0.9" fill="#6fe0f7"/>
