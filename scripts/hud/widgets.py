@@ -31,6 +31,14 @@ def _esc(s: str) -> str:
              .replace('"', "&quot;"))
 
 
+def _mix(a: str, b: str, t: float) -> str:
+    """Blend two hex colours; t=1 is all b."""
+    t = max(0.0, min(1.0, t))
+    ar, ag, ab = (int(a[i:i+2], 16) for i in (1, 3, 5))
+    br, bg, bb = (int(b[i:i+2], 16) for i in (1, 3, 5))
+    return "#%02x%02x%02x" % (round(ar + (br-ar)*t), round(ag + (bg-ag)*t), round(ab + (bb-ab)*t))
+
+
 def _clip(s: str, n: int) -> str:
     return s if len(s) <= n else s[: n - 1] + "…"
 
@@ -333,21 +341,20 @@ def languages(t: Telemetry, p: Palette) -> str:
     tones = series_colours(len(shown), p)
 
     # Colour and shading are separate layers. One radial gradient over the whole
-    # ring does the tube shading, which frees the colour underneath to cross-fade
-    # at the joins instead of butting hard against its neighbour — a hard cut is
-    # what made the boundaries look cut out with scissors.
+    # ring does the tube shading, which frees the colour underneath to be a
+    # continuous sweep rather than blocks butted together.
+    #
+    # Patching each join with a blend arc only worked where both neighbours were
+    # wide enough to give the patch room; four shares under 1.4% sit next to each
+    # other, so their joins stayed as hard cuts. Interpolating the colour along
+    # the circumference instead means every boundary softens by the same rule,
+    # with the blend radius bounded by whichever neighbour is smaller so a thin
+    # share still shows its own colour at its middle.
     rmax = R + sw / 2
 
     def stop(radius: float) -> float:
         return max(0.0, min(1.0, radius / rmax))
 
-    def dash(length: float, lead: float) -> str:
-        return (f'stroke-dasharray="{max(length, 0.01):.3f} {circ-max(length, 0.01):.3f}" '
-                f'stroke-dashoffset="{-lead:.3f}"')
-
-    rot = f'transform="rotate(-90 {cx} {cy})"'
-
-    grads, segs, legend = [], [], []
     bounds, spans = [], []
     off = 0.0
     for (name, size, _g), tone in zip(shown, tones):
@@ -355,30 +362,62 @@ def languages(t: Telemetry, p: Palette) -> str:
         spans.append((off, arc, tone))
         off += arc
         bounds.append(off)
+    filled = off
 
-    for i, (lead, arc, (light, base, deep)) in enumerate(spans):
-        segs.append(f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{base}" '
-                    f'stroke-width="{sw}" {dash(arc, lead)} {rot} opacity="0.88"/>')
+    n = len(spans)
 
-    # cross-fade across each join, straddling it evenly so no share shifts
-    for i in range(len(spans) - 1):
-        at = bounds[i]
-        left, right = spans[i], spans[i + 1]
-        bw = min(5.5, left[1] * 0.45, right[1] * 0.45)
-        if bw < 0.4:
-            continue
-        ang = math.radians(-90 + 360 * at / circ)
-        tx, ty = -math.sin(ang), math.cos(ang)
-        half = bw / 2 + 0.6
-        grads.append(
-            f'<linearGradient id="{P}J{i}" gradientUnits="userSpaceOnUse" '
-            f'x1="{cx + R*math.cos(ang) - tx*half:.2f}" y1="{cy + R*math.sin(ang) - ty*half:.2f}" '
-            f'x2="{cx + R*math.cos(ang) + tx*half:.2f}" y2="{cy + R*math.sin(ang) + ty*half:.2f}">'
-            f'<stop offset="0" stop-color="{left[2][1]}"/>'
-            f'<stop offset="1" stop-color="{right[2][1]}"/></linearGradient>')
-        segs.append(f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="url(#{P}J{i})" '
-                    f'stroke-width="{sw}" {dash(bw, at - bw/2)} {rot} opacity="0.88"/>')
+    def raw(pos: float) -> tuple[int, int, int]:
+        pos %= filled
+        for lead, arc, tone in spans:
+            if pos < lead + arc:
+                c = tone[1]
+                return tuple(int(c[i:i+2], 16) for i in (1, 3, 5))
+        c = spans[-1][2][1]
+        return tuple(int(c[i:i+2], 16) for i in (1, 3, 5))
 
+    # A per-boundary blend width has to be bounded by the smaller neighbour, and
+    # collapses to nothing when that neighbour is a 0.1% sliver — which is why
+    # the seam where the ring closes stayed a hard cut. Smoothing the whole
+    # circumference with one triangular kernel treats every boundary by the same
+    # rule, and lets a sliver tint its surroundings instead of vanishing or
+    # leaving an edge.
+    half, taps = 5.5, 11
+
+    def colour_at(pos: float) -> str:
+        acc = [0.0, 0.0, 0.0]
+        wsum = 0.0
+        for j in range(taps):
+            d = -half + 2 * half * j / (taps - 1)
+            w = 1 - abs(d) / half
+            if w <= 0:
+                continue
+            r, g, bl = raw(pos + d)
+            acc[0] += r * w
+            acc[1] += g * w
+            acc[2] += bl * w
+            wsum += w
+        return "#%02x%02x%02x" % tuple(round(v / wsum) for v in acc)
+
+    steps = 200
+    span = filled / steps
+    rot = f'transform="rotate(-90 {cx} {cy})"'
+    segs = [
+        f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{colour_at((k+0.5)*span)}" '
+        f'stroke-width="{sw}" stroke-dasharray="{span*1.35:.2f} {circ-span*1.35:.2f}" '
+        f'stroke-dashoffset="{-(k*span - span*0.18):.2f}" {rot} opacity="0.88"/>'
+        for k in range(steps)]
+
+    grads = [
+        f'<radialGradient id="{P}Tube" gradientUnits="userSpaceOnUse" '
+        f'cx="{cx}" cy="{cy}" r="{rmax:.2f}">'
+        f'<stop offset="{stop(R-sw/2):.4f}" stop-color="#000000" stop-opacity="0.5"/>'
+        f'<stop offset="{stop(R-sw*0.24):.4f}" stop-color="#000000" stop-opacity="0"/>'
+        f'<stop offset="{stop(R+sw*0.04):.4f}" stop-color="#ffffff" stop-opacity="0.34"/>'
+        f'<stop offset="{stop(R+sw*0.26):.4f}" stop-color="#000000" stop-opacity="0"/>'
+        f'<stop offset="1" stop-color="#000000" stop-opacity="0.55"/>'
+        f'</radialGradient>']
+
+    legend = []
     for i, ((name, size, _g), (light, base, deep)) in enumerate(zip(shown, tones)):
         ly = PAD + BAR + 22 + i * 18
         legend.append(
@@ -389,17 +428,6 @@ def languages(t: Telemetry, p: Palette) -> str:
             f'<text x="{PAD+219}" y="{ly}" fill="{p.pale}" font-size="7.7">{_esc(_clip(name, 20))}</text>'
             f'<text x="{W-PAD-14}" y="{ly}" fill="{p.dim}" font-size="7.7" '
             f'text-anchor="end">{size/total*100:.1f}%</text>')
-
-    shading = (
-        f'<radialGradient id="{P}Tube" gradientUnits="userSpaceOnUse" '
-        f'cx="{cx}" cy="{cy}" r="{rmax:.2f}">'
-        f'<stop offset="{stop(R-sw/2):.4f}" stop-color="#000000" stop-opacity="0.5"/>'
-        f'<stop offset="{stop(R-sw*0.24):.4f}" stop-color="#000000" stop-opacity="0"/>'
-        f'<stop offset="{stop(R+sw*0.04):.4f}" stop-color="#ffffff" stop-opacity="0.34"/>'
-        f'<stop offset="{stop(R+sw*0.26):.4f}" stop-color="#000000" stop-opacity="0"/>'
-        f'<stop offset="1" stop-color="#000000" stop-opacity="0.55"/>'
-        f'</radialGradient>')
-    grads.append(shading)
 
     ticks = "".join(
         f'<line x1="{cx + (R+12)*math.cos(math.radians(a)):.1f}" y1="{cy + (R+12)*math.sin(math.radians(a)):.1f}" '
