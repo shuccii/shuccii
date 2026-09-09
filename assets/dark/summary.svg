@@ -160,7 +160,7 @@
     <text x="207" y="72" fill="#f7feff" font-size="15" letter-spacing="1.4">SHUICHI TANI</text>
     <text x="207" y="88" fill="#63a8c0" font-size="7.4" letter-spacing="1.4">github.com/shuccii</text>
     <text x="207" y="112" fill="#63a8c0" font-size="6.4" letter-spacing="2">PRIMARY LANGUAGE</text>
-    <text x="207" y="128" fill="#dcf3fd" font-size="10">Python</text>
+    <text x="207" y="128" fill="#dcf3fd" font-size="10">Astro</text>
 
     <line x1="359" y1="40" x2="359" y2="157" stroke="#63a8c0" stroke-width="0.45" opacity="0.45"/>
     <text x="859" y="42" fill="#63a8c0" font-size="6.4" letter-spacing="2" text-anchor="end">CONTRIBUTIONS PER WEEK</text>

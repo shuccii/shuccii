@@ -148,8 +148,8 @@
     <line x1="234" y1="12" x2="234" y2="32" stroke="#63a8c0" stroke-width="0.45" opacity="0.6"/>
     <g clip-path="url(#tbTick)">
       <text y="24.6" fill="#63a8c0" font-size="6.8" letter-spacing="2.4" xml:space="preserve">
-        <animate attributeName="x" values="246;-899" dur="42s" repeatCount="indefinite"/>
-        REPO shuccii/shuccii   •   BRANCH main   •   HEAD e773e1d   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-08 21:17Z   •   REPO shuccii/shuccii   •   BRANCH main   •   HEAD e773e1d   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG PYTHON   •   SYNC 2026-09-08 21:17Z   •   
+        <animate attributeName="x" values="246;-892" dur="42s" repeatCount="indefinite"/>
+        REPO shuccii/shuccii   •   BRANCH main   •   HEAD a341362   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG ASTRO   •   SYNC 2026-09-09 21:02Z   •   REPO shuccii/shuccii   •   BRANCH main   •   HEAD a341362   •   CONTRIB 160   •   COMMITS 157   •   PEAK 79/WK   •   LANG ASTRO   •   SYNC 2026-09-09 21:02Z   •   
       </text>
     </g>
     <rect x="246" y="8" width="544" height="28" fill="url(#tbFade)"/>
