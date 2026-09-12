@@ -147,9 +147,9 @@
   </g>
 <g clip-path="url(#syInner)">
 
-  <defs><clipPath id="syBar0"><rect x="19" y="45.0" width="254.0" height="3" rx="1.5"/></clipPath><clipPath id="syBar1"><rect x="19" y="65.5" width="249.5" height="3" rx="1.5"/></clipPath><clipPath id="syBar2"><rect x="19" y="86.0" width="245.1" height="3" rx="1.5"/></clipPath><clipPath id="syBar3"><rect x="19" y="106.5" width="30.5" height="3" rx="1.5"/></clipPath></defs>
+  <defs><clipPath id="syBar0"><rect x="19" y="45.0" width="254.0" height="3" rx="1.5"/></clipPath><clipPath id="syBar1"><rect x="19" y="65.5" width="254.0" height="3" rx="1.5"/></clipPath><clipPath id="syBar2"><rect x="19" y="86.0" width="245.1" height="3" rx="1.5"/></clipPath><clipPath id="syBar3"><rect x="19" y="106.5" width="30.5" height="3" rx="1.5"/></clipPath></defs>
   <g class="t">
-    <text x="19" y="41.0" fill="#dcf3fd" font-size="6.8" letter-spacing="0.6">research-dev-orchestr…</text>
+    <text x="19" y="41.0" fill="#dcf3fd" font-size="6.8" letter-spacing="0.6">shuccii</text>
     <text x="273" y="41.0" fill="#63a8c0" font-size="6.1" text-anchor="end">09-11</text>
     <rect x="19" y="45.0" width="254" height="3" rx="1.5" fill="#1e5169" opacity="0.75"/>
     <rect x="19" y="45.0" width="254.0" height="3" rx="1.5" fill="#6fe0f7" opacity="0.85"/>
@@ -160,14 +160,14 @@
                  begin="0.00s" repeatCount="indefinite"/>
       </rect>
     </g>
-    <text x="19" y="61.5" fill="#dcf3fd" font-size="6.8" letter-spacing="0.6">shuccii</text>
-    <text x="273" y="61.5" fill="#63a8c0" font-size="6.1" text-anchor="end">09-10</text>
+    <text x="19" y="61.5" fill="#dcf3fd" font-size="6.8" letter-spacing="0.6">research-dev-orchestr…</text>
+    <text x="273" y="61.5" fill="#63a8c0" font-size="6.1" text-anchor="end">09-11</text>
     <rect x="19" y="65.5" width="254" height="3" rx="1.5" fill="#1e5169" opacity="0.75"/>
-    <rect x="19" y="65.5" width="249.5" height="3" rx="1.5" fill="#6fe0f7" opacity="0.85"/>
-    <rect x="19" y="65.5" width="249.5" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
+    <rect x="19" y="65.5" width="254.0" height="3" rx="1.5" fill="#6fe0f7" opacity="0.85"/>
+    <rect x="19" y="65.5" width="254.0" height="0.9" rx="0.5" fill="#ffffff" opacity="0.22"/>
     <g clip-path="url(#syBar1)">
       <rect y="65.5" width="26" height="3" rx="1.5" fill="#eafcff" opacity="0.5">
-        <animate attributeName="x" values="-7;268.5" dur="2.6s"
+        <animate attributeName="x" values="-7;273.0" dur="2.6s"
                  begin="0.42s" repeatCount="indefinite"/>
       </rect>
     </g>
