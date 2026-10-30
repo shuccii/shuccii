@@ -51,6 +51,14 @@ flowchart LR
 > Sparse experiments cannot cover a high-dimensional composition space on their own.
 > Linked to abundant computation through a shared covariance structure, they can tell you which single experiment to run next.
 
+**Validation.** A prediction counts only if it beats a strong baseline under a split that mirrors real use:
+
+- hold out whole literature series (leave-one-series-out), not random points, and recompute any pre-registered priors inside each fold;
+- compare against simple baselines on the same split — the high-temperature data alone, a calibrated linear fit, hierarchical and mixed-effects models;
+- gate on convergence, and report failed fits separately instead of averaging them in.
+
+**Working method.** Every claim is tied to its evidence — figure, table, or run — and reviewed from an examiner's side before it is shown. That review loop is packaged as [REO](https://github.com/shuccii/REO), an evidence-first research adviser for Claude Code and Codex.
+
 <div align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dark/divider.svg" />
   <source media="(prefers-color-scheme: light)" srcset="assets/light/divider.svg" />
@@ -91,9 +99,11 @@ flowchart LR
 
 | | Repository | Contents |
 | :---: | :--- | :--- |
-| `01` | **[Python-seminar](https://github.com/shuccii/Python-seminar)** | Lab seminar notebooks — regression, SVR, classification, clustering, PCA, and the reasoning behind each. |
-| `02` | **[shuccii.github.io](https://github.com/shuccii/shuccii.github.io)** | Personal site — research notes and writing. Astro. |
-| `03` | **[shuccii](https://github.com/shuccii/shuccii)** | This profile. The panels above are redrawn from the GitHub API every day by Actions. |
+| `01` | **[REO](https://github.com/shuccii/REO)** | Evidence-first research adviser (Claude Code / Codex plugin) — checks claims against evidence, rates findings by severity, and runs mock defence Q&A. |
+| `02` | **[research-slide-design](https://github.com/shuccii/research-slide-design)** | Monochrome, high-density slide design system for conference and research talks, written so AI agents can read and apply it. |
+| `03` | **[Python-seminar](https://github.com/shuccii/Python-seminar)** | Lab seminar notebooks — regression, SVR, classification, clustering, PCA, and the reasoning behind each. |
+| `04` | **[shuccii.github.io](https://github.com/shuccii/shuccii.github.io)** | Personal site — research notes and writing. Astro. |
+| `05` | **[shuccii](https://github.com/shuccii/shuccii)** | This profile. The panels above are redrawn from the GitHub API every day by Actions. |
 
 <div align="center">
 
